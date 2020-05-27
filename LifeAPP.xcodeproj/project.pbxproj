@@ -23,6 +23,9 @@
 		13B05452247CE9A000B85357 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05451247CE9A000B85357 /* ClientManager.swift */; };
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
 		13B05457247CEB0700B85357 /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05456247CEB0700B85357 /* WetherModel.swift */; };
+		13B1B33C247E48EF003FC8F2 /* AQIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B33B247E48EF003FC8F2 /* AQIModel.swift */; };
+		13B1B33E247E5496003FC8F2 /* UVIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B33D247E5496003FC8F2 /* UVIModel.swift */; };
+		13B1B340247E65F6003FC8F2 /* PopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B33F247E65F6003FC8F2 /* PopModel.swift */; };
 		771B19AAD36A9DCABFCC81DC /* Pods_LifeAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,9 @@
 		13B05451247CE9A000B85357 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		13B05456247CEB0700B85357 /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
+		13B1B33B247E48EF003FC8F2 /* AQIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIModel.swift; sourceTree = "<group>"; };
+		13B1B33D247E5496003FC8F2 /* UVIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVIModel.swift; sourceTree = "<group>"; };
+		13B1B33F247E65F6003FC8F2 /* PopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopModel.swift; sourceTree = "<group>"; };
 		18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.debug.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.release.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,11 +93,11 @@
 				13B05450247CE98700B85357 /* Manager */,
 				13552E91247B8E5A00CA895E /* AppDelegate.swift */,
 				13552E93247B8E5A00CA895E /* SceneDelegate.swift */,
-				13552E95247B8E5A00CA895E /* ViewController.swift */,
 				13552ED6247CBEB300CA895E /* TextCollectionViewCell.swift */,
 				13552ED7247CBEB300CA895E /* TextCollectionViewCell.xib */,
 				13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */,
 				13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */,
+				13552E95247B8E5A00CA895E /* ViewController.swift */,
 				13552E97247B8E5A00CA895E /* Main.storyboard */,
 				13552E9A247B8E5B00CA895E /* Assets.xcassets */,
 				13552E9C247B8E5B00CA895E /* LaunchScreen.storyboard */,
@@ -124,6 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				13B05456247CEB0700B85357 /* WetherModel.swift */,
+				13B1B33B247E48EF003FC8F2 /* AQIModel.swift */,
+				13B1B33D247E5496003FC8F2 /* UVIModel.swift */,
+				13B1B33F247E65F6003FC8F2 /* PopModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -269,10 +278,13 @@
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
 				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
+				13B1B340247E65F6003FC8F2 /* PopModel.swift in Sources */,
 				13B05457247CEB0700B85357 /* WetherModel.swift in Sources */,
 				13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */,
+				13B1B33E247E5496003FC8F2 /* UVIModel.swift in Sources */,
 				13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */,
 				13552EA6247B915100CA895E /* Extension.swift in Sources */,
+				13B1B33C247E48EF003FC8F2 /* AQIModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +432,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9B87Y926C5;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,6 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9B87Y926C5;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
