@@ -430,6 +430,7 @@
                     <connections>
                         <outlet property="aqiDangerImage" destination="xmO-dF-ggS" id="cNA-ra-wQy"/>
                         <outlet property="aqiLabel" destination="Zje-st-b2N" id="mLS-9t-iZQ"/>
+                        <outlet property="aqiMemoLabel" destination="od2-RI-ioI" id="A5P-fh-Eak"/>
                         <outlet property="aqiStatusImage" destination="SvJ-IQ-CvM" id="13m-QY-YTM"/>
                         <outlet property="contentView" destination="YOo-Nh-g3s" id="EDB-uP-x6f"/>
                         <outlet property="dateLabel" destination="c7l-pG-3DL" id="JOh-zb-8Kh"/>
@@ -440,6 +441,7 @@
                         <outlet property="pickerView" destination="1DO-7q-cZL" id="LVf-xK-bkA"/>
                         <outlet property="popDangerImage" destination="82z-sP-Ycy" id="MkW-Qk-bed"/>
                         <outlet property="popLabel" destination="NnN-rH-arq" id="z1w-vm-KJ1"/>
+                        <outlet property="popMemoLabel" destination="HTD-qk-XH9" id="9V8-c1-u3y"/>
                         <outlet property="popStatusImage" destination="Uv9-O8-9JB" id="qbq-0l-Clf"/>
                         <outlet property="refreshBtnItem" destination="PLy-e2-HVm" id="GOs-v1-ubr"/>
                         <outlet property="refreshView" destination="7XQ-Ao-RcL" id="WEN-JZ-DQJ"/>
@@ -450,8 +452,11 @@
                         <outlet property="symbolLabel" destination="bQ9-cf-fUf" id="qmQ-fF-CZI"/>
                         <outlet property="todayDTNLabel" destination="GLT-bV-yQs" id="vHg-Pw-lpC"/>
                         <outlet property="todayDTXLabel" destination="kTV-lc-c8D" id="Nf2-GQ-9P3"/>
+                        <outlet property="todayWxMaxImageView" destination="TFr-lD-Vpv" id="0xj-6E-VEw"/>
+                        <outlet property="todayWxMinImageView" destination="BXd-hb-2h7" id="uaz-Ja-iK2"/>
                         <outlet property="uviDangerImage" destination="vtw-gO-XHU" id="cE5-Ra-ZcK"/>
                         <outlet property="uviLabel" destination="Zjf-6E-zTR" id="gMh-mH-Lno"/>
+                        <outlet property="uviMemoLabel" destination="m5l-fh-y6D" id="HXI-0p-nNl"/>
                         <outlet property="uviStatusImage" destination="Fek-48-Jth" id="Aus-XF-RHY"/>
                         <outlet property="weekendCollectionView" destination="aze-y1-ECO" id="IrW-tU-gYL"/>
                         <outlet property="wetherViewFirst" destination="qGG-hF-fFS" id="Xa1-NP-usC"/>

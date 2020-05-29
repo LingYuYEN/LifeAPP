@@ -56,7 +56,11 @@ class ViewController: UIViewController {
     
     
     
+    @IBOutlet var todayWxMaxImageView: UIImageView!
     @IBOutlet var todayDTXLabel: UILabel!
+    
+    
+    @IBOutlet var todayWxMinImageView: UIImageView!
     @IBOutlet var todayDTNLabel: UILabel!
     @IBOutlet var aqiLabel: UILabel!
     @IBOutlet var uviLabel: UILabel!
@@ -64,10 +68,17 @@ class ViewController: UIViewController {
     
     @IBOutlet var aqiStatusImage: UIImageView!
     @IBOutlet var aqiDangerImage: UIImageView!
+    @IBOutlet var aqiMemoLabel: UILabel!
+    
+    
     @IBOutlet var uviStatusImage: UIImageView!
     @IBOutlet var uviDangerImage: UIImageView!
+    @IBOutlet var uviMemoLabel: UILabel!
+    
+    
     @IBOutlet var popStatusImage: UIImageView!
     @IBOutlet var popDangerImage: UIImageView!
+    @IBOutlet var popMemoLabel: UILabel!
     
     @IBOutlet var locationsBtn: UIButton!
     var myLocationManager: CLLocationManager!
@@ -76,14 +87,19 @@ class ViewController: UIViewController {
     var chWeekArr = [String]()
     var oneWeekMaxTemp = [String]()
     var oneWeekMinTemp = [String]()
+    var oneWeekWx = [String]()
     
     let locationArr = [
         "台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"
     ]
     let weekArr = ["五", "六", "日", "一", "二", "三"]
-    let wetherImageName = ["group6Copy", "group6Copy", "group6Copy", "group6Copy", "group6Copy", "group6Copy"]
-    let hightT = ["26°", "25°", "22°", "28°", "25°", "20°"]
-    let lowT = ["22°", "20°", "18°", "23°", "19°", "16°"]
+    var wetherImageName = [String]()
+//    let hightT = ["26°", "25°", "22°", "28°", "25°", "20°"]
+//    let lowT = ["22°", "20°", "18°", "23°", "19°", "16°"]
+    let wxMappingDic = [
+        "01" : "wetherIcon1", "02" : "wetherIcon2", "03" : "wetherIcon2", "04" : "wetherIcon4", "05" : "wetherIcon4", "06" : "wetherIcon4", "07" : "wetherIcon4", "08" : "wetherIcon3", "09" : "wetherIcon5", "10" : "wetherIcon5", "11" : "wetherIcon5", "12" : "wetherIcon5", "13" : "wetherIcon5", "14" : "wetherIcon5", "15" : "wetherIcon6", "16" : "wetherIcon6", "17" : "wetherIcon6", "18" : "wetherIcon6", "19" : "wetherIcon3", "20" : "wetherIcon3", "21" : "wetherIcon6", "22" : "wetherIcon6", "23" : "wetherIcon7", "24" : "wetherIcon7", "25" : "wetherIcon7", "26" : "wetherIcon7", "27" : "wetherIcon7", "28" : "wetherIcon7", "29" : "wetherIcon7", "30" : "wetherIcon7", "31" : "wetherIcon7", "32" : "wetherIcon7", "33" : "wetherIcon6", "34" : "wetherIcon6", "35" : "wetherIcon7", "36" : "wetherIcon7", "37" : "wetherIcon7", "38" : "wetherIcon7", "39" : "wetherIcon7", "40" : "wetherIcon7", "41" : "wetherIcon7", "42" : "wetherIcon7"
+    ]
+    
     let baseUrl = DataManager.shared.baseUrl
     let wetherApiKey = DataManager.shared.wetherApiKey
     
@@ -512,19 +528,22 @@ class ViewController: UIViewController {
                             case .良好:
                                 self.aqiLabel.text = "空氣品質良好"
                                 self.aqiStatusImage.image = UIImage(named: "smileIcon")
+                                self.aqiMemoLabel.text = "正常戶外活動"
                                 self.aqiDangerImage.isHidden = true
                                 self.refreshView.isHidden = true
                             case .普通:
-                                self.aqiLabel.text = "空氣品質普通"
+                                self.aqiLabel.text = "空氣品質欠佳"
                                 self.aqiStatusImage.image = UIImage(named: "normalSmileIcon")
+                                self.aqiMemoLabel.text = "記得戴口罩"
                                 self.aqiDangerImage.isHidden = false
                                 self.refreshView.isHidden = true
                             case .設備維護:
                                 self.aqiLabel.text = "設備維護中..."
                                 self.refreshView.isHidden = true
                             default:
-                                self.aqiLabel.text = "空氣品質差"
+                                self.aqiLabel.text = "空氣品質不良"
                                 self.aqiStatusImage.image = UIImage(named: "unsmileIcon")
+                                self.aqiMemoLabel.text = "減少戶外活動"
                                 self.aqiDangerImage.isHidden = false
                                 self.refreshView.isHidden = true
                             }
@@ -552,24 +571,19 @@ class ViewController: UIViewController {
                             guard let uviDouble = Double(uviModel.uvi) else { return }
                             switch lrint(uviDouble) {
                             case 0 ... 2:
-                                self.uviLabel.text = "紫外線低"
+                                self.uviLabel.text = "紫外線正常"
                                 self.uviStatusImage.image = UIImage(named: "smileIcon")
+                                self.uviMemoLabel.text = "基礎防曬安心外出"
                                 self.uviDangerImage.isHidden = true
                             case 3 ... 5:
-                                self.uviLabel.text = "紫外線中量"
+                                self.uviLabel.text = "紫外線中級"
                                 self.uviStatusImage.image = UIImage(named: "normalSmileIcon")
+                                self.uviMemoLabel.text = "隨時補擦防曬"
                                 self.uviDangerImage.isHidden = true
-                            case 6 ... 7:
-                                self.uviLabel.text = "紫外線高"
-                                self.uviStatusImage.image = UIImage(named: "unsmileIcon")
-                                self.uviDangerImage.isHidden = false
-                            case 8 ... 10:
-                                self.uviLabel.text = "紫外線過量"
-                                self.uviStatusImage.image = UIImage(named: "unsmileIcon")
-                                self.uviDangerImage.isHidden = false
                             default:
-                                self.uviLabel.text = "紫外線危險"
+                                self.uviLabel.text = "紫外線過高"
                                 self.uviStatusImage.image = UIImage(named: "unsmileIcon")
+                                self.uviMemoLabel.text = "請待在室內或做加倍防曬"
                                 self.uviDangerImage.isHidden = false
                             }
                         case .環境保護署:
@@ -598,12 +612,19 @@ class ViewController: UIViewController {
                     switch intPopElement {
                     case 0 ... 10:
                         self.popStatusImage.image = UIImage(named: "smileIcon")
+                        self.popMemoLabel.text = "是個好天氣"
                         self.popDangerImage.isHidden = true
-                    case 11 ... 30:
+                    case 11 ... 40:
                         self.popStatusImage.image = UIImage(named: "normalSmileIcon")
+                        self.popMemoLabel.text = "記得攜帶雨具"
                         self.popDangerImage.isHidden = true
+                    case 41 ... 80:
+                        self.popStatusImage.image = UIImage(named: "normalSmileIcon")
+                        self.popMemoLabel.text = "記得攜帶雨具"
+                        self.popDangerImage.isHidden = false
                     default:
                         self.popStatusImage.image = UIImage(named: "unsmileIcon")
+                        self.popMemoLabel.text = "務必攜帶雨具"
                         self.popDangerImage.isHidden = false
                     }
                 }
@@ -619,6 +640,8 @@ class ViewController: UIViewController {
         
         oneWeekMaxTemp = [String]()
         oneWeekMinTemp = [String]()
+        oneWeekWx = [String]()
+        wetherImageName = [String]()
         let locationNameUrl = "&locationName=\(locationName)"
         guard let newLocationNameUrl = locationNameUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
 
@@ -641,6 +664,19 @@ class ViewController: UIViewController {
                             for index in stride(from: 1, to: 13, by: 2) {
                                 guard let temp = weatherElement.time[index].elementValue.first?.value else { return }
                                 self.oneWeekMinTemp.append(temp + "°")
+                            }
+                        }  else if weatherElement.elementName == "Wx" {
+                            
+                            guard let wx = weatherElement.time.first?.elementValue.last?.value else { return }
+                            guard let wxMapping = self.wxMappingDic[wx] else { return }
+                            self.todayWxMaxImageView.image = UIImage(named: wxMapping)
+                            self.todayWxMinImageView.image = UIImage(named: wxMapping)
+                            
+                            for index in stride(from: 0, to: 12, by: 2) {
+                                guard let wx = weatherElement.time[index].elementValue.last?.value else { return }
+                                self.oneWeekWx.append(wx)
+                                guard let wxMapping = self.wxMappingDic[wx] else { return }
+                                self.wetherImageName.append(wxMapping)
                             }
                         }
                     }
