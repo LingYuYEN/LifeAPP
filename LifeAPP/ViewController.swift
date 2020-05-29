@@ -8,17 +8,17 @@
 
 import UIKit
 import GoogleMobileAds
+import CoreLocation
+
 class ViewController: UIViewController {
     
-    @IBOutlet var adBannerView: UIView!
-    lazy var bannerView: GADBannerView = {
-        let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.adUnitID = "ca-app-pub-1109779512560033/5958433025"
-        bannerView.delegate = self
-        bannerView.rootViewController = self
-        return bannerView
-    }()
+    var bannerView: GADBannerView!
+    var interstitial: GADInterstitial?
     
+    @IBOutlet var pickerContentView: UIView!
+    @IBOutlet var pickerView: UIPickerView!
+    
+    @IBOutlet var refreshView: UIActivityIndicatorView!
     @IBOutlet var gradientView: UIView! {
         didSet {
             let gradientLayer = CAGradientLayer()
@@ -36,6 +36,11 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet var refreshBtnItem: UIBarButtonItem!
+    @IBOutlet var shareBtnItem: UIBarButtonItem!
+    
+    
+    
     @IBOutlet var stackContentViewFirst: UIView!
     @IBOutlet var stackContentViewSec: UIView!
     @IBOutlet var stackContentViewThird: UIView!
@@ -47,6 +52,10 @@ class ViewController: UIViewController {
     @IBOutlet var weekendCollectionView: UICollectionView!
     @IBOutlet var nowTempLabel: UILabel!
     @IBOutlet var symbolLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
+    
+    
+    
     @IBOutlet var todayDTXLabel: UILabel!
     @IBOutlet var todayDTNLabel: UILabel!
     @IBOutlet var aqiLabel: UILabel!
@@ -60,16 +69,102 @@ class ViewController: UIViewController {
     @IBOutlet var popStatusImage: UIImageView!
     @IBOutlet var popDangerImage: UIImageView!
     
+    @IBOutlet var locationsBtn: UIButton!
+    var myLocationManager: CLLocationManager!
     
-    let week = ["五", "六", "日", "一", "二", "三"]
+    var intWeekArr = [Int]()
+    var chWeekArr = [String]()
+    var oneWeekMaxTemp = [String]()
+    var oneWeekMinTemp = [String]()
+    
+    let locationArr = [
+        "台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"
+    ]
+    let weekArr = ["五", "六", "日", "一", "二", "三"]
     let wetherImageName = ["group6Copy", "group6Copy", "group6Copy", "group6Copy", "group6Copy", "group6Copy"]
     let hightT = ["26°", "25°", "22°", "28°", "25°", "20°"]
     let lowT = ["22°", "20°", "18°", "23°", "19°", "16°"]
     let baseUrl = DataManager.shared.baseUrl
     let wetherApiKey = DataManager.shared.wetherApiKey
     
+    var testMessage = "這個是測試的分享訊息............!!"
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let image = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        self.navigationController?.navigationBar.shadowImage = image
+        
+        // 首次使用 向使用者詢問定位自身位置權限
+        getAuthorization()
+        
+        view.addSubview(pickerContentView)
+        pickerContentView.translatesAutoresizingMaskIntoConstraints = false
+        pickerContentView.heightAnchor.constraint(equalToConstant: 216).isActive = true
+        pickerContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        pickerContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        let pickerBottomAnchor = pickerContentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 216)
+        pickerBottomAnchor.identifier = "bottom"
+        pickerBottomAnchor.isActive = true
+        super.viewWillAppear(animated)
+        
+    }
+    
+    // 首次使用 向使用者詢問定位自身位置權限
+    func getAuthorization() {
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            // 取得定位服務授權
+            myLocationManager.requestWhenInUseAuthorization()
+
+            // 開始定位自身位置
+            myLocationManager.startUpdatingLocation()
+        
+        }
+        // 使用者已經拒絕定位自身位置權限
+        else if CLLocationManager.authorizationStatus() == .denied {
+            // 提示可至[設定]中開啟權限
+            let alertController = UIAlertController(
+              title: "定位權限已關閉",
+              message:
+              "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
+              preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "確認", style: .default, handler:nil)
+            alertController.addAction(okAction)
+            self.present(
+              alertController,
+              animated: true, completion: nil)
+        }
+        // 使用者已經同意定位自身位置權限
+        else if CLLocationManager.authorizationStatus()
+            == .authorizedWhenInUse {
+            // 開始定位自身位置
+            myLocationManager.startUpdatingLocation()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 必須將 locationsBtn 指向 titleView 才可使用
+        self.navigationItem.titleView = locationsBtn
+        
+        refreshView.layer.cornerRadius = 15
+        
+        // 經緯度管理
+        myLocationManager = CLLocationManager()
+        myLocationManager.delegate = self
+        
+        // 取得自身定位位置的精確度
+        myLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        
+        
+        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
+        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
+        // 取得使用者座標並更新數據
+        locationAddress(latitude: lat, longitude: lon) {
+//            self.setUI()
+        }
         
         if #available(iOS 13.0, *) {
             let barAppearance =  UINavigationBarAppearance()
@@ -83,25 +178,286 @@ class ViewController: UIViewController {
         setWetherView(wetherView: wetherViewThrid, gradientView: stackContentViewThird)
         
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+        bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        bannerView.adUnitID = "ca-app-pub-1109779512560033/1833493055"
+        bannerView.rootViewController = self
         bannerView.load(GADRequest())
+        bannerView.delegate = self
+        
+        // 載入插頁式廣告
+//        interstitial = createAndLoadInterstitial()
         
         let nib = UINib(nibName: "TextCollectionViewCell", bundle: nil)
         let imageNib = UINib(nibName: "ImageCollectionViewCell", bundle: nil)
         self.weekendCollectionView.register(nib, forCellWithReuseIdentifier: "TextCollectionViewCell")
         self.weekendCollectionView.register(imageNib, forCellWithReuseIdentifier: "ImageCollectionViewCell")
         
-        let urlStr = "\(baseUrl)/v1/rest/datastore/O-A0003-001?Authorization=\(wetherApiKey)&parameterName=CITY"
-        getWetherData(urlStr: urlStr)
+        locationsBtn.addTarget(self, action: #selector(onSelectLocationClick), for: .touchUpInside)
         
-        let aqiUrl = "https://opendata.epa.gov.tw/webapi/Data/AQI/?$skip=0&$top=1000&format=json"
-        getAQIData(urlStr: aqiUrl)
-        
-        let uviUrl = "https://opendata.epa.gov.tw/webapi/Data/UV/?$skip=0&$top=1000&format=json"
-        getUVIData(urlStr: uviUrl)
-        
-        let popUrl = "\(baseUrl)/v1/rest/datastore/F-C0032-001?Authorization=\(wetherApiKey)&locationName=%E9%AB%98%E9%9B%84%E5%B8%82&elementName=PoP"
-        getPopData(urlStr: popUrl)
+        setupUI()
     }
+    
+    @objc func onSelectLocationClick(_ sender: UIButton) {
+        pickerViewIsHidden(bool: false)
+        
+    }
+    @IBAction func onRefreshClick(_ sender: UIBarButtonItem) {
+        refreshView.isHidden = false
+        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
+        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
+        
+        // 取得使用者座標並更新數據
+        locationAddress(latitude: lat, longitude: lon) {
+            
+        }
+        
+        
+    }
+    @IBAction func onShareClick(_ sender: UIBarButtonItem) {
+//        interstitial = createAndLoadInterstitial()
+        // activityItems 陣列中放入我們想要使用的元件，這邊我們放入使用者圖片、使用者名稱及個人部落格。
+        // 這邊因為我們確認裡面有值，所以使用驚嘆號強制解包。
+        let activityVC = UIActivityViewController(activityItems: [testMessage], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+            if completed {
+                self.interstitial = self.createAndLoadInterstitial()
+            }
+        }
+        // 顯示出我們的 activityVC。
+        self.present(activityVC, animated: true)
+    }
+    
+    @IBAction func onPickerViewDoneClick(_ sender: UIButton) {
+        refreshView.isHidden = false
+        let location = locationArr[pickerView.selectedRow(inComponent: 0)]
+        selectLocationCity(cityStr: location) {
+            self.locationsBtn.setTitle(location, for: .normal)
+        }
+        pickerViewIsHidden(bool: true)
+        
+    }
+    @IBAction func onPickerViewCancelClick(_ sender: UIButton) {
+        pickerViewIsHidden(bool: true)
+    }
+    
+    func setupUI() {
+        
+        let chineseWeekDic = ["Monday" : "一", "Tuesday" : "二", "Wednesday" : "三", "Thursday" : "四", "Friday" : "五", "Saturday" : "六", "Sunday" : "日"]
+        let enToIntDic: [String : Int] = ["Monday" : 1, "Tuesday" : 2, "Wednesday" : 3, "Thursday" : 4, "Friday" : 5, "Saturday" : 6, "Sunday" : 7]
+        let intToStrDic = [1 : "一", 2 : "二", 3 : "三", 4 : "四", 5 : "五", 6 : "六", 7 : "日"]
+        // 5 / 21 ( 四 ) 13 : 50
+        let now = Date()
+        /// Date 格式化
+        let dateFormatter = DateFormatter()     // 建立日期格式化器
+        dateFormatter.locale = Locale.current   // 格式化為當地時間
+        dateFormatter.dateFormat = "EEEE"
+        let weekDateFormatter = dateFormatter.string(from: now)
+        guard let chineseWeek = chineseWeekDic[weekDateFormatter] else { return }
+        guard var intWeek = enToIntDic[weekDateFormatter] else { return }
+        dateFormatter.dateFormat = "M / dd ( \(chineseWeek) ) hh : mm" // 格式化顯示型態
+        let nowFormatter = dateFormatter.string(from: now)  // 將現在時間格式化
+        
+        while intWeekArr.count < 6 {
+            intWeek += 1
+            if intWeek > 7 {
+                intWeek = 1
+            }
+            
+            intWeekArr.append(intWeek)
+            guard let todayWeekCh = intToStrDic[intWeek] else { return }
+            chWeekArr.append(todayWeekCh)
+        }
+
+        print(chWeekArr)
+        dateLabel.text = "\(nowFormatter)"
+    }
+    
+    func pickerViewIsHidden(bool: Bool) {
+        for constraint in view.constraints {
+            if constraint.identifier == "bottom" {
+                constraint.constant = bool ? 166 : -50
+                break
+            }
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    /// 透過 pickerView 選擇後的資料取得
+    func selectLocationCity(cityStr: String, _ completion: @escaping () -> Void) {
+        defer {
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+        
+        DispatchQueue.main.async {
+            let locationNameDic: Dictionary = [
+                "台北市" : "臺北",
+                "新北市" : "土城",
+                "基隆市" : "基隆",
+                "宜蘭縣" : "宜蘭",
+                "桃園市" : "桃園",
+                "新竹縣" : "新竹",
+                "新竹市" : "新竹市東區",
+                "苗栗縣" : "苗栗",
+                "台中市" : "臺中",
+                "彰化縣" : "員林",
+                "南投縣" : "南投",
+                "雲林縣" : "斗六",
+                "嘉義縣" : "太保",
+                "嘉義市" : "嘉義市東區",
+                "台南市" : "臺南",
+                "高雄市" : "高雄",
+                "屏東縣" : "恆春",
+                "花蓮縣" : "花蓮",
+                "台東縣" : "臺東",
+                "金門縣" : "金沙",
+                "連江縣" : "東引",
+                "澎湖縣" : "澎湖",
+            ]
+
+            let aqiLocationNameDic: Dictionary = [
+                "台北市" : "臺北市",
+                "新北市" : "新北市",
+                "基隆市" : "基隆市",
+                "宜蘭縣" : "宜蘭縣",
+                "桃園市" : "桃園市",
+                "新竹縣" : "新竹縣",
+                "新竹市" : "新竹市",
+                "苗栗縣" : "苗栗縣",
+                "台中市" : "臺中市",
+                "彰化縣" : "彰化縣",
+                "南投縣" : "南投縣",
+                "雲林縣" : "雲林縣",
+                "嘉義縣" : "嘉義縣",
+                "嘉義市" : "嘉義市",
+                "台南市" : "臺南市",
+                "高雄市" : "高雄市",
+                "屏東縣" : "屏東縣",
+                "花蓮縣" : "花蓮縣",
+                "台東縣" : "台東縣",
+                "金門縣" : "金門縣",
+                "連江縣" : "連江縣",
+                "澎湖縣" : "澎湖縣"
+            ]
+            
+            // 套用 url 的各縣市站點名稱
+            guard let newCity = locationNameDic[cityStr] else { return }
+            guard let aqiNewCity = aqiLocationNameDic[cityStr] else { return }
+            let urlStr = "\(self.baseUrl)/v1/rest/datastore/O-A0003-001?Authorization=\(self.wetherApiKey)&parameterName=CITY"
+
+            self.getWetherData(urlStr: urlStr, locationName: newCity)
+
+            let aqiUrl = "https://opendata.epa.gov.tw/webapi/Data/AQI/?$skip=0&$top=1000&format=json"
+            self.getAQIData(urlStr: aqiUrl, locationName: aqiNewCity)
+
+            let uviUrl = "https://opendata.epa.gov.tw/webapi/Data/UV/?$skip=0&$top=1000&format=json"
+            self.getUVIData(urlStr: uviUrl)
+
+            let popUrl = "\(self.baseUrl)/v1/rest/datastore/F-C0032-001?Authorization=\(self.wetherApiKey)&locationName=\(cityStr)&elementName=PoP"
+            guard let newPopUrl = popUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+            self.getPopData(urlStr: newPopUrl)
+            
+            let oneWeekUrl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=\(self.wetherApiKey)"
+            self.getOneWeekWether(urlStr: oneWeekUrl, locationName: cityStr)
+        }
+        
+    }
+    
+    
+    @objc func locationAddress(latitude: Double, longitude: Double, _ completion: @escaping () -> Void){
+        defer {
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+
+        /// CLGeocoder地理編碼 經緯度轉換地址位置
+        GeocodeManager.shared.geocode(latitude: latitude, longitude: longitude) { placemark, error in
+            guard let placemark = placemark, error == nil else { return }
+            // you should always update your UI in the main thread
+            DispatchQueue.main.async {
+                let locationNameDic: Dictionary = [
+                    "台北市" : "臺北",
+                    "新北市" : "土城",
+                    "基隆市" : "基隆",
+                    "宜蘭縣" : "宜蘭",
+                    "桃園市" : "桃園",
+                    "新竹縣" : "新竹",
+                    "新竹市" : "新竹市東區",
+                    "苗栗縣" : "苗栗",
+                    "台中市" : "臺中",
+                    "彰化縣" : "員林",
+                    "南投縣" : "南投",
+                    "雲林縣" : "斗六",
+                    "嘉義縣" : "太保",
+                    "嘉義市" : "嘉義市東區",
+                    "台南市" : "臺南",
+                    "高雄市" : "高雄",
+                    "屏東縣" : "恆春",
+                    "花蓮縣" : "花蓮",
+                    "台東縣" : "臺東",
+                    "金門縣" : "金沙",
+                    "連江縣" : "東引",
+                    "澎湖縣" : "澎湖",
+                ]
+
+                let aqiLocationNameDic: Dictionary = [
+                    "台北市" : "臺北市",
+                    "新北市" : "新北市",
+                    "基隆市" : "基隆市",
+                    "宜蘭縣" : "宜蘭縣",
+                    "桃園市" : "桃園市",
+                    "新竹縣" : "新竹縣",
+                    "新竹市" : "新竹市",
+                    "苗栗縣" : "苗栗縣",
+                    "台中市" : "臺中市",
+                    "彰化縣" : "彰化縣",
+                    "南投縣" : "南投縣",
+                    "雲林縣" : "雲林縣",
+                    "嘉義縣" : "嘉義縣",
+                    "嘉義市" : "嘉義市",
+                    "台南市" : "臺南市",
+                    "高雄市" : "高雄市",
+                    "屏東縣" : "屏東縣",
+                    "花蓮縣" : "花蓮縣",
+                    "台東縣" : "台東縣",
+                    "金門縣" : "金門縣",
+                    "連江縣" : "連江縣",
+                    "澎湖縣" : "澎湖縣"
+                ]
+
+                // 定位出來的縣市名稱
+                guard let city = placemark.subAdministrativeArea else { return }
+                self.locationsBtn.setTitle(placemark.subAdministrativeArea, for: .normal)
+                
+                // 套用 url 的各縣市站點名稱
+                guard let newCity = locationNameDic[city] else { return }
+                guard let aqiNewCity = aqiLocationNameDic[city] else { return }
+                let urlStr = "\(self.baseUrl)/v1/rest/datastore/O-A0003-001?Authorization=\(self.wetherApiKey)&parameterName=CITY"
+
+                self.getWetherData(urlStr: urlStr, locationName: newCity)
+
+                let aqiUrl = "https://opendata.epa.gov.tw/webapi/Data/AQI/?$skip=0&$top=1000&format=json"
+                self.getAQIData(urlStr: aqiUrl, locationName: aqiNewCity)
+
+                let uviUrl = "https://opendata.epa.gov.tw/webapi/Data/UV/?$skip=0&$top=1000&format=json"
+                self.getUVIData(urlStr: uviUrl)
+
+                let popUrl = "\(self.baseUrl)/v1/rest/datastore/F-C0032-001?Authorization=\(self.wetherApiKey)&locationName=\(city)&elementName=PoP"
+                guard let newPopUrl = popUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+                self.getPopData(urlStr: newPopUrl)
+                
+                let oneWeekUrl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=\(self.wetherApiKey)"
+                self.getOneWeekWether(urlStr: oneWeekUrl, locationName: city)
+                
+                
+            }
+        }
+    }
+    
+    
     
     func setUI() {
         DispatchQueue.main.async {
@@ -109,9 +465,8 @@ class ViewController: UIViewController {
         }
     }
     
-    
     /// 取得天氣資訊
-    func getWetherData(urlStr: String) {
+    func getWetherData(urlStr: String, locationName: String) {
         guard let url = URL(string: urlStr) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -119,11 +474,12 @@ class ViewController: UIViewController {
             do {
                 let wetherModel = try JSONDecoder().decode(WetherModel.self, from: data)
                 for location in wetherModel.records.location {
-                    if location.locationName == "高雄" {
+                    if location.locationName == locationName {
                         for weatherElement in location.weatherElement {
                             switch weatherElement.elementName {
                             case .temp:
                                 self.convertTemperature(temperatureStr: weatherElement.elementValue, inputLabel: self.nowTempLabel, symbol: false)
+                                self.setUI()
                             case .dTx:
                                 self.convertTemperature(temperatureStr: weatherElement.elementValue, inputLabel: self.todayDTXLabel, symbol: true)
                             case .dTn:
@@ -142,7 +498,7 @@ class ViewController: UIViewController {
     }
     
     /// 取得空氣品質指標
-    func getAQIData(urlStr: String) {
+    func getAQIData(urlStr: String, locationName: String) {
         guard let url = URL(string: urlStr) else { return }
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else { return }
@@ -150,20 +506,28 @@ class ViewController: UIViewController {
                 let aqiModels = try JSONDecoder().decode(AQIModel.self, from: data)
                 
                 for aqiModel in aqiModels {
-                    DispatchQueue.main.async {
-                        switch aqiModel.status {
-                        case .良好:
-                            self.aqiLabel.text = "空氣品質良好"
-                            self.aqiStatusImage.image = UIImage(named: "smileIcon")
-                            self.aqiDangerImage.isHidden = true
-                        case .普通:
-                            self.aqiLabel.text = "空氣品質普通"
-                            self.aqiStatusImage.image = UIImage(named: "normalSmileIcon")
-                            self.aqiDangerImage.isHidden = false
-                        default:
-                            self.aqiLabel.text = "空氣品質差"
-                            self.aqiStatusImage.image = UIImage(named: "unsmileIcon")
-                            self.aqiDangerImage.isHidden = false
+                    if aqiModel.county == locationName {
+                        DispatchQueue.main.async {
+                            switch aqiModel.status {
+                            case .良好:
+                                self.aqiLabel.text = "空氣品質良好"
+                                self.aqiStatusImage.image = UIImage(named: "smileIcon")
+                                self.aqiDangerImage.isHidden = true
+                                self.refreshView.isHidden = true
+                            case .普通:
+                                self.aqiLabel.text = "空氣品質普通"
+                                self.aqiStatusImage.image = UIImage(named: "normalSmileIcon")
+                                self.aqiDangerImage.isHidden = false
+                                self.refreshView.isHidden = true
+                            case .設備維護:
+                                self.aqiLabel.text = "設備維護中..."
+                                self.refreshView.isHidden = true
+                            default:
+                                self.aqiLabel.text = "空氣品質差"
+                                self.aqiStatusImage.image = UIImage(named: "unsmileIcon")
+                                self.aqiDangerImage.isHidden = false
+                                self.refreshView.isHidden = true
+                            }
                         }
                     }
                 }
@@ -181,7 +545,6 @@ class ViewController: UIViewController {
             guard let data = data else { return }
             do {
                 let uviModels = try JSONDecoder().decode(UVIModel.self, from: data)
-                
                 for uviModel in uviModels {
                     DispatchQueue.main.async {
                         switch uviModel.publishAgency {
@@ -251,6 +614,45 @@ class ViewController: UIViewController {
         task.resume()
     }
     
+    /// 取得一週（六天）天氣
+    func getOneWeekWether(urlStr: String, locationName: String) {
+        
+        oneWeekMaxTemp = [String]()
+        oneWeekMinTemp = [String]()
+        let locationNameUrl = "&locationName=\(locationName)"
+        guard let newLocationNameUrl = locationNameUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+
+        guard let url = URL(string: urlStr + newLocationNameUrl) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else { return }
+            do {
+                let oneWeekWetherModel = try JSONDecoder().decode(OneWeekWetherModel.self, from: data)
+                DispatchQueue.main.async {
+                    guard let weatherElements = oneWeekWetherModel.records.locations.first?.location.first?.weatherElement else { return }
+                    
+                    for weatherElement in weatherElements {
+                        if weatherElement.elementName == "MaxT" {
+                            
+                            for index in stride(from: 0, to: 12, by: 2) {
+                                guard let temp = weatherElement.time[index].elementValue.first?.value else { return }
+                                self.oneWeekMaxTemp.append(temp + "°")
+                            }
+                        } else if weatherElement.elementName == "MinT" {
+                            for index in stride(from: 1, to: 13, by: 2) {
+                                guard let temp = weatherElement.time[index].elementValue.first?.value else { return }
+                                self.oneWeekMinTemp.append(temp + "°")
+                            }
+                        }
+                    }
+                    self.weekendCollectionView.reloadData()
+                }
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
     /// 將取得的溫度轉換成整數並置入Label，是否包含符號
     func convertTemperature(temperatureStr: String, inputLabel: UILabel, symbol: Bool) {
         switch symbol {
@@ -267,7 +669,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-        setUI()
     }
     
     
@@ -290,8 +691,40 @@ class ViewController: UIViewController {
         
         wetherView.layer.applySketchShadow(color: .set(red: 255, green: 0, blue: 0), alpha: 0.19, x: 1.3, y: 1.3, blur: 3.7, spread: 0)
     }
+    
+    // 加入橫幅廣告頁面
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+     bannerView.translatesAutoresizingMaskIntoConstraints = false
+     view.addSubview(bannerView)
+     view.addConstraints(
+       [NSLayoutConstraint(item: bannerView,
+                           attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: view.safeAreaLayoutGuide,
+                           attribute: .bottom,
+                           multiplier: 1,
+                           constant: 0),
+        NSLayoutConstraint(item: bannerView,
+                           attribute: .centerX,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .centerX,
+                           multiplier: 1,
+                           constant: 0)
+       ])
+    }
 
+    // 加入插頁式廣告頁面
+    private func createAndLoadInterstitial() -> GADInterstitial? {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-1109779512560033/7553767489")
+        guard let interstitial = interstitial else { return nil }
+        let request = GADRequest()
+        interstitial.load(request)
+        interstitial.delegate = self
+        return interstitial
+    }
 
+    
 }
 
 extension ViewController: GADBannerViewDelegate {
@@ -299,23 +732,24 @@ extension ViewController: GADBannerViewDelegate {
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("Banner loaded successfully")
 
-//        self.adBannerView.frame = bannerView.frame
-//        self.adBannerView = bannerView
-        
-        // 重新調整橫幅廣告位置來建立滑下特效
-        let translateTransform = CGAffineTransform(translationX: 0, y: -bannerView.bounds.size.height)
-        bannerView.transform = translateTransform
-
-        UIView.animate(withDuration: 0.5) {
-            self.adBannerView.frame = bannerView.frame
-            bannerView.transform = CGAffineTransform.identity
-            self.adBannerView = bannerView
-        }
+        addBannerViewToView(bannerView)
     }
 
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         print("Fail to receive ads")
         print(error)
+    }
+}
+
+extension ViewController: GADInterstitialDelegate {
+
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("Interstitial loaded successfully")
+        ad.present(fromRootViewController: self)
+    }
+
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        print("Fail to receive interstitial")
     }
 }
 
@@ -325,7 +759,7 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return week.count
+        return oneWeekMaxTemp.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -334,17 +768,17 @@ extension ViewController: UICollectionViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.textLabel.text = week[indexPath.row]
+            cell.textLabel.text = chWeekArr[indexPath.row]
             cell.textLabel.font = UIFont(name: "PingFangTC-Regular", size: 17)
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
             cell.imageView.image = UIImage(named: wetherImageName[indexPath.row])
             return cell
         case 2:
-            cell.textLabel.text = hightT[indexPath.row]
+            cell.textLabel.text = oneWeekMaxTemp[indexPath.row]
             
         case 3:
-            cell.textLabel.text = lowT[indexPath.row]
+            cell.textLabel.text = oneWeekMinTemp[indexPath.row]
             
         default:
             break
@@ -406,3 +840,44 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         return 0 * screenScaleWidth
     }
 }
+
+extension ViewController: CLLocationManagerDelegate {
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//        // 印出目前所在位置座標
+//        let currentLocation :CLLocation = locations[0] as CLLocation
+//        guard let locationLat = Double("\(currentLocation.coordinate.latitude)") else { return }
+//        guard let locationLon = Double("\(currentLocation.coordinate.longitude)") else { return }
+//
+//        print("載入座標及ＡＰＩ資訊: \(locationLat), \(locationLon)")
+//        // 將座標轉換成地址，並取得所在縣市
+//        locationAddress(latitude: locationLat, longitude: locationLon) {
+//            self.myLocationManager = nil
+//        }
+//
+//    }
+    
+}
+
+extension ViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.locationArr.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.locationArr[row]
+    }
+    
+    
+}
+
+extension ViewController: UIPickerViewDelegate {
+    
+    
+    
+}
+

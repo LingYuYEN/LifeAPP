@@ -54,10 +54,11 @@ struct AQIModelElement: Codable {
 enum Status: String, Codable {
     case 良好 = "良好"
     case 普通 = "普通"
-    case 對敏感族群不良 = "對敏感族群不良"
+    case 對敏感族群不良 = "對敏感族群不健康"
     case 對所有族群不良 = "對所有族群不良"
     case 非常不良 = "非常不良"
     case 有害 = "有害"
+    case 設備維護 = "設備維護"
 }
 
 typealias AQIModel = [AQIModelElement]
@@ -65,7 +66,7 @@ typealias AQIModel = [AQIModelElement]
 /**
  AQI值0～50空氣品質為「良好」，
  51～100空氣品質為「普通」，
- 101~150空氣品質為「對敏感族群不良」，
+ 101~150空氣品質為「對敏感族群不健康」，
  151~200空氣品質為「對所有族群不良」，
  201~300空氣品質為「非常不良」，
  301~500空氣品質為「有害」。
