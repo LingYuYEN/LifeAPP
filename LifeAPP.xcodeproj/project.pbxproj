@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		131EEB7A2480FEF700D69C86 /* OneWeekWetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131EEB792480FEF700D69C86 /* OneWeekWetherModel.swift */; };
+		1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5D624848ADF0036E4A2 /* DetailVC.swift */; };
+		1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5D724848ADF0036E4A2 /* DetailVC.xib */; };
+		1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */; };
+		1347E5DD2484C4470036E4A2 /* CardDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */; };
 		13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E91247B8E5A00CA895E /* AppDelegate.swift */; };
 		13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E93247B8E5A00CA895E /* SceneDelegate.swift */; };
 		13552E96247B8E5A00CA895E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E95247B8E5A00CA895E /* ViewController.swift */; };
@@ -33,6 +37,10 @@
 
 /* Begin PBXFileReference section */
 		131EEB792480FEF700D69C86 /* OneWeekWetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWeekWetherModel.swift; sourceTree = "<group>"; };
+		1347E5D624848ADF0036E4A2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		1347E5D724848ADF0036E4A2 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
+		1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewCell.swift; sourceTree = "<group>"; };
+		1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardDetailTableViewCell.xib; sourceTree = "<group>"; };
 		13552E8E247B8E5A00CA895E /* LifeAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13552E91247B8E5A00CA895E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13552E93247B8E5A00CA895E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +109,10 @@
 				13552ED7247CBEB300CA895E /* TextCollectionViewCell.xib */,
 				13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */,
 				13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */,
+				1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */,
+				1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */,
+				1347E5D624848ADF0036E4A2 /* DetailVC.swift */,
+				1347E5D724848ADF0036E4A2 /* DetailVC.xib */,
 				13552E95247B8E5A00CA895E /* ViewController.swift */,
 				13552E97247B8E5A00CA895E /* Main.storyboard */,
 				13552E9A247B8E5B00CA895E /* Assets.xcassets */,
@@ -221,6 +233,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13552E9E247B8E5B00CA895E /* LaunchScreen.storyboard in Resources */,
+				1347E5DD2484C4470036E4A2 /* CardDetailTableViewCell.xib in Resources */,
+				1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */,
 				13552E9B247B8E5B00CA895E /* Assets.xcassets in Resources */,
 				13552ED5247C9C1B00CA895E /* Lato-Regular.ttf in Resources */,
 				13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */,
@@ -284,8 +298,10 @@
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
 				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
+				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
 				13B1B340247E65F6003FC8F2 /* PopModel.swift in Sources */,
 				13B05457247CEB0700B85357 /* WetherModel.swift in Sources */,
+				1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */,
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,
 				13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */,
 				13B1B33E247E5496003FC8F2 /* UVIModel.swift in Sources */,
@@ -438,7 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 7VWHLZ2Z9V;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -459,7 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 7VWHLZ2Z9V;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

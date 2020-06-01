@@ -275,9 +275,9 @@ extension String {
     /// 轉換日期格式
     func dateFormatter(sourceDateStr: String) -> String{
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        dateFormatter.dateFormat = "YYYY-MM-dd HH:mm"
         let date = dateFormatter.date(from: sourceDateStr)
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy / MM / dd      HH:mm"
         let dateString = dateFormatter.string(from: date!)
         return dateString
     }
@@ -474,3 +474,26 @@ extension UIColor {
     }
 }
 
+extension UIView {
+    // 將當前是圖轉為 UIImage
+    func snapImage() -> UIImage {
+        let snapImageView = UIImageView()
+        snapImageView.frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height - 50)
+        
+        let renderer = UIGraphicsImageRenderer(bounds: snapImageView.frame)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
+// 更方便的載入 Nib ViewController
+extension UIViewController {
+    static func loadFromNib() -> Self {
+        func instantiateFromNib<T: UIViewController>() -> T {
+            return T.init(nibName: String(describing: T.self), bundle: nil)
+        }
+
+        return instantiateFromNib()
+    }
+}

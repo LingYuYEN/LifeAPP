@@ -89,13 +89,30 @@ class ViewController: UIViewController {
     var oneWeekMinTemp = [String]()
     var oneWeekWx = [String]()
     
+    var aqiValue: String?
+    var uviValue: String?
+    var popValue: String?
+    
+    var memoHeaderValue: String?
+    var memoValue: String?
+    var statusValue: String?
+    
+    var pm25: Double?
+    var pm10: Double?
+    var o3: Double?
+    
+    
+    var aqiPublishTimeValue: String?
+    var uviPublishTimeValue: String?
+    var popPublishTimeValue: String?
+    
+    var the24R = ""
+    
     let locationArr = [
         "台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"
     ]
     let weekArr = ["五", "六", "日", "一", "二", "三"]
     var wetherImageName = [String]()
-//    let hightT = ["26°", "25°", "22°", "28°", "25°", "20°"]
-//    let lowT = ["22°", "20°", "18°", "23°", "19°", "16°"]
     let wxMappingDic = [
         "01" : "wetherIcon1", "02" : "wetherIcon2", "03" : "wetherIcon2", "04" : "wetherIcon4", "05" : "wetherIcon4", "06" : "wetherIcon4", "07" : "wetherIcon4", "08" : "wetherIcon3", "09" : "wetherIcon5", "10" : "wetherIcon5", "11" : "wetherIcon5", "12" : "wetherIcon5", "13" : "wetherIcon5", "14" : "wetherIcon5", "15" : "wetherIcon6", "16" : "wetherIcon6", "17" : "wetherIcon6", "18" : "wetherIcon6", "19" : "wetherIcon3", "20" : "wetherIcon3", "21" : "wetherIcon6", "22" : "wetherIcon6", "23" : "wetherIcon7", "24" : "wetherIcon7", "25" : "wetherIcon7", "26" : "wetherIcon7", "27" : "wetherIcon7", "28" : "wetherIcon7", "29" : "wetherIcon7", "30" : "wetherIcon7", "31" : "wetherIcon7", "32" : "wetherIcon7", "33" : "wetherIcon6", "34" : "wetherIcon6", "35" : "wetherIcon7", "36" : "wetherIcon7", "37" : "wetherIcon7", "38" : "wetherIcon7", "39" : "wetherIcon7", "40" : "wetherIcon7", "41" : "wetherIcon7", "42" : "wetherIcon7"
     ]
@@ -231,9 +248,17 @@ class ViewController: UIViewController {
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
 //        interstitial = createAndLoadInterstitial()
+        
+        // 將整個視圖轉為 UIImage
+        guard let image = UIApplication.shared.keyWindow?.snapImage() else { return }
+        
+        // 將轉換後的 UIImage 顯示在 UIImageView 中(在這是直接由 activityItems 輸出)
+//        self.imageView.image = image
+        
+        let conquerUrl = "https://www.conquers.co/"
         // activityItems 陣列中放入我們想要使用的元件，這邊我們放入使用者圖片、使用者名稱及個人部落格。
         // 這邊因為我們確認裡面有值，所以使用驚嘆號強制解包。
-        let activityVC = UIActivityViewController(activityItems: [testMessage], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [conquerUrl, testMessage, image], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
             if completed {
                 self.interstitial = self.createAndLoadInterstitial()
@@ -256,6 +281,84 @@ class ViewController: UIViewController {
         pickerViewIsHidden(bool: true)
     }
     
+    @IBAction func onAqiPresentClick(_ sender: UIButton) {
+        var memoTextArr = [NSMutableAttributedString]()
+        var aqiMemoText = "PM2.5  ( 細懸浮微粒 )"
+        let bigFont = UIFont.systemFont(ofSize: 16)
+        let smallFont = UIFont.systemFont(ofSize: 10)
+        var string = NSMutableAttributedString(string: aqiMemoText, attributes: [.font: bigFont])
+        string.setAttributes([.font: smallFont, .baselineOffset: 7], range: NSRange(location: 2, length: 3))
+        memoTextArr.append(string)
+
+        aqiMemoText = "PM10  ( 懸浮微粒 )"
+        string = NSMutableAttributedString(string: aqiMemoText, attributes: [.font: bigFont])
+        string.setAttributes([.font: smallFont, .baselineOffset: 7], range: NSRange(location: 2, length: 2))
+        memoTextArr.append(string)
+
+        aqiMemoText = "O3  ( 臭氧 )"
+        string = NSMutableAttributedString(string: aqiMemoText, attributes: [.font: bigFont])
+        string.setAttributes([.font: smallFont, .baselineOffset: 7], range: NSRange(location: 1, length: 1))
+        memoTextArr.append(string)
+        
+        var memoLabelArr = [String]()
+        
+        let detailVC = DetailVC.loadFromNib()
+        detailVC.modalPresentationStyle = .overFullScreen
+        detailVC.titleValue = "空氣品質指標 AQI"
+        detailVC.value = aqiValue
+        
+        guard let memoHeaderValue = self.memoHeaderValue, let memoValue = self.memoValue else { return }
+        detailVC.memoValue = "\(memoHeaderValue) ｜ \(memoValue)"
+        detailVC.statusValue = self.statusValue
+        
+        detailVC.memoTextArr = memoTextArr
+        guard let pm25 = self.pm25, let pm10 = self.pm10, let o3 = self.o3 else { return }
+        memoLabelArr = [pm25 > 35.4 ? "不健康" : "健康",
+                        pm10 > 154.0 ? "不健康" : "健康",
+                        o3 > 250.0 ? "不健康" : "健康"]
+        detailVC.cellLabelStatus = memoLabelArr
+        
+        guard let aqiPublishTimeValue = aqiPublishTimeValue else { return }
+        detailVC.publishTimeValue = "更新時間：\(aqiPublishTimeValue)"
+        self.present(detailVC, animated: false, completion: nil)
+    }
+    
+    @IBAction func onUviPresentClick(_ sender: UIButton) {
+        let detailVC = DetailVC.loadFromNib()
+        detailVC.modalPresentationStyle = .overFullScreen
+        detailVC.titleValue = "紫外線指標 UVI"
+        detailVC.value = uviValue
+        detailVC.memoValue = "差 ｜ 對敏感族群不健康"
+        detailVC.statusValue = "unsmileIcon"
+        guard let uviPublishTimeValue = uviPublishTimeValue else { return }
+        detailVC.publishTimeValue = "更新時間：\(uviPublishTimeValue)"
+        self.present(detailVC, animated: false, completion: nil)
+    }
+    
+    @IBAction func onPopPresentClick(_ sender: UIButton) {
+        let detailVC = DetailVC.loadFromNib()
+        detailVC.modalPresentationStyle = .overFullScreen
+        detailVC.titleValue = "降雨機率"
+        guard let popValue = popValue else { return }
+        detailVC.value = "\(popValue) %"
+        detailVC.memoValue = "今天是個好天氣"
+        detailVC.statusValue = "smileIcon"
+        guard let popPublishTimeValue = popPublishTimeValue else { return }
+        detailVC.publishTimeValue = "更新時間：\(popPublishTimeValue)"
+        
+        var memoTextArr = [NSMutableAttributedString]()
+        var string = NSMutableAttributedString(string: "1 小時雨量")
+        memoTextArr.append(string)
+        string = NSMutableAttributedString(string: "24 小時雨量")
+        memoTextArr.append(string)
+        detailVC.memoTextArr = memoTextArr
+        
+        let the24R = self.the24R + "  毫米"
+        detailVC.cellLabelStatus = [the24R, the24R]
+        detailVC.cellLabelIsHidden = true
+        self.present(detailVC, animated: false, completion: nil)
+    }
+    
     func setupUI() {
         
         let chineseWeekDic = ["Monday" : "一", "Tuesday" : "二", "Wednesday" : "三", "Thursday" : "四", "Friday" : "五", "Saturday" : "六", "Sunday" : "日"]
@@ -270,7 +373,7 @@ class ViewController: UIViewController {
         let weekDateFormatter = dateFormatter.string(from: now)
         guard let chineseWeek = chineseWeekDic[weekDateFormatter] else { return }
         guard var intWeek = enToIntDic[weekDateFormatter] else { return }
-        dateFormatter.dateFormat = "M / dd ( \(chineseWeek) ) hh : mm" // 格式化顯示型態
+        dateFormatter.dateFormat = "M / dd    (   \(chineseWeek)   )    hh : mm" // 格式化顯示型態
         let nowFormatter = dateFormatter.string(from: now)  // 將現在時間格式化
         
         while intWeekArr.count < 6 {
@@ -491,6 +594,7 @@ class ViewController: UIViewController {
                 let wetherModel = try JSONDecoder().decode(WetherModel.self, from: data)
                 for location in wetherModel.records.location {
                     if location.locationName == locationName {
+                        
                         for weatherElement in location.weatherElement {
                             switch weatherElement.elementName {
                             case .temp:
@@ -500,6 +604,8 @@ class ViewController: UIViewController {
                                 self.convertTemperature(temperatureStr: weatherElement.elementValue, inputLabel: self.todayDTXLabel, symbol: true)
                             case .dTn:
                                 self.convertTemperature(temperatureStr: weatherElement.elementValue, inputLabel: self.todayDTNLabel, symbol: true)
+                            case .the24R:
+                                self.the24R = weatherElement.elementValue
                             default:
                                 break
                             }
@@ -523,17 +629,35 @@ class ViewController: UIViewController {
                 
                 for aqiModel in aqiModels {
                     if aqiModel.county == locationName {
+                        print(aqiModel)
                         DispatchQueue.main.async {
+                            self.aqiValue = aqiModel.aqi
+                            self.aqiPublishTimeValue = aqiModel.publishTime
+                            
+                            self.pm25 = Double(aqiModel.pm25)
+                            self.pm10 = Double(aqiModel.pm10)
+                            self.o3 = Double(aqiModel.o3)
+                            
+                            
+                            
                             switch aqiModel.status {
                             case .良好:
                                 self.aqiLabel.text = "空氣品質良好"
+                                self.memoValue = self.aqiLabel.text
+                                self.memoHeaderValue = "好"
                                 self.aqiStatusImage.image = UIImage(named: "smileIcon")
+                                self.statusValue = "smileIcon"
+                                
                                 self.aqiMemoLabel.text = "正常戶外活動"
                                 self.aqiDangerImage.isHidden = true
                                 self.refreshView.isHidden = true
                             case .普通:
                                 self.aqiLabel.text = "空氣品質欠佳"
+                                self.memoValue = self.aqiLabel.text
+                                self.memoHeaderValue = "不佳"
                                 self.aqiStatusImage.image = UIImage(named: "normalSmileIcon")
+                                self.statusValue = "normalSmileIcon"
+                                
                                 self.aqiMemoLabel.text = "記得戴口罩"
                                 self.aqiDangerImage.isHidden = false
                                 self.refreshView.isHidden = true
@@ -542,12 +666,16 @@ class ViewController: UIViewController {
                                 self.refreshView.isHidden = true
                             default:
                                 self.aqiLabel.text = "空氣品質不良"
+                                self.memoValue = self.aqiLabel.text
+                                self.memoHeaderValue = "差"
                                 self.aqiStatusImage.image = UIImage(named: "unsmileIcon")
+                                self.statusValue = "unsmileIcon"
                                 self.aqiMemoLabel.text = "減少戶外活動"
                                 self.aqiDangerImage.isHidden = false
                                 self.refreshView.isHidden = true
                             }
                         }
+                        break
                     }
                 }
             } catch {
@@ -566,6 +694,8 @@ class ViewController: UIViewController {
                 let uviModels = try JSONDecoder().decode(UVIModel.self, from: data)
                 for uviModel in uviModels {
                     DispatchQueue.main.async {
+                        self.uviValue = uviModel.uvi
+                        self.uviPublishTimeValue = uviModel.publishTime
                         switch uviModel.publishAgency {
                         case .中央氣象局:
                             guard let uviDouble = Double(uviModel.uvi) else { return }
@@ -606,8 +736,13 @@ class ViewController: UIViewController {
             do {
                 let popModel = try JSONDecoder().decode(POPModel.self, from: data)
                 guard let popElement = popModel.records.location.first?.weatherElement.first?.time.first?.parameter.parameterName else { return }
+                guard let popPublishTime = popModel.records.location.first?.weatherElement.first?.time.first?.startTime else { return }
+                
                 DispatchQueue.main.async {
                     self.popLabel.text = "降雨機率 \(popElement)％"
+                    self.popValue = popElement
+                    self.popPublishTimeValue = popPublishTime
+                    
                     guard let intPopElement = Int(popElement) else { return }
                     switch intPopElement {
                     case 0 ... 10:
