@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "app1Mobile3.pdf"
+      "filename" : "app1Mobile3.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

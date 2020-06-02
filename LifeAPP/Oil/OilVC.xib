@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OilVC" customModule="LifeAPP" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="PGv-bj-Rf3" id="oBX-8u-bYh"/>
+                <outlet property="collectionViewHeightConstraint" destination="7Ck-E5-Ete" id="4It-qB-ZEn"/>
+                <outlet property="gradientView" destination="uVV-kL-5fR" id="44j-o0-Nel"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="oilVC" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVV-kL-5fR">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2V-OB-6Dk">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RF-gH-g8d">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="962"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下週漲幅預測" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-Dw-ZDq">
+                                    <rect key="frame" x="37.666666666666657" y="130" width="339" height="25.333333333333343"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaB-KE-0OA">
+                                    <rect key="frame" x="132" y="178.33333333333337" width="150" height="139.66666666666663"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="117"/>
+                                    <color key="textColor" red="1" green="0.41960784313725491" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日油價" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4v-RR-DZJ">
+                                    <rect key="frame" x="26" y="518" width="86" height="26"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PGv-bj-Rf3">
+                                    <rect key="frame" x="26" y="562" width="362" height="300"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="300" id="7Ck-E5-Ete"/>
+                                    </constraints>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iIq-p4-pbD">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="k20-uD-FoG"/>
+                                        <outlet property="delegate" destination="-1" id="6mQ-iQ-ZrS"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="PGv-bj-Rf3" firstAttribute="top" secondItem="q4v-RR-DZJ" secondAttribute="bottom" constant="18" id="5kN-OD-Vx0"/>
+                                <constraint firstItem="qaB-KE-0OA" firstAttribute="centerX" secondItem="1RF-gH-g8d" secondAttribute="centerX" id="9pc-vH-lSG"/>
+                                <constraint firstItem="jI8-Dw-ZDq" firstAttribute="leading" secondItem="1RF-gH-g8d" secondAttribute="leading" constant="37.5" id="J5y-Sh-LWG"/>
+                                <constraint firstAttribute="trailing" secondItem="PGv-bj-Rf3" secondAttribute="trailing" constant="26" id="L1w-sb-Yfh"/>
+                                <constraint firstAttribute="bottom" secondItem="PGv-bj-Rf3" secondAttribute="bottom" constant="100" id="NlN-95-zyE"/>
+                                <constraint firstItem="jI8-Dw-ZDq" firstAttribute="top" secondItem="1RF-gH-g8d" secondAttribute="top" constant="130" id="NnL-wj-cpY"/>
+                                <constraint firstItem="q4v-RR-DZJ" firstAttribute="top" secondItem="qaB-KE-0OA" secondAttribute="bottom" constant="200" id="PLN-rD-pU3"/>
+                                <constraint firstItem="qaB-KE-0OA" firstAttribute="top" secondItem="jI8-Dw-ZDq" secondAttribute="bottom" constant="23" id="Sdf-US-hDM"/>
+                                <constraint firstAttribute="trailing" secondItem="jI8-Dw-ZDq" secondAttribute="trailing" constant="37.5" id="bNH-3n-gy9"/>
+                                <constraint firstItem="PGv-bj-Rf3" firstAttribute="leading" secondItem="1RF-gH-g8d" secondAttribute="leading" constant="26" id="kIb-2P-lMV"/>
+                                <constraint firstItem="q4v-RR-DZJ" firstAttribute="leading" secondItem="1RF-gH-g8d" secondAttribute="leading" constant="26" id="n2N-TZ-fit"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="1RF-gH-g8d" firstAttribute="bottom" secondItem="xGu-cR-v34" secondAttribute="bottom" id="Gfe-K3-Ax5"/>
+                        <constraint firstItem="1RF-gH-g8d" firstAttribute="trailing" secondItem="xGu-cR-v34" secondAttribute="trailing" id="IE8-kM-gLL"/>
+                        <constraint firstItem="1RF-gH-g8d" firstAttribute="leading" secondItem="xGu-cR-v34" secondAttribute="leading" id="NMN-Z5-WxO"/>
+                        <constraint firstItem="1RF-gH-g8d" firstAttribute="top" secondItem="xGu-cR-v34" secondAttribute="top" id="X6k-FT-UlB"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="xGu-cR-v34"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="rKM-wZ-4M8"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="S2V-OB-6Dk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="91A-JZ-kXN"/>
+                <constraint firstItem="uVV-kL-5fR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BVc-h2-1hE"/>
+                <constraint firstItem="S2V-OB-6Dk" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="ESe-ih-0ne"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uVV-kL-5fR" secondAttribute="bottom" id="RR0-oc-yrc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uVV-kL-5fR" secondAttribute="trailing" id="UgN-zK-uZl"/>
+                <constraint firstItem="S2V-OB-6Dk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Xqz-F9-cwJ"/>
+                <constraint firstItem="uVV-kL-5fR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="YEK-mJ-3xD"/>
+                <constraint firstItem="1RF-gH-g8d" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="q6Z-NG-Adc"/>
+                <constraint firstItem="S2V-OB-6Dk" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tQI-dQ-DKL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="152.44565217391306"/>
+        </view>
+    </objects>
+</document>

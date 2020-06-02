@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar
+        UINavigationBar.appearance().tintColor = .white
 
         if #available(iOS 13.0, *) {
             let navigationBarAppearence = UINavigationBarAppearance()
@@ -32,17 +33,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navigationController.navigationBar.setBackgroundImage(image, for: .default)
             navigationController.navigationBar.shadowImage = image
         }
+        
 
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         // 先建立 Main SB
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let initVC = sb.instantiateViewController(withIdentifier: "navi")
+//        let initVC = sb.instantiateViewController(withIdentifier: "navi")
+        
+        let controllers = navigationController.viewControllers
+        var newStack = [UIViewController]()
+        if controllers.count > 0 {
+            let rootVC = controllers[0]
+            newStack.append(rootVC)
+        }
+        if let initVC = sb.instantiateViewController(withIdentifier: "navi") as? ViewController {
+            newStack.append(initVC)
+        }
+        
+        if let vc = sb.instantiateViewController(withIdentifier: "main") as? ViewController {
+            newStack.append(vc)
+        }
+        
+        let detailVC = DetailVC.loadFromNib()
+        newStack.append(detailVC)
+        
+        let oilVC = OilVC.loadFromNib()
+        newStack.append(oilVC)
+//        if let detailVC = sb.instantiateViewController(withIdentifier: "detailVC") as? DetailVC {
+//            newStack.append(detailVC)
+//        }
+//        if let oilVC = sb.instantiateViewController(withIdentifier: "oilVC") as? OilVC {
+//            newStack.append(oilVC)
+//        }
+        navigationController.setViewControllers(newStack, animated: true)
+        
         // window 滿版
         window = UIWindow(frame: UIScreen.main.bounds)
         // 指定 rootViewController
-        window?.rootViewController = initVC
+        window?.rootViewController = navigationController.viewControllers.first
         // 顯示當前窗口
         window?.makeKeyAndVisible()
         

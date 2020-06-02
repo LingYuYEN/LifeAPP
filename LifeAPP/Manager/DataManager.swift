@@ -40,6 +40,42 @@ class DataManager {
         }
     }
     
+    /// 取得雨量資訊
+    func getRain(range: String, locationName: String, completed: @escaping (String?) -> (Void)) {
+        let urlStr = "\(baseUrl)/v1/rest/datastore/O-A0002-001?Authorization=\(wetherApiKey)&locationName=\(locationName)&elementName=\(range)&parameterName=CITY"
+        guard let newUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let url = URL(string: newUrlStr) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return}
+            do {
+                let model = try JSONDecoder().decode(RainfallModel.self, from: data)
+                guard let the24R = model.records.location.first!.weatherElement.first?.elementValue else { return }
+                completed(the24R)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    /// 取得小幫手文字
+    func getCWB(locationID: String, completed: @escaping (String?) -> (Void)) {
+        let urlStr = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/\(locationID)?Authorization=\(wetherApiKey)&downloadType=WEB&format=JSON"
+        guard let url = URL(string: urlStr) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, res, error) in
+            guard let data = data else { return }
+            do {
+                let model = try JSONDecoder().decode(CWBModel.self, from: data)
+                let parameterCount = model.cwbopendata.dataset.parameterSet.parameter.count
+                let number = Int.random(in: 0 ... parameterCount - 1)
+                let parameter = model.cwbopendata.dataset.parameterSet.parameter[number].parameterValue
+                completed(parameter)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
     
     
 }

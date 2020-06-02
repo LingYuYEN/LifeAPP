@@ -35,8 +35,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOo-Nh-g3s">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="985"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="晴時多雲，適合出遊 !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="6Pl-gZ-cAj">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="29.666666666666668"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="6Pl-gZ-cAj">
+                                                <rect key="frame" x="20" y="0.0" width="374" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -403,16 +403,10 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="FMR-2i-13M"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="kxI-P3-Tu9"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="6Tr-O0-xSU"/>
+                                </connections>
                             </scrollView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7XQ-Ao-RcL">
-                                <rect key="frame" x="144.66666666666666" y="384.33333333333331" width="124.99999999999997" height="125"/>
-                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="4Aa-VD-0hS"/>
-                                    <constraint firstAttribute="height" constant="125" id="nka-JV-BAZ"/>
-                                </constraints>
-                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -420,11 +414,9 @@
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="6bq-Ch-MA1"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Abe-dV-GLv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gRG-ax-kQ9" secondAttribute="bottom" id="F9K-mc-oKF"/>
-                            <constraint firstItem="7XQ-Ao-RcL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="368:492.5" id="L9d-C8-Y9i"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LtB-Vv-zVE"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NE7-7R-1mk"/>
                             <constraint firstItem="gRG-ax-kQ9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ai2-5d-PIP"/>
-                            <constraint firstItem="7XQ-Ao-RcL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eZQ-wX-Atq"/>
                             <constraint firstItem="YOo-Nh-g3s" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="i9B-Hz-Qal"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gRG-ax-kQ9" secondAttribute="trailing" id="w3p-PU-EJY"/>
                         </constraints>
@@ -432,7 +424,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LgM-Wp-IHg">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="refresh" id="PLy-e2-HVm">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="text.justify" catalog="system" id="PLy-e2-HVm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onRefreshClick:" destination="BYZ-38-t0r" id="Zbu-4q-phJ"/>
@@ -442,7 +434,7 @@
                             <rect key="frame" x="207" y="22" width="0.0" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0Y-F9-bJh">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0Y-F9-bJh">
                                     <rect key="frame" x="-42" y="-21" width="84" height="42"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="21"/>
                                     <state key="normal" title="所在區域">
@@ -472,6 +464,7 @@
                         <outlet property="contentView" destination="YOo-Nh-g3s" id="EDB-uP-x6f"/>
                         <outlet property="dateLabel" destination="c7l-pG-3DL" id="JOh-zb-8Kh"/>
                         <outlet property="gradientView" destination="gRG-ax-kQ9" id="ENa-hB-VP1"/>
+                        <outlet property="locationContentView" destination="8SL-m0-55M" id="FaJ-oY-CTd"/>
                         <outlet property="locationsBtn" destination="T0Y-F9-bJh" id="aJg-nB-4bK"/>
                         <outlet property="nowTempLabel" destination="Ekq-Dx-vAl" id="gQx-gV-8CM"/>
                         <outlet property="pickerContentView" destination="OaX-te-XBA" id="I9K-2Z-VvG"/>
@@ -481,7 +474,7 @@
                         <outlet property="popMemoLabel" destination="HTD-qk-XH9" id="9V8-c1-u3y"/>
                         <outlet property="popStatusImage" destination="Uv9-O8-9JB" id="qbq-0l-Clf"/>
                         <outlet property="refreshBtnItem" destination="PLy-e2-HVm" id="GOs-v1-ubr"/>
-                        <outlet property="refreshView" destination="7XQ-Ao-RcL" id="WEN-JZ-DQJ"/>
+                        <outlet property="scrollView" destination="67h-1f-Bc5" id="XEz-Me-lZX"/>
                         <outlet property="shareBtnItem" destination="wBj-sF-ttm" id="JeY-di-aqg"/>
                         <outlet property="stackContentViewFirst" destination="re7-KS-nWL" id="cTk-nl-KFL"/>
                         <outlet property="stackContentViewSec" destination="xh2-gP-FbK" id="KPX-nd-nY5"/>
@@ -499,6 +492,7 @@
                         <outlet property="wetherViewFirst" destination="qGG-hF-fFS" id="Xa1-NP-usC"/>
                         <outlet property="wetherViewSec" destination="fRC-26-42y" id="c2d-yP-p3j"/>
                         <outlet property="wetherViewThrid" destination="Hj0-XV-zqw" id="zUe-hi-Tvc"/>
+                        <outlet property="wxDescriptionLabel" destination="6Pl-gZ-cAj" id="ebw-Lh-nse"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -573,8 +567,8 @@
     </scenes>
     <resources>
         <image name="dangerIcon" width="18" height="18"/>
-        <image name="refresh" width="23" height="23"/>
         <image name="share" width="23" height="23"/>
+        <image name="text.justify" catalog="system" width="64" height="50"/>
         <image name="wetherIcon1" width="46" height="46"/>
         <image name="wetherIcon3" width="46" height="46"/>
     </resources>

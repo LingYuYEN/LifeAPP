@@ -12,6 +12,16 @@
 		1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5D724848ADF0036E4A2 /* DetailVC.xib */; };
 		1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */; };
 		1347E5DD2484C4470036E4A2 /* CardDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */; };
+		1347E5DF2485EC9A0036E4A2 /* RainfallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DE2485EC9A0036E4A2 /* RainfallModel.swift */; };
+		1347E5E12485F87E0036E4A2 /* CWBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5E02485F87E0036E4A2 /* CWBModel.swift */; };
+		1347E5E424862BFD0036E4A2 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5E224862BFD0036E4A2 /* MenuVC.swift */; };
+		1347E5E524862BFD0036E4A2 /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5E324862BFD0036E4A2 /* MenuVC.xib */; };
+		1347E5EA248632060036E4A2 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5E8248632060036E4A2 /* MenuTableViewCell.swift */; };
+		1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5E9248632060036E4A2 /* MenuTableViewCell.xib */; };
+		1347E5EF24863C0F0036E4A2 /* OilVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5ED24863C0F0036E4A2 /* OilVC.swift */; };
+		1347E5F024863C0F0036E4A2 /* OilVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5EE24863C0F0036E4A2 /* OilVC.xib */; };
+		1347E5F3248654370036E4A2 /* OilCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5F1248654370036E4A2 /* OilCollectionViewCell.swift */; };
+		1347E5F4248654370036E4A2 /* OilCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5F2248654370036E4A2 /* OilCollectionViewCell.xib */; };
 		13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E91247B8E5A00CA895E /* AppDelegate.swift */; };
 		13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E93247B8E5A00CA895E /* SceneDelegate.swift */; };
 		13552E96247B8E5A00CA895E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E95247B8E5A00CA895E /* ViewController.swift */; };
@@ -41,6 +51,16 @@
 		1347E5D724848ADF0036E4A2 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewCell.swift; sourceTree = "<group>"; };
 		1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardDetailTableViewCell.xib; sourceTree = "<group>"; };
+		1347E5DE2485EC9A0036E4A2 /* RainfallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainfallModel.swift; sourceTree = "<group>"; };
+		1347E5E02485F87E0036E4A2 /* CWBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWBModel.swift; sourceTree = "<group>"; };
+		1347E5E224862BFD0036E4A2 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		1347E5E324862BFD0036E4A2 /* MenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
+		1347E5E8248632060036E4A2 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		1347E5E9248632060036E4A2 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		1347E5ED24863C0F0036E4A2 /* OilVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OilVC.swift; sourceTree = "<group>"; };
+		1347E5EE24863C0F0036E4A2 /* OilVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OilVC.xib; sourceTree = "<group>"; };
+		1347E5F1248654370036E4A2 /* OilCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OilCollectionViewCell.swift; sourceTree = "<group>"; };
+		1347E5F2248654370036E4A2 /* OilCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OilCollectionViewCell.xib; sourceTree = "<group>"; };
 		13552E8E247B8E5A00CA895E /* LifeAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13552E91247B8E5A00CA895E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13552E93247B8E5A00CA895E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +100,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1347E5E6248631BE0036E4A2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				13552ED6247CBEB300CA895E /* TextCollectionViewCell.swift */,
+				13552ED7247CBEB300CA895E /* TextCollectionViewCell.xib */,
+				13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */,
+				13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */,
+				1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */,
+				1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */,
+				1347E5D624848ADF0036E4A2 /* DetailVC.swift */,
+				1347E5D724848ADF0036E4A2 /* DetailVC.xib */,
+				13552E95247B8E5A00CA895E /* ViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		1347E5E7248631D50036E4A2 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				1347E5E224862BFD0036E4A2 /* MenuVC.swift */,
+				1347E5E324862BFD0036E4A2 /* MenuVC.xib */,
+				1347E5E8248632060036E4A2 /* MenuTableViewCell.swift */,
+				1347E5E9248632060036E4A2 /* MenuTableViewCell.xib */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		1347E5EC24863BF00036E4A2 /* Oil */ = {
+			isa = PBXGroup;
+			children = (
+				1347E5ED24863C0F0036E4A2 /* OilVC.swift */,
+				1347E5EE24863C0F0036E4A2 /* OilVC.xib */,
+				1347E5F1248654370036E4A2 /* OilCollectionViewCell.swift */,
+				1347E5F2248654370036E4A2 /* OilCollectionViewCell.xib */,
+			);
+			path = Oil;
+			sourceTree = "<group>";
+		};
 		13552E85247B8E5A00CA895E = {
 			isa = PBXGroup;
 			children = (
@@ -105,15 +163,9 @@
 				13B05450247CE98700B85357 /* Manager */,
 				13552E91247B8E5A00CA895E /* AppDelegate.swift */,
 				13552E93247B8E5A00CA895E /* SceneDelegate.swift */,
-				13552ED6247CBEB300CA895E /* TextCollectionViewCell.swift */,
-				13552ED7247CBEB300CA895E /* TextCollectionViewCell.xib */,
-				13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */,
-				13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */,
-				1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */,
-				1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */,
-				1347E5D624848ADF0036E4A2 /* DetailVC.swift */,
-				1347E5D724848ADF0036E4A2 /* DetailVC.xib */,
-				13552E95247B8E5A00CA895E /* ViewController.swift */,
+				1347E5E6248631BE0036E4A2 /* Home */,
+				1347E5E7248631D50036E4A2 /* Menu */,
+				1347E5EC24863BF00036E4A2 /* Oil */,
 				13552E97247B8E5A00CA895E /* Main.storyboard */,
 				13552E9A247B8E5B00CA895E /* Assets.xcassets */,
 				13552E9C247B8E5B00CA895E /* LaunchScreen.storyboard */,
@@ -151,6 +203,8 @@
 				13B1B33D247E5496003FC8F2 /* UVIModel.swift */,
 				13B1B33F247E65F6003FC8F2 /* PopModel.swift */,
 				131EEB792480FEF700D69C86 /* OneWeekWetherModel.swift */,
+				1347E5DE2485EC9A0036E4A2 /* RainfallModel.swift */,
+				1347E5E02485F87E0036E4A2 /* CWBModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -237,10 +291,14 @@
 				1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */,
 				13552E9B247B8E5B00CA895E /* Assets.xcassets in Resources */,
 				13552ED5247C9C1B00CA895E /* Lato-Regular.ttf in Resources */,
+				1347E5F4248654370036E4A2 /* OilCollectionViewCell.xib in Resources */,
 				13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */,
 				13552ED9247CBEB300CA895E /* TextCollectionViewCell.xib in Resources */,
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
+				1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */,
 				13552E99247B8E5A00CA895E /* Main.storyboard in Resources */,
+				1347E5E524862BFD0036E4A2 /* MenuVC.xib in Resources */,
+				1347E5F024863C0F0036E4A2 /* OilVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +355,7 @@
 				13B05454247CE9AD00B85357 /* DataManager.swift in Sources */,
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
+				1347E5E12485F87E0036E4A2 /* CWBModel.swift in Sources */,
 				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
 				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
 				13B1B340247E65F6003FC8F2 /* PopModel.swift in Sources */,
@@ -305,10 +364,15 @@
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,
 				13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */,
 				13B1B33E247E5496003FC8F2 /* UVIModel.swift in Sources */,
+				1347E5F3248654370036E4A2 /* OilCollectionViewCell.swift in Sources */,
 				13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */,
+				1347E5EA248632060036E4A2 /* MenuTableViewCell.swift in Sources */,
+				1347E5EF24863C0F0036E4A2 /* OilVC.swift in Sources */,
 				13552EA6247B915100CA895E /* Extension.swift in Sources */,
 				13B1B33C247E48EF003FC8F2 /* AQIModel.swift in Sources */,
+				1347E5DF2485EC9A0036E4A2 /* RainfallModel.swift in Sources */,
 				131EEB7A2480FEF700D69C86 /* OneWeekWetherModel.swift in Sources */,
+				1347E5E424862BFD0036E4A2 /* MenuVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
