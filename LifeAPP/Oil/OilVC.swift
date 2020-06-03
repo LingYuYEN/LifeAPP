@@ -7,15 +7,25 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class OilVC: UIViewController {
     
     let oilNameArr = ["92  無鉛", "95  無鉛", "98  無鉛", "高級柴油"]
-    let cnpcPriceArr = ["中油 19.6", "中油 19.6", "中油 19.6", "中油 19.6"]
-    let formosaPriceArr = ["台塑 19.6", "台塑 19.6", "台塑 19.6", "台塑 19.6"]
+    var cnpcPriceArr = ["-", "-", "-", "-"]
+    var formosaPriceArr = ["-", "-", "-", "-"]
     let cellHeight = 60 * screenSceleHeight
+    var shareMessage = ""
+    let levelTextMap = [1 : "漲", 2 : "持\n平", 3 : "跌"]
+    let levelIconMap = [1 : "priceUpIcon", 2 : "noneImage", 3 : "priceDownIcon"]
+    let levelTextColorMap: [Int : UIColor] = [1 : .setPriceUp(), 2 : .setPriceNormal(), 3 : .setPriceDown()]
+    
+    var bannerView: GADBannerView!
+    var interstitial: GADInterstitial?
     
     
+    
+    @IBOutlet var naviBar: UINavigationBar!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var gradientView: UIView! {
@@ -29,8 +39,25 @@ class OilVC: UIViewController {
         }
     }
     
+    @IBOutlet var dieselOilWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet var oilChangeLabel: UILabel!
+    @IBOutlet var dieselOilChangeLabel: UILabel!
+    @IBOutlet var dieselOilLevelImageView: UIImageView!
+    @IBOutlet var levelLabel: UILabel!
+    @IBOutlet var levelTextLabel: UILabel!
+    @IBOutlet var levelIconImageView: UIImageView!
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-//        self.navigationController?.navigationBar.isHidden = false
+        let image = UIImage()
+        naviBar.setBackgroundImage(image, for: .default)
+        naviBar.shadowImage = image
+        
+        self.navigationController?.navigationBar.isHidden = true
+        
+        
     }
     
     override func viewDidLoad() {
@@ -40,8 +67,97 @@ class OilVC: UIViewController {
         
         collectionViewHeightConstraint.constant = CGFloat(cellHeight * CGFloat(oilNameArr.count) + CGFloat(60))
         collectionView.register(nib, forCellWithReuseIdentifier: "OilCollectionViewCell")
+        
+        DataManager.shared.getOil { (data) -> (Void) in
+            guard let data = data?.results.first else { return }
+            self.cnpcPriceArr = [String]()
+            self.formosaPriceArr = [String]()
+            
+            self.cnpcPriceArr.append("中油  \(data.cpcOil92)")
+            self.cnpcPriceArr.append("中油  \(data.cpcOil98)")
+            self.cnpcPriceArr.append("中油  \(data.cpcOil95)")
+            self.cnpcPriceArr.append("中油  \(data.cpcDieselOil)")
+            
+            self.formosaPriceArr.append("台塑  \(data.fpcOil92)")
+            self.formosaPriceArr.append("台塑  \(data.fpcOil95)")
+            self.formosaPriceArr.append("台塑  \(data.fpcOil98)")
+            self.formosaPriceArr.append("台塑  \(data.fpcDieselOil)")
+            
+            
+            DispatchQueue.main.async {
+                self.levelTextLabel.text = self.levelTextMap[data.priceLevelDisel]
+                self.levelIconImageView.image = UIImage(named: self.levelIconMap[data.priceLevelDisel] ?? "")
+                self.levelTextLabel.textColor = self.levelTextColorMap[data.priceLevelDisel]
+                self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
+                
+                self.oilChangeLabel.text = "\(data.oilChange)"
+                self.oilChangeLabel.textColor = self.levelTextColorMap[data.priceLevelDisel]
+                
+                self.dieselOilChangeLabel.text = "\(data.dieselChange)"
+                self.dieselOilChangeLabel.textColor = self.levelTextColorMap[data.priceLevelDisel]
+                self.dieselOilLevelImageView.image = UIImage(named: self.levelIconMap[data.priceLevelDisel] ?? "")
+                
+                self.dieselOilWidthConstraint.constant = data.priceLevelDisel == 2 ? 0 : self.dieselOilWidthConstraint.constant
+                
+                self.collectionView.reloadData()
+            }
+        }
+        
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+        bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        bannerView.adUnitID = "ca-app-pub-1109779512560033/1833493055"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
     }
-
+    @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
+        let menuVC = MenuVC.loadFromNib()
+        menuVC.modalPresentationStyle = .overFullScreen
+        self.navigationController?.pushViewController(menuVC, animated: true)
+    }
+    @IBAction func onShareClick(_ sender: UIBarButtonItem) {
+        let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+            if completed {
+                self.interstitial = self.createAndLoadInterstitial()
+            }
+        }
+        // 顯示出我們的 activityVC。
+        self.present(activityVC, animated: true)
+    }
+    
+    /// 加入橫幅廣告頁面
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+     bannerView.translatesAutoresizingMaskIntoConstraints = false
+     view.addSubview(bannerView)
+     view.addConstraints(
+       [NSLayoutConstraint(item: bannerView,
+                           attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: view.safeAreaLayoutGuide,
+                           attribute: .bottom,
+                           multiplier: 1,
+                           constant: 0),
+        NSLayoutConstraint(item: bannerView,
+                           attribute: .centerX,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .centerX,
+                           multiplier: 1,
+                           constant: 0)
+       ])
+    }
+    
+    /// 加入插頁式廣告頁面
+    private func createAndLoadInterstitial() -> GADInterstitial? {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-1109779512560033/7553767489")
+        guard let interstitial = interstitial else { return nil }
+        let request = GADRequest()
+        interstitial.load(request)
+        interstitial.delegate = self
+        return interstitial
+    }
+    
 }
 
 extension OilVC: UICollectionViewDataSource {
@@ -110,5 +226,31 @@ extension OilVC: UICollectionViewDelegateFlowLayout {
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0 * screenScaleWidth
+    }
+}
+
+extension OilVC: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner loaded successfully")
+
+        addBannerViewToView(bannerView)
+    }
+
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
+    }
+}
+
+extension OilVC: GADInterstitialDelegate {
+
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("Interstitial loaded successfully")
+        ad.present(fromRootViewController: self)
+    }
+
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        print("Fail to receive interstitial")
     }
 }

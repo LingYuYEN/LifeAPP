@@ -207,6 +207,7 @@ class ViewController: UIViewController {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage = image
+        self.navigationController?.navigationBar.isHidden = false
         
         // 首次使用 向使用者詢問定位自身位置權限
         getAuthorization()
@@ -280,7 +281,6 @@ class ViewController: UIViewController {
         guard let lon = myLocationManager.location?.coordinate.longitude else { return }
         // 取得使用者座標並更新數據
         locationAddress(latitude: lat, longitude: lon) {
-//            self.setUI()
         }
         
         if #available(iOS 13.0, *) {
@@ -311,8 +311,6 @@ class ViewController: UIViewController {
         
         locationsBtn.addTarget(self, action: #selector(onSelectLocationClick), for: .touchUpInside)
         
-        
-        
         setupUI()
     }
     
@@ -320,7 +318,7 @@ class ViewController: UIViewController {
         pickerViewIsHidden(bool: false)
         
     }
-    @IBAction func onRefreshClick(_ sender: UIBarButtonItem) {
+    @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
         
 //        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
 //        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
@@ -331,7 +329,7 @@ class ViewController: UIViewController {
 //        }
         let menuVC = MenuVC.loadFromNib()
         menuVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.show(menuVC, sender: self)
+        self.navigationController?.pushViewController(menuVC, animated: true)
         
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
@@ -608,7 +606,7 @@ class ViewController: UIViewController {
                 self.getUVIData(urlStr: uviUrl)
 
                 let popUrl = "\(self.baseUrl)/v1/rest/datastore/F-C0032-001?Authorization=\(self.wetherApiKey)&locationName=\(city)&elementName=PoP"
-                guard let newPopUrl = popUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+                guard let newPopUrl = popUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return } 
                 self.getPopData(urlStr: newPopUrl)
                 
                 let oneWeekUrl = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=\(self.wetherApiKey)"
@@ -926,7 +924,7 @@ class ViewController: UIViewController {
         wetherView.layer.applySketchShadow(color: .set(red: 255, green: 0, blue: 0), alpha: 0.19, x: 1.3, y: 1.3, blur: 3.7, spread: 0)
     }
     
-    // 加入橫幅廣告頁面
+    /// 加入橫幅廣告頁面
     func addBannerViewToView(_ bannerView: GADBannerView) {
      bannerView.translatesAutoresizingMaskIntoConstraints = false
      view.addSubview(bannerView)
@@ -948,7 +946,7 @@ class ViewController: UIViewController {
        ])
     }
 
-    // 加入插頁式廣告頁面
+    /// 加入插頁式廣告頁面
     private func createAndLoadInterstitial() -> GADInterstitial? {
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-1109779512560033/7553767489")
         guard let interstitial = interstitial else { return nil }

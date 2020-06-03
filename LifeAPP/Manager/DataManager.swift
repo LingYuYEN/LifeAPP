@@ -36,7 +36,7 @@ class DataManager {
             guard let data = data else { return }
             guard let dataStr = String(data: data, encoding: .utf8) else { return }
             print(data)
-            print(dataStr + "sdfsdlgijlerijbelrigjl")
+            print(dataStr)
         }
     }
     
@@ -77,6 +77,20 @@ class DataManager {
         task.resume()
     }
     
-    
+    /// 取得油價資訊
+    func getOil(completed: @escaping (OilModel?) -> (Void)) {
+        let urlStr = "http://172.104.71.209:2000/api/oil/?limit=1&offset=0"
+        guard let url = URL(string: urlStr) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, res, error) in
+            guard let data = data else { return }
+            do {
+                let model = try JSONDecoder().decode(OilModel.self, from: data)
+                completed(model)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
 }
 

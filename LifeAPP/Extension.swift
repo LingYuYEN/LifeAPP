@@ -172,7 +172,7 @@ extension NSAttributedString {
         paraph.alignment = .justified
         
         let attributedString = NSMutableAttributedString(string: string)
-        let stringColor = [NSAttributedString.Key.foregroundColor : UIColor.setMyGray()]
+        let stringColor = [NSAttributedString.Key.foregroundColor : UIColor.setPriceUp()]
         attributedString.addAttributes(stringColor, range: NSRange(location: 0, length: attributedString.length))
         
         // 字距調整
@@ -225,20 +225,16 @@ extension UIColor {
         return UIColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
     }
     
-    static func setMyYellow() -> UIColor {
-        return UIColor(red: 1, green: 214 / 255, blue: 0, alpha: 1)
+    static func setPriceUp() -> UIColor {
+        return UIColor(red: 255, green: 104 / 255, blue: 104 / 255, alpha: 1)
     }
     
-    static func setMyGray() -> UIColor {
-        return UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1)
+    static func setPriceDown() -> UIColor {
+        return UIColor(red: 44 / 255, green: 183 / 255, blue: 164 / 255, alpha: 1)
     }
     
-    static func setMyLightMustard() -> UIColor {
-        return UIColor(red: 253.0 / 255.0, green: 203.0 / 255.0, blue: 87.0 / 255.0, alpha: 1.0)
-    }
-    
-    @nonobjc class var lightMustard: UIColor {
-      return UIColor(red: 253.0 / 255.0, green: 203.0 / 255.0, blue: 87.0 / 255.0, alpha: 1.0)
+    static func setPriceNormal() -> UIColor {
+        return UIColor(red: 99 / 255, green: 186 / 255, blue: 222 / 255, alpha: 1)
     }
     
     //返回隨機顏色

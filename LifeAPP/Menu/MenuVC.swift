@@ -16,10 +16,11 @@ class MenuVC: UIViewController {
     let titleNameArr = ["天氣快報", "油價資訊", "振興券專區"]
     let titleImageNameArr = ["wetherIcon1", "oilIcon", "ticketIcon"]
     let rowHeight = 130 * screenSceleHeight
-    let presentIdArr = ["oilVC", "oilVC", "oilVC"]
+//    let presentIdArr = ["oilVC", "oilVC", "oilVC"]
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     override func viewDidLoad() {
@@ -55,27 +56,19 @@ extension MenuVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
-//        guard let vcArr = self.navigationController?.viewControllers else { return }
-//        let vc = OilVC.loadFromNib()
-        
-        
-//        let naviController = UINavigationController(rootViewController: vc)
-//        naviController.modalPresentationStyle = .overFullScreen
-        
-//        self.navigationController?.present(naviController, animated: true, completion: nil)
-//        self.navigationController?.popToRootViewController(animated: true)
-//        guard let vc = navigationController?.viewControllers[1] else { return }
-//        self.navigationController?.popToViewController(vc, animated: true)
-        
-
-        let vc = OilVC.loadFromNib()
-        vc.modalPresentationStyle = .overFullScreen
-        self.navigationController?.show(vc, sender: self)
-//        self.navigationController?.present(vc, animated: true, completion: nil)
-        
-        
-//        self.navigationController?.popViewController(animated: true)
-//        self.navigationController?.present(vc, animated: true, completion: nil)
+        switch indexPath.row {
+        case 0:
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "main")
+            vc.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            let oilVC = OilVC.loadFromNib()
+            oilVC.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(oilVC, animated: true)
+        default:
+            break
+        }
     }
     
     
