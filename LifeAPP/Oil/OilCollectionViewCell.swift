@@ -39,5 +39,75 @@ class OilCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func setOilAttr(cnpcStr: String, formosaStr: String, oilLevel: Int, cnpc: UILabel, formosa: UILabel) {
+        switch oilLevel {
+        case 0:
+            let cnpcAttributedString = NSMutableAttributedString(string: cnpcStr)
+            cnpcAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], range: NSRange(location: 0, length: cnpcAttributedString.length))
+            cnpcAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                          range: NSRange(location: 0, length: 2))
+            cnpcAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                          range: NSRange(location: 4, length: 4))
+            
+            let formosaAttributedString = NSMutableAttributedString(string: formosaStr)
+            formosaAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], range: NSRange(location: 0, length: formosaAttributedString.length))
+            formosaAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                          range: NSRange(location: 0, length: 2))
+            formosaAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                          range: NSRange(location: 4, length: 4))
+            
+            cnpc.attributedText = cnpcAttributedString
+            formosa.attributedText = formosaAttributedString
+        case 1:
+            let cnpcAttributedString = NSMutableAttributedString(string: cnpcStr)
+            cnpcAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.setCheapPrice()], range: NSRange(location: 0, length: cnpcAttributedString.length))
+            cnpcAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                          range: NSRange(location: 0, length: 2))
+            cnpcAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                          range: NSRange(location: 4, length: 4))
+            
+            let formosaAttributedString = NSMutableAttributedString(string: formosaStr)
+            formosaAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], range: NSRange(location: 0, length: formosaAttributedString.length))
+            formosaAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                          range: NSRange(location: 0, length: 2))
+            formosaAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                          range: NSRange(location: 4, length: 4))
+            
+            cnpc.attributedText = cnpcAttributedString
+            formosa.attributedText = formosaAttributedString
+        case 2:
+            let cnpcAttributedString = NSMutableAttributedString(string: cnpcStr)
+            cnpcAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], range: NSRange(location: 0, length: cnpcAttributedString.length))
+            cnpcAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                          range: NSRange(location: 0, length: 2))
+            cnpcAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                          range: NSRange(location: 4, length: 4))
+            
+            let formosaAttributedString = NSMutableAttributedString(string: formosaStr)
+            formosaAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.setCheapPrice()], range: NSRange(location: 0, length: formosaAttributedString.length))
+            formosaAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                          range: NSRange(location: 0, length: 2))
+            formosaAttributedString.addAttribute(.font,
+                                          value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                          range: NSRange(location: 4, length: 4))
+            
+            cnpc.attributedText = cnpcAttributedString
+            formosa.attributedText = formosaAttributedString
+        default:
+            break
+        }
+    }
 
 }

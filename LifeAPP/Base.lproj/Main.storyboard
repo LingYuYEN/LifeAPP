@@ -546,10 +546,10 @@
             </objects>
             <point key="canvasLocation" x="1044.9275362318842" y="137.36413043478262"/>
         </scene>
-        <!--Side Menu Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="ZAH-3d-ZMH">
             <objects>
-                <navigationController storyboardIdentifier="navi" automaticallyAdjustsScrollViewInsets="NO" id="raR-Sc-alm" customClass="SideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navi" automaticallyAdjustsScrollViewInsets="NO" id="raR-Sc-alm" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mhV-Cq-Wct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

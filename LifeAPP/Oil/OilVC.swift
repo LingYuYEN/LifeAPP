@@ -14,6 +14,7 @@ class OilVC: UIViewController {
     let oilNameArr = ["92  無鉛", "95  無鉛", "98  無鉛", "高級柴油"]
     var cnpcPriceArr = ["--------", "--------", "--------", "--------"]
     var formosaPriceArr = ["--------", "--------", "--------", "--------"]
+    var oilCompareArr = [0, 1, 2, 1]
     let cellHeight = 60 * screenSceleHeight
     var shareMessage = ""
     let levelTextMap = [0 : "持平", 1 : "低", 2 : "高"]
@@ -74,10 +75,11 @@ class OilVC: UIViewController {
             guard let data = data?.results.first else { return }
             self.cnpcPriceArr = [String]()
             self.formosaPriceArr = [String]()
+            self.oilCompareArr = [Int]()
             
             self.cnpcPriceArr.append("中油  \(data.cpcOil92)")
-            self.cnpcPriceArr.append("中油  \(data.cpcOil98)")
             self.cnpcPriceArr.append("中油  \(data.cpcOil95)")
+            self.cnpcPriceArr.append("中油  \(data.cpcOil98)")
             self.cnpcPriceArr.append("中油  \(data.cpcDieselOil)")
             
             self.formosaPriceArr.append("台塑  \(data.fpcOil92)")
@@ -85,6 +87,11 @@ class OilVC: UIViewController {
             self.formosaPriceArr.append("台塑  \(data.fpcOil98)")
             self.formosaPriceArr.append("台塑  \(data.fpcDieselOil)")
             
+            // 0: 持平, 1:中油低於台塑, 2: 台塑低於中油
+            self.oilCompareArr.append(data.cpcOil92 == data.fpcOil92 ? 0 : data.cpcOil92 < data.fpcOil92 ? 1 : 2)
+            self.oilCompareArr.append(data.cpcOil95 == data.fpcOil95 ? 0 : data.cpcOil95 < data.fpcOil95 ? 1 : 2)
+            self.oilCompareArr.append(data.cpcOil98 == data.fpcOil98 ? 0 : data.cpcOil98 < data.fpcOil98 ? 1 : 2)
+            self.oilCompareArr.append(data.cpcDieselOil == data.fpcDieselOil ? 0 : data.cpcDieselOil < data.fpcDieselOil ? 1 : 2)
             
             DispatchQueue.main.async {
                 
@@ -154,7 +161,8 @@ class OilVC: UIViewController {
     @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
         let menuVC = MenuVC.loadFromNib()
         menuVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.pushViewController(menuVC, animated: true)
+        self.navigationController?.show(menuVC, sender: self)
+//        self.navigationController?.pushViewController(menuVC, animated: true)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
         let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
@@ -209,13 +217,10 @@ extension OilVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OilCollectionViewCell", for: indexPath) as! OilCollectionViewCell
         cell.oilNameLabel.text = oilNameArr[indexPath.row]
-        cell.cnpcPrice.attributedText = .setOilTextAttr(Str: cnpcPriceArr[indexPath.row])
-        cell.formosaPrice.attributedText = .setOilTextAttr(Str: formosaPriceArr[indexPath.row])
+        cell.setOilAttr(cnpcStr: cnpcPriceArr[indexPath.row], formosaStr: formosaPriceArr[indexPath.row], oilLevel: oilCompareArr[indexPath.row], cnpc: cell.cnpcPrice, formosa: cell.formosaPrice)
         
         return cell
     }
-    
-    
 }
 
 extension OilVC: UICollectionViewDelegate {

@@ -214,7 +214,7 @@ class ViewController: UIViewController {
         setupUI()
         
         // 首次使用 向使用者詢問定位自身位置權限
-        getAuthorization()
+//        getAuthorization()
         
         view.addSubview(pickerContentView)
         pickerContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -260,6 +260,7 @@ class ViewController: UIViewController {
         setWetherView(wetherView: wetherViewFirst, gradientView: stackContentViewFirst)
         setWetherView(wetherView: wetherViewSec, gradientView: stackContentViewSec)
         setWetherView(wetherView: wetherViewThrid, gradientView: stackContentViewThird)
+        
     }
     
     // 首次使用 向使用者詢問定位自身位置權限
@@ -310,11 +311,6 @@ class ViewController: UIViewController {
         // 取得自身定位位置的精確度
         myLocationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-//        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
-//        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
-//        // 取得使用者座標並更新數據
-//        locationAddress(latitude: lat, longitude: lon) {}
-        
         if #available(iOS 13.0, *) {
             let barAppearance =  UINavigationBarAppearance()
             barAppearance.configureWithTransparentBackground()
@@ -345,18 +341,10 @@ class ViewController: UIViewController {
         
     }
     @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
-        
-//        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
-//        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
-//
-//        // 取得使用者座標並更新數據
-//        locationAddress(latitude: lat, longitude: lon) {
-//
-//        }
         let menuVC = MenuVC.loadFromNib()
         menuVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.pushViewController(menuVC, animated: true)
-        
+        self.navigationController?.show(menuVC, sender: self)
+//        self.navigationController?.pushViewController(menuVC, animated: true)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
 //        interstitial = createAndLoadInterstitial()
@@ -381,7 +369,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onPickerViewDoneClick(_ sender: UIButton) {
-//        refreshView.isHidden = false
         let location = locationArr[pickerView.selectedRow(inComponent: 0)]
         selectLocationCity(cityStr: location) {
             self.locationsBtn.setTitle(location, for: .normal)
@@ -506,9 +493,10 @@ class ViewController: UIViewController {
     }
     
     func pickerViewIsHidden(bool: Bool) {
+        self.view.bringSubviewToFront(bannerView)
         for constraint in view.constraints {
             if constraint.identifier == "bottom" {
-                constraint.constant = bool ? 166 : -50
+                constraint.constant = bool ? 216 : -50
                 break
             }
         }
@@ -929,6 +917,7 @@ class ViewController: UIViewController {
     func addBannerViewToView(_ bannerView: GADBannerView) {
      bannerView.translatesAutoresizingMaskIntoConstraints = false
      view.addSubview(bannerView)
+     view.bringSubviewToFront(bannerView)
      view.addConstraints(
        [NSLayoutConstraint(item: bannerView,
                            attribute: .bottom,
@@ -964,7 +953,6 @@ extension ViewController: GADBannerViewDelegate {
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("Banner loaded successfully")
-
         addBannerViewToView(bannerView)
     }
 
@@ -1075,6 +1063,35 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            // 取得定位服務授權
+            manager.requestWhenInUseAuthorization()
+            // 開始定位自身位置
+            manager.startUpdatingLocation()
+        case .denied:
+            // 提示可至[設定]中開啟權限
+            let alertController = UIAlertController(
+                title: "定位權限已關閉",
+                message:
+                "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "確認", style: .default, handler:nil)
+            alertController.addAction(okAction)
+            self.present(
+                alertController,
+                animated: true, completion: nil)
+        case .authorizedWhenInUse:
+            // 開始定位自身位置
+            myLocationManager.startUpdatingLocation()
+        default:
+            break
+        }
+    }
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         oneWeekMaxTemp = [String]()
@@ -1084,7 +1101,7 @@ extension ViewController: CLLocationManagerDelegate {
         
         guard let lat = manager.location?.coordinate.latitude else { return }
         guard let lon = manager.location?.coordinate.longitude else { return }
-        
+        manager.stopUpdatingLocation()
         // 取得使用者座標並更新數據
         locationAddress(latitude: lat, longitude: lon) {}
 

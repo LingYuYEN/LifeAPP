@@ -185,21 +185,18 @@ extension NSAttributedString {
         return attributedString
     }
     
-    static func setOilTextAttr(Str: String) -> NSAttributedString {
-        let attributedString = NSMutableAttributedString(string: Str)
-        let stringColor = [NSAttributedString.Key.foregroundColor : UIColor.setCheapPrice()]
-        attributedString.addAttributes(stringColor, range: NSRange(location: 0, length: attributedString.length))
-        
-//        var attributeFont = [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 17)]
-        attributedString.addAttribute(.font,
-                                      value: UIFont(name: "PingFangTC-Regular", size: 17)!,
-                                      range: NSRange(location: 0, length: 2))
-        attributedString.addAttribute(.font,
-                                      value: UIFont(name: "PingFangTC-Regular", size: 23)!,
-                                      range: NSRange(location: 4, length: 4))
-        
-        return attributedString
-    }
+//    static func setOilHightAttr(Str: String) -> NSAttributedString {
+//        let attributedString = NSMutableAttributedString(string: Str)
+//        let stringColor = [NSAttributedString.Key.foregroundColor : UIColor.white]
+//        attributedString.addAttributes(stringColor, range: NSRange(location: 0, length: attributedString.length))
+//        attributedString.addAttribute(.font,
+//                                      value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+//                                      range: NSRange(location: 0, length: 2))
+//        attributedString.addAttribute(.font,
+//                                      value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+//                                      range: NSRange(location: 4, length: 4))
+//        return attributedString
+//    }
     
 }
 
