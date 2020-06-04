@@ -573,6 +573,10 @@ class ViewController: UIViewController {
     /// 取得 lat, lon 後開始接 API
     @objc func locationAddress(latitude: Double, longitude: Double, _ completion: @escaping () -> Void){
 
+        oneWeekMaxTemp = [String]()
+        oneWeekMinTemp = [String]()
+        oneWeekWx = [String]()
+        wetherImageName = [String]()
         DispatchQueue.main.async {
             completion()
         }
@@ -988,7 +992,7 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return oneWeekMaxTemp.count
+        return chWeekArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -1076,23 +1080,13 @@ extension ViewController: CLLocationManagerDelegate {
         oneWeekMaxTemp = [String]()
         oneWeekMinTemp = [String]()
         oneWeekWx = [String]()
+        wetherImageName = [String]()
         
-        print("取得定位............")
         guard let lat = manager.location?.coordinate.latitude else { return }
         guard let lon = manager.location?.coordinate.longitude else { return }
         
-        print(lat, lon)
         // 取得使用者座標並更新數據
         locationAddress(latitude: lat, longitude: lon) {}
-        
-        
-//        // 印出目前所在位置座標
-//        let currentLocation :CLLocation = locations[0] as CLLocation
-//        guard let locationLat = Double("\(currentLocation.coordinate.latitude)") else { return }
-//        guard let locationLon = Double("\(currentLocation.coordinate.longitude)") else { return }
-//
-//        // 取得使用者座標並更新數據
-//        locationAddress(latitude: locationLat, longitude: locationLon) {}
 
     }
     
