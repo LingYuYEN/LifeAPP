@@ -10,22 +10,22 @@ import Foundation
 
 // MARK: - OilModel
 struct OilModel: Codable {
-    let count: Int
-    let next: String
-    let previous: String?
-    let results: [OilResult]
+    var count: Int
+    var next: String
+    var previous: String?
+    var results: [OilResult]
 }
 
 // MARK: - Result
 struct OilResult: Codable {
-    let id: Int
-    let dieselChange: Double
-    let priceLevel92, priceLevel95, priceLevel98, priceLevelDisel: Int
-    let createdAt: String
-    let cpcOil92, cpcOil95, cpcOil98, cpcDieselOil: Double
-    let fpcOil92, fpcOil95, fpcOil98, fpcDieselOil: Double
-    let oilChange: Double
-    let lastUpdatedAt: String
+    var id: Int
+    var dieselChange: Double
+    var priceLevel92, priceLevel95, priceLevel98, priceLevelDisel: Int
+    var createdAt: String
+    var cpcOil92, cpcOil95, cpcOil98, cpcDieselOil: Double
+    var fpcOil92, fpcOil95, fpcOil98, fpcDieselOil: Double
+    var oilChange: Double
+    var lastUpdatedAt: String
 
     enum CodingKeys: String, CodingKey {
         case id

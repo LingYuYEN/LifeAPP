@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     @IBOutlet var pickerContentView: UIView!
     @IBOutlet var pickerView: UIPickerView!
     
-//    @IBOutlet var refreshView: UIActivityIndicatorView!
     @IBOutlet var gradientView: UIView! {
         didSet {
             let gradientLayer = CAGradientLayer()
@@ -53,7 +52,6 @@ class ViewController: UIViewController {
     @IBOutlet var wetherViewThrid: UIView!
     
     @IBOutlet var weekendCollectionView: UICollectionView!
-    
     
     @IBOutlet var wxDescriptionLabel: UILabel!
     @IBOutlet var nowTempLabel: UILabel!
@@ -92,10 +90,14 @@ class ViewController: UIViewController {
     var myLocationManager: CLLocationManager!
     
     var intWeekArr = [Int]()
-    var chWeekArr = [String]()
-    var oneWeekMaxTemp = [String]()
-    var oneWeekMinTemp = [String]()
-    var oneWeekWx = [String]()
+//    var chWeekArr = [String]()
+//    var oneWeekMaxTemp = [String]()
+//    var oneWeekMinTemp = [String]()
+    var chWeekArr = ["-", "-", "-", "-", "-", "-"]
+    var oneWeekMaxTemp = ["-", "-", "-", "-", "-", "-"]
+    var oneWeekMinTemp = ["-", "-", "-", "-", "-", "-"]
+    var oneWeekWx = ["-", "-", "-", "-", "-", "-"]
+    
     
     var aqiValue: String?
     var uviValue: String?
@@ -117,7 +119,7 @@ class ViewController: UIViewController {
         "台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"
     ]
     let weekArr = ["五", "六", "日", "一", "二", "三"]
-    var wetherImageName = [String]()
+    var wetherImageName = ["-", "-", "-", "-", "-", "-"]
     let wxMappingDic = [
         "01" : "wetherIcon1", "02" : "wetherIcon2", "03" : "wetherIcon2", "04" : "wetherIcon4", "05" : "wetherIcon4", "06" : "wetherIcon4", "07" : "wetherIcon4", "08" : "wetherIcon3", "09" : "wetherIcon5", "10" : "wetherIcon5", "11" : "wetherIcon5", "12" : "wetherIcon5", "13" : "wetherIcon5", "14" : "wetherIcon5", "15" : "wetherIcon6", "16" : "wetherIcon6", "17" : "wetherIcon6", "18" : "wetherIcon6", "19" : "wetherIcon3", "20" : "wetherIcon3", "21" : "wetherIcon6", "22" : "wetherIcon6", "23" : "wetherIcon7", "24" : "wetherIcon7", "25" : "wetherIcon7", "26" : "wetherIcon7", "27" : "wetherIcon7", "28" : "wetherIcon7", "29" : "wetherIcon7", "30" : "wetherIcon7", "31" : "wetherIcon7", "32" : "wetherIcon7", "33" : "wetherIcon6", "34" : "wetherIcon6", "35" : "wetherIcon7", "36" : "wetherIcon7", "37" : "wetherIcon7", "38" : "wetherIcon7", "39" : "wetherIcon7", "40" : "wetherIcon7", "41" : "wetherIcon7", "42" : "wetherIcon7"
     ]
@@ -209,6 +211,8 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = image
         self.navigationController?.navigationBar.isHidden = false
         
+        setupUI()
+        
         // 首次使用 向使用者詢問定位自身位置權限
         getAuthorization()
         
@@ -223,16 +227,48 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         
     }
+    func setupUI() {
+        chWeekArr = [String]()
+        let chineseWeekDic = ["Monday" : "一", "Tuesday" : "二", "Wednesday" : "三", "Thursday" : "四", "Friday" : "五", "Saturday" : "六", "Sunday" : "日"]
+        let enToIntDic: [String : Int] = ["Monday" : 1, "Tuesday" : 2, "Wednesday" : 3, "Thursday" : 4, "Friday" : 5, "Saturday" : 6, "Sunday" : 7]
+        let intToStrDic = [1 : "一", 2 : "二", 3 : "三", 4 : "四", 5 : "五", 6 : "六", 7 : "日"]
+        // 5 / 21 ( 四 ) 13 : 50
+        let now = Date()
+        /// Date 格式化
+        let dateFormatter = DateFormatter()     // 建立日期格式化器
+        dateFormatter.locale = Locale.current   // 格式化為當地時間
+        dateFormatter.dateFormat = "EEEE"
+        let weekDateFormatter = dateFormatter.string(from: now)
+        guard let chineseWeek = chineseWeekDic[weekDateFormatter] else { return }
+        guard var intWeek = enToIntDic[weekDateFormatter] else { return }
+        dateFormatter.dateFormat = "M / dd    (   \(chineseWeek)   )    hh : mm" // 格式化顯示型態
+        let nowFormatter = dateFormatter.string(from: now)  // 將現在時間格式化
+        
+        while intWeekArr.count < 6 {
+            intWeek += 1
+            if intWeek > 7 {
+                intWeek = 1
+            }
+            
+            intWeekArr.append(intWeek)
+            guard let todayWeekCh = intToStrDic[intWeek] else { return }
+            chWeekArr.append(todayWeekCh)
+        }
+
+        dateLabel.text = "\(nowFormatter)"
+        
+        setWetherView(wetherView: wetherViewFirst, gradientView: stackContentViewFirst)
+        setWetherView(wetherView: wetherViewSec, gradientView: stackContentViewSec)
+        setWetherView(wetherView: wetherViewThrid, gradientView: stackContentViewThird)
+    }
     
     // 首次使用 向使用者詢問定位自身位置權限
     func getAuthorization() {
         if CLLocationManager.authorizationStatus() == .notDetermined {
             // 取得定位服務授權
             myLocationManager.requestWhenInUseAuthorization()
-
             // 開始定位自身位置
             myLocationManager.startUpdatingLocation()
-        
         }
         // 使用者已經拒絕定位自身位置權限
         else if CLLocationManager.authorizationStatus() == .denied {
@@ -268,31 +304,22 @@ class ViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
         self.scrollView.refreshControl = refreshControl
         
-//        refreshView.layer.cornerRadius = 15
-        
         // 經緯度管理
         myLocationManager = CLLocationManager()
         myLocationManager.delegate = self
-        
         // 取得自身定位位置的精確度
         myLocationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
-        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
-        // 取得使用者座標並更新數據
-        locationAddress(latitude: lat, longitude: lon) {
-        }
+//        guard let lat = myLocationManager.location?.coordinate.latitude else { return }
+//        guard let lon = myLocationManager.location?.coordinate.longitude else { return }
+//        // 取得使用者座標並更新數據
+//        locationAddress(latitude: lat, longitude: lon) {}
         
         if #available(iOS 13.0, *) {
             let barAppearance =  UINavigationBarAppearance()
             barAppearance.configureWithTransparentBackground()
             navigationController?.navigationBar.standardAppearance = barAppearance
         }
-        
-        
-        setWetherView(wetherView: wetherViewFirst, gradientView: stackContentViewFirst)
-        setWetherView(wetherView: wetherViewSec, gradientView: stackContentViewSec)
-        setWetherView(wetherView: wetherViewThrid, gradientView: stackContentViewThird)
         
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
@@ -311,7 +338,6 @@ class ViewController: UIViewController {
         
         locationsBtn.addTarget(self, action: #selector(onSelectLocationClick), for: .touchUpInside)
         
-        setupUI()
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {
@@ -468,36 +494,7 @@ class ViewController: UIViewController {
         self.present(detailVC, animated: false, completion: nil)
     }
     
-    func setupUI() {
-        
-        let chineseWeekDic = ["Monday" : "一", "Tuesday" : "二", "Wednesday" : "三", "Thursday" : "四", "Friday" : "五", "Saturday" : "六", "Sunday" : "日"]
-        let enToIntDic: [String : Int] = ["Monday" : 1, "Tuesday" : 2, "Wednesday" : 3, "Thursday" : 4, "Friday" : 5, "Saturday" : 6, "Sunday" : 7]
-        let intToStrDic = [1 : "一", 2 : "二", 3 : "三", 4 : "四", 5 : "五", 6 : "六", 7 : "日"]
-        // 5 / 21 ( 四 ) 13 : 50
-        let now = Date()
-        /// Date 格式化
-        let dateFormatter = DateFormatter()     // 建立日期格式化器
-        dateFormatter.locale = Locale.current   // 格式化為當地時間
-        dateFormatter.dateFormat = "EEEE"
-        let weekDateFormatter = dateFormatter.string(from: now)
-        guard let chineseWeek = chineseWeekDic[weekDateFormatter] else { return }
-        guard var intWeek = enToIntDic[weekDateFormatter] else { return }
-        dateFormatter.dateFormat = "M / dd    (   \(chineseWeek)   )    hh : mm" // 格式化顯示型態
-        let nowFormatter = dateFormatter.string(from: now)  // 將現在時間格式化
-        
-        while intWeekArr.count < 6 {
-            intWeek += 1
-            if intWeek > 7 {
-                intWeek = 1
-            }
-            
-            intWeekArr.append(intWeek)
-            guard let todayWeekCh = intToStrDic[intWeek] else { return }
-            chWeekArr.append(todayWeekCh)
-        }
-
-        dateLabel.text = "\(nowFormatter)"
-    }
+    
     
     func getNowFormatter () -> String {
         let now = Date()
@@ -573,7 +570,7 @@ class ViewController: UIViewController {
         
     }
     
-    
+    /// 取得 lat, lon 後開始接 API
     @objc func locationAddress(latitude: Double, longitude: Double, _ completion: @escaping () -> Void){
 
         DispatchQueue.main.async {
@@ -1074,20 +1071,30 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: CLLocationManagerDelegate {
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        oneWeekMaxTemp = [String]()
+        oneWeekMinTemp = [String]()
+        oneWeekWx = [String]()
+        
+        print("取得定位............")
+        guard let lat = manager.location?.coordinate.latitude else { return }
+        guard let lon = manager.location?.coordinate.longitude else { return }
+        
+        print(lat, lon)
+        // 取得使用者座標並更新數據
+        locationAddress(latitude: lat, longitude: lon) {}
+        
+        
 //        // 印出目前所在位置座標
 //        let currentLocation :CLLocation = locations[0] as CLLocation
 //        guard let locationLat = Double("\(currentLocation.coordinate.latitude)") else { return }
 //        guard let locationLon = Double("\(currentLocation.coordinate.longitude)") else { return }
 //
-//        print("載入座標及ＡＰＩ資訊: \(locationLat), \(locationLon)")
-//        // 將座標轉換成地址，並取得所在縣市
-//        locationAddress(latitude: locationLat, longitude: locationLon) {
-//            self.myLocationManager = nil
-//        }
-//
-//    }
+//        // 取得使用者座標並更新數據
+//        locationAddress(latitude: locationLat, longitude: locationLon) {}
+
+    }
     
 }
 

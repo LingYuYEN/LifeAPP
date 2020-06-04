@@ -185,38 +185,21 @@ extension NSAttributedString {
         return attributedString
     }
     
-    
-    
-//======================================================================================================
-//    static func setLargeAttributedString(string: String) -> NSAttributedString {
-//        let attributedString = NSMutableAttributedString(string: string)
-//        let attributedStringColor = [NSAttributedString.Key.foregroundColor : UIColor.white]
-//        attributedString.addAttribute(NSAttributedString.Key.kern, value: 3.5, range: NSRange(location: 0, length: attributedString.length))
-//        attributedString.addAttributes(attributedStringColor, range: NSRange(location: 0, length: attributedString.length))
-//        return attributedString
-//    }
-//
-//    static func setMediumAttributedString(string: String) -> NSAttributedString {
-//        let attributedString = NSMutableAttributedString(string: string)
-//        let attributedStringColor = [NSAttributedString.Key.foregroundColor : UIColor(red: 1, green: 214/255, blue: 0, alpha: 1)]
-//        let attributedFont = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 16.0)!]
-//        attributedString.addAttribute(NSAttributedString.Key.kern, value: 3, range: NSRange(location: 0, length: attributedString.length))
-//        attributedString.addAttributes(attributedStringColor, range: NSRange(location: 0, length: attributedString.length))
-//        attributedString.addAttributes(attributedFont, range: NSRange(location: 0, length: attributedString.length))
-//        return attributedString
-//    }
-//
-//
-//
-//    static func setSmallAttributedString(string: String) -> NSAttributedString {
-//        let attributedString = NSMutableAttributedString(string: string)
-//
-//        let attributedStringColor = [NSAttributedString.Key.foregroundColor : UIColor.white]
-//        attributedString.addAttribute(NSAttributedString.Key.kern, value: 2.8, range: NSRange(location: 0, length: attributedString.length))
-//        attributedString.addAttributes(attributedStringColor, range: NSRange(location: 0, length: attributedString.length))
-//
-//        return attributedString
-//    }
+    static func setOilTextAttr(Str: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: Str)
+        let stringColor = [NSAttributedString.Key.foregroundColor : UIColor.setCheapPrice()]
+        attributedString.addAttributes(stringColor, range: NSRange(location: 0, length: attributedString.length))
+        
+//        var attributeFont = [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 17)]
+        attributedString.addAttribute(.font,
+                                      value: UIFont(name: "PingFangTC-Regular", size: 17)!,
+                                      range: NSRange(location: 0, length: 2))
+        attributedString.addAttribute(.font,
+                                      value: UIFont(name: "PingFangTC-Regular", size: 23)!,
+                                      range: NSRange(location: 4, length: 4))
+        
+        return attributedString
+    }
     
 }
 
@@ -236,6 +219,11 @@ extension UIColor {
     static func setPriceNormal() -> UIColor {
         return UIColor(red: 99 / 255, green: 186 / 255, blue: 222 / 255, alpha: 1)
     }
+    
+    static func setCheapPrice() -> UIColor {
+        return UIColor(red: 255 / 255, green: 245 / 255, blue: 104 / 255, alpha: 1)
+    }
+    
     
     //返回隨機顏色
     open class var randomColor:UIColor{

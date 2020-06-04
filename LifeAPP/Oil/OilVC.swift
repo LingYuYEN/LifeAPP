@@ -12,13 +12,13 @@ import GoogleMobileAds
 class OilVC: UIViewController {
     
     let oilNameArr = ["92  無鉛", "95  無鉛", "98  無鉛", "高級柴油"]
-    var cnpcPriceArr = ["-", "-", "-", "-"]
-    var formosaPriceArr = ["-", "-", "-", "-"]
+    var cnpcPriceArr = ["--------", "--------", "--------", "--------"]
+    var formosaPriceArr = ["--------", "--------", "--------", "--------"]
     let cellHeight = 60 * screenSceleHeight
     var shareMessage = ""
-    let levelTextMap = [1 : "漲", 2 : "持\n平", 3 : "跌"]
-    let levelIconMap = [1 : "priceUpIcon", 2 : "noneImage", 3 : "priceDownIcon"]
-    let levelTextColorMap: [Int : UIColor] = [1 : .setPriceUp(), 2 : .setPriceNormal(), 3 : .setPriceDown()]
+    let levelTextMap = [0 : "持平", 1 : "低", 2 : "高"]
+    let levelIconMap = [0 : "noneIcon", 1 : "priceDownIcon", 2 : "priceUpIcon"]
+    let levelTextColorMap: [Int : UIColor] = [0 : .setPriceNormal(), 1 : .setPriceDown(), 2 : .setPriceUp()]
     
     var bannerView: GADBannerView!
     var interstitial: GADInterstitial?
@@ -40,11 +40,13 @@ class OilVC: UIViewController {
     }
     
     @IBOutlet var dieselOilWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var levelIconWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet var oilChangeLabel: UILabel!
     @IBOutlet var dieselOilChangeLabel: UILabel!
     @IBOutlet var dieselOilLevelImageView: UIImageView!
-    @IBOutlet var levelLabel: UILabel!
+    @IBOutlet var averageLabel: UILabel!
+    @IBOutlet var averageIconImageView: UIImageView!
     @IBOutlet var levelTextLabel: UILabel!
     @IBOutlet var levelIconImageView: UIImageView!
     
@@ -85,28 +87,67 @@ class OilVC: UIViewController {
             
             
             DispatchQueue.main.async {
-                self.levelTextLabel.text = self.levelTextMap[data.priceLevelDisel]
-                self.levelIconImageView.image = UIImage(named: self.levelIconMap[data.priceLevelDisel] ?? "")
-                self.levelTextLabel.textColor = self.levelTextColorMap[data.priceLevelDisel]
-                self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
                 
+                // 一般油價
                 self.oilChangeLabel.text = "\(data.oilChange)"
-                self.oilChangeLabel.textColor = self.levelTextColorMap[data.priceLevelDisel]
-                
+                switch data.oilChange {
+                case 0:
+                    self.levelTextLabel.text = "持平"
+                    self.levelTextLabel.textColor = .setPriceNormal()
+                    self.levelIconImageView.image = UIImage(named: "noneIcon")
+                    self.oilChangeLabel.textColor = .setPriceNormal()
+                case 0...:
+                    self.levelTextLabel.text = "漲"
+                    self.levelTextLabel.textColor = .setPriceUp()
+                    self.levelIconImageView.image = UIImage(named: "priceUpIcon")
+                    self.oilChangeLabel.textColor = .setPriceUp()
+                case ..<0:
+                    self.levelTextLabel.text = "跌"
+                    self.levelTextLabel.textColor = .setPriceDown()
+                    self.levelIconImageView.image = UIImage(named: "priceDownIcon")
+                    self.oilChangeLabel.textColor = .setPriceDown()
+                    self.oilChangeLabel.text = "\(data.oilChange * -1)"
+                default:
+                    break
+                }
+              
+                // 柴油油價
                 self.dieselOilChangeLabel.text = "\(data.dieselChange)"
-                self.dieselOilChangeLabel.textColor = self.levelTextColorMap[data.priceLevelDisel]
-                self.dieselOilLevelImageView.image = UIImage(named: self.levelIconMap[data.priceLevelDisel] ?? "")
+                switch data.dieselChange {
+                case 0:
+                    self.dieselOilChangeLabel.textColor = .setPriceNormal()
+                    self.dieselOilChangeLabel.textColor = .setPriceNormal()
+                    self.dieselOilLevelImageView.image = UIImage(named: "noneIcon")
+                    self.dieselOilWidthConstraint.constant = 0
+                case 0...:
+                    self.dieselOilChangeLabel.textColor = .setPriceUp()
+                    self.dieselOilChangeLabel.textColor = .setPriceUp()
+                    self.dieselOilLevelImageView.image = UIImage(named: "priceUpIcon")
+                case ..<0:
+                    self.dieselOilChangeLabel.textColor = .setPriceDown()
+                    self.dieselOilChangeLabel.textColor = .setPriceDown()
+                    self.dieselOilLevelImageView.image = UIImage(named: "priceDownIcon")
+                    self.dieselOilChangeLabel.text = "\(data.dieselChange * -1)"
+                default:
+                    break
+                }
                 
-                self.dieselOilWidthConstraint.constant = data.priceLevelDisel == 2 ? 0 : self.dieselOilWidthConstraint.constant
+                // 平均
+                self.averageLabel.text = self.levelTextMap[data.priceLevel95]
+                self.averageLabel.textColor = self.levelTextColorMap[data.priceLevel95]
+                self.averageIconImageView.image = UIImage(named: self.levelIconMap[data.priceLevel95] ?? "")
+                self.levelIconWidthConstraint.constant = data.priceLevel95 == 0 ? 0 : self.levelIconWidthConstraint.constant
                 
+                self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
+
                 self.collectionView.reloadData()
             }
         }
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         bannerView.adUnitID = "ca-app-pub-1109779512560033/1833493055"
         bannerView.rootViewController = self
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView.load(GADRequest())
         bannerView.delegate = self
     }
@@ -168,8 +209,8 @@ extension OilVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OilCollectionViewCell", for: indexPath) as! OilCollectionViewCell
         cell.oilNameLabel.text = oilNameArr[indexPath.row]
-        cell.cnpcPrice.text = cnpcPriceArr[indexPath.row]
-        cell.formosaPrice.text = formosaPriceArr[indexPath.row]
+        cell.cnpcPrice.attributedText = .setOilTextAttr(Str: cnpcPriceArr[indexPath.row])
+        cell.formosaPrice.attributedText = .setOilTextAttr(Str: formosaPriceArr[indexPath.row])
         
         return cell
     }

@@ -18,6 +18,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OilVC" customModule="LifeAPP" customModuleProvider="target">
             <connections>
+                <outlet property="averageIconImageView" destination="93s-fm-OEJ" id="KNE-3R-Pbs"/>
+                <outlet property="averageLabel" destination="Vwj-pt-E6Z" id="xco-ZN-u5n"/>
                 <outlet property="collectionView" destination="PGv-bj-Rf3" id="oBX-8u-bYh"/>
                 <outlet property="collectionViewHeightConstraint" destination="7Ck-E5-Ete" id="4It-qB-ZEn"/>
                 <outlet property="dieselOilChangeLabel" destination="9OK-5O-5eI" id="DOx-XY-Pyv"/>
@@ -25,7 +27,7 @@
                 <outlet property="dieselOilWidthConstraint" destination="dj3-hs-J8r" id="NPP-Xy-2VR"/>
                 <outlet property="gradientView" destination="uVV-kL-5fR" id="44j-o0-Nel"/>
                 <outlet property="levelIconImageView" destination="vDG-BQ-UAP" id="l0l-5r-tLz"/>
-                <outlet property="levelLabel" destination="Vwj-pt-E6Z" id="xco-ZN-u5n"/>
+                <outlet property="levelIconWidthConstraint" destination="d1S-Eh-hZO" id="jTg-Fc-zn8"/>
                 <outlet property="levelTextLabel" destination="NDg-yA-3nW" id="wJq-D8-SMb"/>
                 <outlet property="naviBar" destination="veh-D3-UUg" id="cgb-Xd-qHY"/>
                 <outlet property="oilChangeLabel" destination="qaB-KE-0OA" id="kNc-ds-4UA"/>
@@ -118,20 +120,17 @@
                                     </connections>
                                 </collectionView>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pkp-sF-zqz">
-                                    <rect key="frame" x="247.33333333333337" y="318.66666666666669" width="85" height="40"/>
+                                    <rect key="frame" x="247.33333333333337" y="318.66666666666669" width="85" height="46.333333333333314"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priceUpIcon" translatesAutoresizingMaskIntoConstraints="NO" id="93s-fm-OEJ">
-                                            <rect key="frame" x="0.0" y="11" width="18" height="18"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="93s-fm-OEJ">
+                                            <rect key="frame" x="0.0" y="14.333333333333314" width="18" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="TaT-ji-aTc"/>
                                                 <constraint firstAttribute="width" constant="18" id="d1S-Eh-hZO"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vwj-pt-E6Z">
-                                            <rect key="frame" x="22.999999999999972" y="0.0" width="62" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="aQ2-VY-XHy"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vwj-pt-E6Z">
+                                            <rect key="frame" x="22.999999999999972" y="0.0" width="62" height="46.333333333333336"/>
                                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="33"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -271,7 +270,6 @@
     </objects>
     <resources>
         <image name="hambergerIcon" width="23" height="23"/>
-        <image name="priceUpIcon" width="30" height="30"/>
         <image name="share" width="23" height="23"/>
     </resources>
 </document>
