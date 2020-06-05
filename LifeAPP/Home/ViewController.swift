@@ -10,7 +10,6 @@ import UIKit
 import GoogleMobileAds
 import CoreLocation
 
-
 class ViewController: UIViewController {
     
     var bannerView: GADBannerView!
@@ -323,11 +322,6 @@ class ViewController: UIViewController {
             navigationController?.navigationBar.standardAppearance = barAppearance
         }
         
-        
-        
-        // 載入插頁式廣告
-//        interstitial = createAndLoadInterstitial()
-        
         let nib = UINib(nibName: "TextCollectionViewCell", bundle: nil)
         let imageNib = UINib(nibName: "ImageCollectionViewCell", bundle: nil)
         self.weekendCollectionView.register(nib, forCellWithReuseIdentifier: "TextCollectionViewCell")
@@ -338,7 +332,7 @@ class ViewController: UIViewController {
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {
-        self.locationsBtn.setImage(UIImage(named: "down"), for: .normal)
+        self.locationsBtn.setImage(UIImage(named: "up"), for: .normal)
         pickerViewIsHidden(bool: false)
         
     }
@@ -346,7 +340,6 @@ class ViewController: UIViewController {
         let menuVC = MenuVC.loadFromNib()
         menuVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.show(menuVC, sender: self)
-//        self.navigationController?.pushViewController(menuVC, animated: true)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
         let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
@@ -360,7 +353,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onPickerViewDoneClick(_ sender: UIButton) {
-        self.locationsBtn.setImage(UIImage(named: "up"), for: .normal)
+        self.locationsBtn.setImage(UIImage(named: "down"), for: .normal)
         let location = locationArr[pickerView.selectedRow(inComponent: 0)]
         selectLocationCity(cityStr: location) {
             self.locationsBtn.setTitle(location, for: .normal)
@@ -369,7 +362,7 @@ class ViewController: UIViewController {
         
     }
     @IBAction func onPickerViewCancelClick(_ sender: UIButton) {
-        self.locationsBtn.setImage(UIImage(named: "up"), for: .normal)
+        self.locationsBtn.setImage(UIImage(named: "down"), for: .normal)
         pickerViewIsHidden(bool: true)
     }
     
@@ -1096,7 +1089,6 @@ extension ViewController: CLLocationManagerDelegate {
         manager.stopUpdatingLocation()
         // 取得使用者座標並更新數據
         locationAddress(latitude: lat, longitude: lon) {
-            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
             self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
             self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
             self.bannerView.rootViewController = self

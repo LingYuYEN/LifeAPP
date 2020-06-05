@@ -43,14 +43,14 @@
                                 <action selector="onDismissClick:" destination="-1" eventType="touchUpInside" id="tzU-bZ-EOP"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空氣品質指標 AQI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXE-Jj-7t1">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空氣品質指標 AQI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eXE-Jj-7t1">
                             <rect key="frame" x="26" y="58.666666666666671" width="310" height="28"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="差 | 對敏感族群不健康" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhQ-Be-PIg">
-                            <rect key="frame" x="97" y="194.66666666666663" width="168" height="24"/>
+                        <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="差 | 對敏感族群不健康" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GhQ-Be-PIg">
+                            <rect key="frame" x="97.333333333333329" y="194.66666666666663" width="167.66666666666669" height="24"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -61,14 +61,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsmileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="64C-D9-CcX">
-                            <rect key="frame" x="68" y="196.33333333333331" width="21" height="21"/>
-                            <color key="tintColor" red="0.99215686274509807" green="0.95686274509803915" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="64C-D9-CcX" secondAttribute="height" multiplier="1:1" id="HIQ-ZX-io1"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發布時間：2020 / 05 / 21     10:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFC-xx-NWP">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發布時間：2020 / 05 / 21     10:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="rFC-xx-NWP">
                             <rect key="frame" x="26" y="447.66666666666669" width="310" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,28 +80,37 @@
                                 <outlet property="delegate" destination="-1" id="XTG-rw-mtf"/>
                             </connections>
                         </tableView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsmileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="64C-D9-CcX">
+                            <rect key="frame" x="65.333333333333329" y="194.66666666666663" width="24" height="24"/>
+                            <color key="tintColor" red="0.99215686274509807" green="0.95686274509803915" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="64C-D9-CcX" secondAttribute="height" id="HxX-1f-6uJ"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="64C-D9-CcX" firstAttribute="centerY" secondItem="GhQ-Be-PIg" secondAttribute="centerY" id="1WG-kb-17m"/>
+                        <constraint firstItem="64C-D9-CcX" firstAttribute="height" secondItem="GhQ-Be-PIg" secondAttribute="height" id="3of-yO-HoR"/>
                         <constraint firstAttribute="bottom" secondItem="rFC-xx-NWP" secondAttribute="bottom" constant="30" id="DVO-XX-bZ3"/>
                         <constraint firstItem="nlj-DX-Bb5" firstAttribute="centerX" secondItem="SKK-XB-WSw" secondAttribute="centerX" id="HxQ-V1-FyH"/>
                         <constraint firstAttribute="trailing" secondItem="Phz-mZ-sWu" secondAttribute="trailing" constant="26" id="J2K-Zv-Bhj"/>
                         <constraint firstItem="GhQ-Be-PIg" firstAttribute="top" secondItem="94Q-x3-jC6" secondAttribute="bottom" constant="5" id="J3g-Gh-b8X"/>
                         <constraint firstAttribute="trailing" secondItem="rFC-xx-NWP" secondAttribute="trailing" constant="26" id="JcO-IS-ukU"/>
                         <constraint firstAttribute="trailing" secondItem="eXE-Jj-7t1" secondAttribute="trailing" constant="26" id="KoN-Vs-lTk"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GhQ-Be-PIg" secondAttribute="trailing" constant="30" id="ON6-TU-j7a"/>
+                        <constraint firstItem="GhQ-Be-PIg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SKK-XB-WSw" secondAttribute="leading" constant="30" id="PlX-he-zkf"/>
                         <constraint firstItem="94Q-x3-jC6" firstAttribute="centerX" secondItem="SKK-XB-WSw" secondAttribute="centerX" id="ShE-qy-mG6"/>
+                        <constraint firstItem="GhQ-Be-PIg" firstAttribute="leading" secondItem="64C-D9-CcX" secondAttribute="trailing" constant="8" id="SlX-Fg-EDJ"/>
                         <constraint firstItem="Phz-mZ-sWu" firstAttribute="top" secondItem="SKK-XB-WSw" secondAttribute="top" constant="22" id="Sqb-JJ-hcE"/>
-                        <constraint firstItem="GhQ-Be-PIg" firstAttribute="leading" secondItem="64C-D9-CcX" secondAttribute="trailing" constant="8" id="TAd-WR-DKy"/>
-                        <constraint firstItem="GhQ-Be-PIg" firstAttribute="centerX" secondItem="SKK-XB-WSw" secondAttribute="centerX" id="Tpj-8g-ehS"/>
                         <constraint firstItem="Phz-mZ-sWu" firstAttribute="width" secondItem="SKK-XB-WSw" secondAttribute="width" multiplier="0.058011" id="YTG-T8-uCa"/>
                         <constraint firstItem="eXE-Jj-7t1" firstAttribute="top" secondItem="SKK-XB-WSw" secondAttribute="centerY" multiplier="59:250" id="fn5-iw-G97"/>
                         <constraint firstItem="94Q-x3-jC6" firstAttribute="top" secondItem="eXE-Jj-7t1" secondAttribute="bottom" constant="5" id="iXB-28-G2x"/>
                         <constraint firstItem="rFC-xx-NWP" firstAttribute="top" secondItem="nlj-DX-Bb5" secondAttribute="bottom" constant="25" id="ieG-qy-aPF"/>
+                        <constraint firstItem="64C-D9-CcX" firstAttribute="centerY" secondItem="GhQ-Be-PIg" secondAttribute="centerY" id="jlD-Cq-Ocr"/>
                         <constraint firstItem="nlj-DX-Bb5" firstAttribute="top" secondItem="GhQ-Be-PIg" secondAttribute="bottom" constant="30" id="jzM-Y2-RLl"/>
                         <constraint firstItem="nlj-DX-Bb5" firstAttribute="width" secondItem="SKK-XB-WSw" secondAttribute="width" multiplier="0.718232" id="kVF-A9-86n"/>
                         <constraint firstItem="eXE-Jj-7t1" firstAttribute="leading" secondItem="SKK-XB-WSw" secondAttribute="leading" constant="26" id="l2r-JM-EfH"/>
-                        <constraint firstItem="64C-D9-CcX" firstAttribute="height" secondItem="GhQ-Be-PIg" secondAttribute="height" multiplier="0.875" id="mCm-l3-Xnx"/>
+                        <constraint firstItem="GhQ-Be-PIg" firstAttribute="centerX" secondItem="SKK-XB-WSw" secondAttribute="centerX" id="tLd-jG-WWC"/>
                         <constraint firstItem="rFC-xx-NWP" firstAttribute="leading" secondItem="SKK-XB-WSw" secondAttribute="leading" constant="26" id="wpl-dk-RdH"/>
                     </constraints>
                 </view>

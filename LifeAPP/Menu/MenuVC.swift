@@ -43,6 +43,7 @@ extension MenuVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
         cell.titleLabel.text = titleNameArr[indexPath.row]
         cell.titleImage.image = UIImage(named: titleImageNameArr[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     

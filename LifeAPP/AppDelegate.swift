@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
+
 let screen = UIScreen.main.bounds.size
 let screenScaleWidth = screen.width / 414
 let screenSceleHeight = screen.height / 736

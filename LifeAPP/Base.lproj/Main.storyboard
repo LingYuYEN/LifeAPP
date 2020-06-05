@@ -337,7 +337,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="On5-xk-2zz">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="On5-xk-2zz">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yR5-hv-5em">
@@ -369,19 +369,21 @@
                                             <constraint firstItem="RXa-p7-sSt" firstAttribute="top" secondItem="Heo-To-xQa" secondAttribute="bottom" constant="50" id="5O6-AR-Q2p"/>
                                             <constraint firstAttribute="trailing" secondItem="6Pl-gZ-cAj" secondAttribute="trailing" constant="20" id="5wo-1U-5sh"/>
                                             <constraint firstItem="0cg-p7-rOr" firstAttribute="top" secondItem="xww-gI-MGQ" secondAttribute="bottom" constant="16" id="6o3-Fz-qvp"/>
+                                            <constraint firstItem="c7l-pG-3DL" firstAttribute="centerX" secondItem="YOo-Nh-g3s" secondAttribute="centerX" id="6wE-W1-HVM"/>
                                             <constraint firstItem="c7l-pG-3DL" firstAttribute="top" secondItem="bQ9-cf-fUf" secondAttribute="bottom" id="7QR-c3-ojV"/>
                                             <constraint firstItem="0cg-p7-rOr" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="centerX" multiplier="50:207" id="ATA-NG-TQG"/>
                                             <constraint firstItem="6Pl-gZ-cAj" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="leading" constant="20" id="Ec6-Cp-LCq"/>
                                             <constraint firstItem="Ekq-Dx-vAl" firstAttribute="top" secondItem="YOo-Nh-g3s" secondAttribute="centerY" multiplier="112:965" id="G2T-du-L4z"/>
+                                            <constraint firstItem="c7l-pG-3DL" firstAttribute="width" relation="greaterThanOrEqual" secondItem="YOo-Nh-g3s" secondAttribute="width" multiplier="314:414" id="OtV-gB-Dyp"/>
                                             <constraint firstItem="0cg-p7-rOr" firstAttribute="trailing" secondItem="YOo-Nh-g3s" secondAttribute="centerX" multiplier="364:207" id="PY5-hW-Ar5"/>
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="top" secondItem="RXa-p7-sSt" secondAttribute="bottom" constant="20" id="TlV-AI-VV4"/>
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="leading" secondItem="1bc-Ve-cdg" secondAttribute="leading" id="U0U-Qt-pfi"/>
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="bottom" secondItem="YOo-Nh-g3s" secondAttribute="centerY" multiplier="887:492.5" id="Udw-ZR-Onj"/>
                                             <constraint firstItem="Heo-To-xQa" firstAttribute="top" secondItem="YOo-Nh-g3s" secondAttribute="centerY" multiplier="398:492.5" id="UjY-n4-sPP"/>
-                                            <constraint firstAttribute="trailing" secondItem="c7l-pG-3DL" secondAttribute="trailing" constant="50" id="VSf-02-J8j"/>
                                             <constraint firstItem="xww-gI-MGQ" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="centerX" multiplier="58:207" id="WQN-ki-gDd"/>
                                             <constraint firstItem="6Pl-gZ-cAj" firstAttribute="top" secondItem="YOo-Nh-g3s" secondAttribute="top" constant="10" id="YYP-OZ-Z3S"/>
                                             <constraint firstItem="xww-gI-MGQ" firstAttribute="trailing" secondItem="YOo-Nh-g3s" secondAttribute="centerX" multiplier="356:207" id="aVW-aZ-Hl8"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RXa-p7-sSt" secondAttribute="trailing" constant="20" symbolic="YES" id="bRT-tu-DXH"/>
                                             <constraint firstItem="RXa-p7-sSt" firstAttribute="leading" secondItem="1bc-Ve-cdg" secondAttribute="leading" id="fCT-jU-7WH"/>
                                             <constraint firstItem="Ekq-Dx-vAl" firstAttribute="width" secondItem="YOo-Nh-g3s" secondAttribute="width" multiplier="0.31401" id="fbR-Oq-gRZ"/>
                                             <constraint firstAttribute="height" constant="985" id="fvZ-0C-Qke"/>
@@ -389,8 +391,8 @@
                                             <constraint firstItem="xww-gI-MGQ" firstAttribute="top" secondItem="YOo-Nh-g3s" secondAttribute="centerY" multiplier="260:492.5" id="koF-Gx-ssL"/>
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="trailing" secondItem="1bc-Ve-cdg" secondAttribute="trailing" id="lCw-Gz-gPr"/>
                                             <constraint firstItem="bQ9-cf-fUf" firstAttribute="bottom" secondItem="Ekq-Dx-vAl" secondAttribute="bottom" id="lqy-a7-FFw"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bQ9-cf-fUf" secondAttribute="trailing" constant="20" symbolic="YES" id="oR2-8g-tgQ"/>
                                             <constraint firstItem="bQ9-cf-fUf" firstAttribute="top" secondItem="Ekq-Dx-vAl" secondAttribute="top" id="sSE-rW-7ec"/>
-                                            <constraint firstItem="c7l-pG-3DL" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="leading" constant="50" id="tyQ-hc-cGz"/>
                                             <constraint firstItem="bQ9-cf-fUf" firstAttribute="leading" secondItem="Ekq-Dx-vAl" secondAttribute="trailing" id="yhG-OE-VzQ"/>
                                         </constraints>
                                     </view>
@@ -443,7 +445,7 @@
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="23" maxY="0.0"/>
                                     <inset key="imageEdgeInsets" minX="115" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="所在區域" image="up">
+                                    <state key="normal" title="所在區域" image="down">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                 </button>
@@ -536,16 +538,17 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
+                        <constraint firstItem="9EL-xS-27t" firstAttribute="leading" secondItem="L31-w5-Hh9" secondAttribute="leading" constant="20" id="3c7-3Q-ctM"/>
+                        <constraint firstItem="9EL-xS-27t" firstAttribute="top" secondItem="L31-w5-Hh9" secondAttribute="top" id="3fa-HS-jrA"/>
                         <constraint firstItem="l0A-i9-LUv" firstAttribute="top" secondItem="L31-w5-Hh9" secondAttribute="top" id="4fR-NZ-E6a"/>
-                        <constraint firstItem="9EL-xS-27t" firstAttribute="leading" secondItem="L31-w5-Hh9" secondAttribute="leading" constant="20" id="CxY-HP-cPQ"/>
                         <constraint firstItem="1DO-7q-cZL" firstAttribute="leading" secondItem="L31-w5-Hh9" secondAttribute="leading" id="Kcq-Px-afm"/>
                         <constraint firstItem="L31-w5-Hh9" firstAttribute="trailing" secondItem="l0A-i9-LUv" secondAttribute="trailing" constant="20" id="NPU-2I-2Es"/>
                         <constraint firstItem="1DO-7q-cZL" firstAttribute="top" secondItem="L31-w5-Hh9" secondAttribute="top" constant="30" id="PfZ-ih-z97"/>
-                        <constraint firstItem="9EL-xS-27t" firstAttribute="top" secondItem="L31-w5-Hh9" secondAttribute="top" id="crp-4t-LMw"/>
+                        <constraint firstItem="l0A-i9-LUv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9EL-xS-27t" secondAttribute="trailing" constant="8" symbolic="YES" id="Woe-Yo-4Pk"/>
                         <constraint firstItem="1DO-7q-cZL" firstAttribute="trailing" secondItem="L31-w5-Hh9" secondAttribute="trailing" id="gOa-md-OOb"/>
                         <constraint firstAttribute="bottom" secondItem="1DO-7q-cZL" secondAttribute="bottom" id="h8K-DJ-tGN"/>
+                        <constraint firstItem="1DO-7q-cZL" firstAttribute="top" secondItem="9EL-xS-27t" secondAttribute="bottom" id="p5u-bR-Mbb"/>
                         <constraint firstItem="1DO-7q-cZL" firstAttribute="top" secondItem="l0A-i9-LUv" secondAttribute="bottom" id="udG-VJ-4Va"/>
-                        <constraint firstItem="1DO-7q-cZL" firstAttribute="top" secondItem="9EL-xS-27t" secondAttribute="bottom" id="xU9-PA-mh4"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="L31-w5-Hh9"/>
                 </view>
@@ -579,9 +582,9 @@
     </scenes>
     <resources>
         <image name="dangerIcon" width="18" height="18"/>
+        <image name="down" width="16" height="16"/>
         <image name="hambergerIcon" width="23" height="23"/>
         <image name="share" width="23" height="23"/>
-        <image name="up" width="16" height="16"/>
         <image name="wetherIcon1" width="46" height="46"/>
         <image name="wetherIcon3" width="46" height="46"/>
     </resources>

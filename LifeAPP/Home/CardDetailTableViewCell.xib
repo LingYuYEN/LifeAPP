@@ -39,8 +39,8 @@
                             <constraint firstItem="xzx-GO-dVh" firstAttribute="top" secondItem="3NC-GV-izv" secondAttribute="top" id="wz5-5s-gaQ"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM2.5 (細懸浮微粒)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oN-Cu-ccb">
-                        <rect key="frame" x="3" y="10" width="144" height="38"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM2.5 (細懸浮微粒)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="4oN-Cu-ccb">
+                        <rect key="frame" x="3" y="10" width="180" height="38"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -57,6 +57,7 @@
                     <constraint firstAttribute="bottom" secondItem="4oN-Cu-ccb" secondAttribute="bottom" constant="10" id="Zlk-Ae-YAK"/>
                     <constraint firstItem="4oN-Cu-ccb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cu2-3P-KYY"/>
                     <constraint firstItem="3NC-GV-izv" firstAttribute="trailing" secondItem="vyr-N9-7Wu" secondAttribute="trailing" id="iPY-wv-cov"/>
+                    <constraint firstItem="4oN-Cu-ccb" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.692308" id="r5Z-Ql-wVF"/>
                     <constraint firstItem="4oN-Cu-ccb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="sH2-QL-ZXC"/>
                 </constraints>
             </tableViewCellContentView>
