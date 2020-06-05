@@ -38,7 +38,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="emQ-QW-VtI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1JV-2i-TrG"/>
                     <constraint firstItem="YAI-0m-DFz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="53:207" id="5LO-IA-7cq"/>
@@ -48,6 +48,7 @@
                     <constraint firstItem="cQd-tw-oKo" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="364:207" id="z7e-SW-TSg"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="titleImage" destination="YAI-0m-DFz" id="7w6-4I-MUj"/>

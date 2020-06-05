@@ -10,6 +10,7 @@ import UIKit
 import GoogleMobileAds
 import CoreLocation
 
+
 class ViewController: UIViewController {
     
     var bannerView: GADBannerView!
@@ -87,7 +88,9 @@ class ViewController: UIViewController {
     
     @IBOutlet var locationContentView: UIView!
     @IBOutlet var locationsBtn: UIButton!
+    
     var myLocationManager: CLLocationManager!
+    var urlOfImageToShare: URL?
     
     var intWeekArr = [Int]()
 //    var chWeekArr = [String]()
@@ -297,6 +300,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+
+        
         // 必須將 locationsBtn 指向 titleView 才可使用
         self.navigationItem.titleView = locationsBtn
 //        self.navigationItem.titleView = locationContentView
@@ -337,6 +343,7 @@ class ViewController: UIViewController {
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {
+        self.locationsBtn.setImage(UIImage(named: "down"), for: .normal)
         pickerViewIsHidden(bool: false)
         
     }
@@ -347,17 +354,6 @@ class ViewController: UIViewController {
 //        self.navigationController?.pushViewController(menuVC, animated: true)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
-//        interstitial = createAndLoadInterstitial()
-        
-        // 將整個視圖轉為 UIImage
-//        guard let image = UIApplication.shared.keyWindow?.snapImage() else { return }
-        
-        // 將轉換後的 UIImage 顯示在 UIImageView 中(在這是直接由 activityItems 輸出)
-//        self.imageView.image = image
-        
-//        let conquerUrl = "https://www.conquers.co/"
-        // activityItems 陣列中放入我們想要使用的元件，這邊我們放入使用者圖片、使用者名稱及個人部落格。
-        // 這邊因為我們確認裡面有值，所以使用驚嘆號強制解包。
         let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
             if completed {
@@ -369,6 +365,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onPickerViewDoneClick(_ sender: UIButton) {
+        self.locationsBtn.setImage(UIImage(named: "up"), for: .normal)
         let location = locationArr[pickerView.selectedRow(inComponent: 0)]
         selectLocationCity(cityStr: location) {
             self.locationsBtn.setTitle(location, for: .normal)
@@ -377,6 +374,7 @@ class ViewController: UIViewController {
         
     }
     @IBAction func onPickerViewCancelClick(_ sender: UIButton) {
+        self.locationsBtn.setImage(UIImage(named: "up"), for: .normal)
         pickerViewIsHidden(bool: true)
     }
     
@@ -946,7 +944,6 @@ class ViewController: UIViewController {
         return interstitial
     }
 
-    
 }
 
 extension ViewController: GADBannerViewDelegate {

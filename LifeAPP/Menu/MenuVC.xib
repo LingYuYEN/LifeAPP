@@ -19,9 +19,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuBgImage" translatesAutoresizingMaskIntoConstraints="NO" id="cP4-RW-4ly">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SCj-gO-hAn">
                     <rect key="frame" x="0.0" y="130" width="414" height="390"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="o3R-HB-Fn9"/>
@@ -29,15 +32,22 @@
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="SCj-gO-hAn" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.529891" id="H4M-1B-s8t"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cP4-RW-4ly" secondAttribute="bottom" id="Ibf-3c-3z1"/>
+                <constraint firstItem="cP4-RW-4ly" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RXf-CE-okh"/>
                 <constraint firstItem="SCj-gO-hAn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="SYa-Sg-Wde"/>
                 <constraint firstItem="SCj-gO-hAn" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="VWY-Ug-WIm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cP4-RW-4ly" secondAttribute="trailing" id="ZOU-8R-h0D"/>
                 <constraint firstItem="SCj-gO-hAn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="130:368" id="m99-gE-wjN"/>
+                <constraint firstItem="cP4-RW-4ly" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xAA-pd-1Ln"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="117"/>
+            <point key="canvasLocation" x="137.68115942028987" y="116.57608695652175"/>
         </view>
     </objects>
+    <resources>
+        <image name="menuBgImage" width="413.33334350585938" height="736"/>
+    </resources>
 </document>

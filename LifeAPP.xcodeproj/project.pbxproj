@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		131EEB7A2480FEF700D69C86 /* OneWeekWetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131EEB792480FEF700D69C86 /* OneWeekWetherModel.swift */; };
+		13243BD62489DA7A00962D50 /* LinkPresentationItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13243BD52489DA7A00962D50 /* LinkPresentationItemSource.swift */; };
 		1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5D624848ADF0036E4A2 /* DetailVC.swift */; };
 		1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5D724848ADF0036E4A2 /* DetailVC.xib */; };
 		1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		131EEB792480FEF700D69C86 /* OneWeekWetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWeekWetherModel.swift; sourceTree = "<group>"; };
+		13243BD52489DA7A00962D50 /* LinkPresentationItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPresentationItemSource.swift; sourceTree = "<group>"; };
 		1347E5D624848ADF0036E4A2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1347E5D724848ADF0036E4A2 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				13B05451247CE9A000B85357 /* ClientManager.swift */,
 				13B05453247CE9AD00B85357 /* DataManager.swift */,
 				13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */,
+				13243BD52489DA7A00962D50 /* LinkPresentationItemSource.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */,
 				1347E5EA248632060036E4A2 /* MenuTableViewCell.swift in Sources */,
 				1347E5EF24863C0F0036E4A2 /* OilVC.swift in Sources */,
+				13243BD62489DA7A00962D50 /* LinkPresentationItemSource.swift in Sources */,
 				13552EA6247B915100CA895E /* Extension.swift in Sources */,
 				13B1B33C247E48EF003FC8F2 /* AQIModel.swift in Sources */,
 				1347E5DF2485EC9A0036E4A2 /* RainfallModel.swift in Sources */,
@@ -522,7 +526,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 7VWHLZ2Z9V;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -543,7 +547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 7VWHLZ2Z9V;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

@@ -24,23 +24,37 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgE-0J-KCR">
                         <rect key="frame" x="0.0" y="0.0" width="362" height="60"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wAy-gX-W3M">
-                                <rect key="frame" x="23" y="18" width="316" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="超級柴油" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="axG-Tg-Pq3" customClass="PaddingLabel" customModule="LifeAPP" customModuleProvider="target">
+                                <rect key="frame" x="23" y="16" width="68" height="28"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="P9D-RO-ioL">
+                                <rect key="frame" x="114" y="18" width="225" height="24"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axG-Tg-Pq3">
-                                        <rect key="frame" x="0.0" y="0.0" width="43" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="2Rj-bY-bWT">
+                                        <rect key="frame" x="0.0" y="0.0" width="107.5" height="24"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rj-bY-bWT">
-                                        <rect key="frame" x="136.5" y="0.0" width="43" height="24"/>
-                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7N-oP-dQe">
-                                        <rect key="frame" x="273" y="0.0" width="43" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="X7N-oP-dQe">
+                                        <rect key="frame" x="117.5" y="0.0" width="107.5" height="24"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -50,9 +64,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="wAy-gX-W3M" secondAttribute="trailing" constant="23" id="K5D-BZ-Uwb"/>
-                            <constraint firstItem="wAy-gX-W3M" firstAttribute="leading" secondItem="UgE-0J-KCR" secondAttribute="leading" constant="23" id="qpU-vW-for"/>
-                            <constraint firstItem="wAy-gX-W3M" firstAttribute="centerY" secondItem="UgE-0J-KCR" secondAttribute="centerY" id="sfN-ZZ-GqY"/>
+                            <constraint firstItem="axG-Tg-Pq3" firstAttribute="width" secondItem="UgE-0J-KCR" secondAttribute="width" multiplier="0.187845" id="0LP-Gn-bOm"/>
+                            <constraint firstAttribute="trailing" secondItem="P9D-RO-ioL" secondAttribute="trailing" constant="23" id="2cn-JL-bqo"/>
+                            <constraint firstItem="axG-Tg-Pq3" firstAttribute="leading" secondItem="UgE-0J-KCR" secondAttribute="leading" constant="23" id="J3O-bx-Sis"/>
+                            <constraint firstItem="axG-Tg-Pq3" firstAttribute="centerY" secondItem="UgE-0J-KCR" secondAttribute="centerY" id="TAZ-eI-l5R"/>
+                            <constraint firstItem="P9D-RO-ioL" firstAttribute="leading" secondItem="axG-Tg-Pq3" secondAttribute="trailing" constant="23" id="Tyi-LS-YYs"/>
+                            <constraint firstItem="P9D-RO-ioL" firstAttribute="centerY" secondItem="UgE-0J-KCR" secondAttribute="centerY" id="lKX-uN-rfV"/>
                         </constraints>
                     </view>
                 </subviews>
