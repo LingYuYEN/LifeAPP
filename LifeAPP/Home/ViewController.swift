@@ -323,12 +323,7 @@ class ViewController: UIViewController {
             navigationController?.navigationBar.standardAppearance = barAppearance
         }
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
-        bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        bannerView.delegate = self
+        
         
         // 載入插頁式廣告
 //        interstitial = createAndLoadInterstitial()
@@ -1100,7 +1095,14 @@ extension ViewController: CLLocationManagerDelegate {
         guard let lon = manager.location?.coordinate.longitude else { return }
         manager.stopUpdatingLocation()
         // 取得使用者座標並更新數據
-        locationAddress(latitude: lat, longitude: lon) {}
+        locationAddress(latitude: lat, longitude: lon) {
+            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+            self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+            self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
+            self.bannerView.rootViewController = self
+            self.bannerView.load(GADRequest())
+            self.bannerView.delegate = self
+        }
 
     }
     
