@@ -48,7 +48,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 / 21 (  四  ) 13 : 50 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="c7l-pG-3DL">
-                                                <rect key="frame" x="103.66666666666669" y="174" width="207" height="25.333333333333343"/>
+                                                <rect key="frame" x="50" y="174" width="314" height="25.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -378,7 +378,7 @@
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="leading" secondItem="1bc-Ve-cdg" secondAttribute="leading" id="U0U-Qt-pfi"/>
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="bottom" secondItem="YOo-Nh-g3s" secondAttribute="centerY" multiplier="887:492.5" id="Udw-ZR-Onj"/>
                                             <constraint firstItem="Heo-To-xQa" firstAttribute="top" secondItem="YOo-Nh-g3s" secondAttribute="centerY" multiplier="398:492.5" id="UjY-n4-sPP"/>
-                                            <constraint firstAttribute="trailing" secondItem="c7l-pG-3DL" secondAttribute="trailing" constant="103.5" id="VSf-02-J8j"/>
+                                            <constraint firstAttribute="trailing" secondItem="c7l-pG-3DL" secondAttribute="trailing" constant="50" id="VSf-02-J8j"/>
                                             <constraint firstItem="xww-gI-MGQ" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="centerX" multiplier="58:207" id="WQN-ki-gDd"/>
                                             <constraint firstItem="6Pl-gZ-cAj" firstAttribute="top" secondItem="YOo-Nh-g3s" secondAttribute="top" constant="10" id="YYP-OZ-Z3S"/>
                                             <constraint firstItem="xww-gI-MGQ" firstAttribute="trailing" secondItem="YOo-Nh-g3s" secondAttribute="centerX" multiplier="356:207" id="aVW-aZ-Hl8"/>
@@ -390,7 +390,7 @@
                                             <constraint firstItem="aze-y1-ECO" firstAttribute="trailing" secondItem="1bc-Ve-cdg" secondAttribute="trailing" id="lCw-Gz-gPr"/>
                                             <constraint firstItem="bQ9-cf-fUf" firstAttribute="bottom" secondItem="Ekq-Dx-vAl" secondAttribute="bottom" id="lqy-a7-FFw"/>
                                             <constraint firstItem="bQ9-cf-fUf" firstAttribute="top" secondItem="Ekq-Dx-vAl" secondAttribute="top" id="sSE-rW-7ec"/>
-                                            <constraint firstItem="c7l-pG-3DL" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="leading" constant="103.5" id="tyQ-hc-cGz"/>
+                                            <constraint firstItem="c7l-pG-3DL" firstAttribute="leading" secondItem="YOo-Nh-g3s" secondAttribute="leading" constant="50" id="tyQ-hc-cGz"/>
                                             <constraint firstItem="bQ9-cf-fUf" firstAttribute="leading" secondItem="Ekq-Dx-vAl" secondAttribute="trailing" id="yhG-OE-VzQ"/>
                                         </constraints>
                                     </view>

@@ -68,7 +68,7 @@ class OilVC: UIViewController {
         
         let nib = UINib(nibName: "OilCollectionViewCell", bundle: nil)
         
-        collectionViewHeightConstraint.constant = CGFloat(cellHeight * CGFloat(oilNameArr.count) + CGFloat(60))
+        collectionViewHeightConstraint.constant = CGFloat(cellHeight * CGFloat(oilNameArr.count) + CGFloat(96))
         collectionView.register(nib, forCellWithReuseIdentifier: "OilCollectionViewCell")
         
         DataManager.shared.getOil { (data) -> (Void) in
@@ -152,7 +152,7 @@ class OilVC: UIViewController {
         }
         
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        bannerView.adUnitID = "ca-app-pub-1109779512560033/1833493055"
+        bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         bannerView.rootViewController = self
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView.load(GADRequest())
@@ -199,7 +199,7 @@ class OilVC: UIViewController {
     
     /// 加入插頁式廣告頁面
     private func createAndLoadInterstitial() -> GADInterstitial? {
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-1109779512560033/7553767489")
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4291784641323785/8037037113")
         guard let interstitial = interstitial else { return nil }
         let request = GADRequest()
         interstitial.load(request)
@@ -238,7 +238,7 @@ extension OilVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 18, left: 26, bottom: 18, right: 26)
     }
     
     ///  設定 CollectionViewCell 的寬、高

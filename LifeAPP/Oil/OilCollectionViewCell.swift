@@ -13,11 +13,15 @@ class OilCollectionViewCell: UICollectionViewCell {
     @IBOutlet var gradientView: UIView! {
         didSet {
             let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = gradientView.bounds
+            gradientLayer.frame = cellContentView.bounds
+            gradientLayer.frame.size.height = 60 * screenSceleHeight
+            gradientLayer.frame.size.width = 362 * screenScaleWidth
             gradientLayer.colors = [UIColor.set(red: 6, green: 65, blue: 85).cgColor, UIColor.set(red: 18, green: 40, blue: 68).cgColor]
             gradientLayer.startPoint = CGPoint(x: 1, y: 0.5)
             gradientLayer.endPoint = CGPoint(x: 0, y: 0.5)
+            gradientLayer.cornerRadius = 8
             gradientView.layer.addSublayer(gradientLayer)
+            
         }
     }
     
@@ -34,6 +38,8 @@ class OilCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         self.layer.cornerRadius = 8
+        self.layer.applySketchShadow(color: .black, alpha: 0.19, x: 1.3, y: 1.3, blur: 3.7, spread: 0)
+        self.layer.masksToBounds = false
     }
     
     func setOilAttr(cnpcStr: String, formosaStr: String, oilLevel: Int, cnpc: UILabel, formosa: UILabel) {

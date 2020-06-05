@@ -325,7 +325,7 @@ class ViewController: UIViewController {
         
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        bannerView.adUnitID = "ca-app-pub-1109779512560033/1833493055"
+        bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
@@ -936,7 +936,7 @@ class ViewController: UIViewController {
 
     /// 加入插頁式廣告頁面
     private func createAndLoadInterstitial() -> GADInterstitial? {
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-1109779512560033/7553767489")
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4291784641323785/8037037113")
         guard let interstitial = interstitial else { return nil }
         let request = GADRequest()
         interstitial.load(request)

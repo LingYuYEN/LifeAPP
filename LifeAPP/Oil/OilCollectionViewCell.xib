@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="OilCollectionViewCell" customModule="LifeAPP" customModuleProvider="target">
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="OilCollectionViewCell" customModule="LifeAPP" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="362" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -19,7 +19,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7Q-QP-3Wv">
                         <rect key="frame" x="0.0" y="0.0" width="362" height="60"/>
-                        <color key="backgroundColor" red="0.0" green="0.085184369075342464" blue="0.29462756849315069" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgE-0J-KCR">
                         <rect key="frame" x="0.0" y="0.0" width="362" height="60"/>
@@ -75,16 +75,16 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="C7Q-QP-3Wv" secondAttribute="bottom" id="0Va-5G-JGx"/>
                 <constraint firstItem="UgE-0J-KCR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="A2P-T8-ZEU"/>
+                <constraint firstItem="C7Q-QP-3Wv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BBb-ip-XVI"/>
+                <constraint firstAttribute="bottom" secondItem="C7Q-QP-3Wv" secondAttribute="bottom" id="H4A-6s-CuQ"/>
+                <constraint firstItem="C7Q-QP-3Wv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="J5E-Sa-mqK"/>
                 <constraint firstItem="UgE-0J-KCR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UFd-bk-IgA"/>
                 <constraint firstAttribute="bottom" secondItem="UgE-0J-KCR" secondAttribute="bottom" id="agi-bx-nLb"/>
-                <constraint firstAttribute="trailing" secondItem="C7Q-QP-3Wv" secondAttribute="trailing" id="ebo-T3-USD"/>
                 <constraint firstAttribute="trailing" secondItem="UgE-0J-KCR" secondAttribute="trailing" id="pTm-Tb-v33"/>
-                <constraint firstItem="C7Q-QP-3Wv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ud7-Gf-LVv"/>
-                <constraint firstItem="C7Q-QP-3Wv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xLe-LK-Ngr"/>
+                <constraint firstAttribute="trailing" secondItem="C7Q-QP-3Wv" secondAttribute="trailing" id="zTu-QO-D2C"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <viewLayoutGuide key="safeArea" id="psw-B3-Z9v"/>
             <connections>
                 <outlet property="cellContentView" destination="UgE-0J-KCR" id="QkG-KC-CH6"/>
                 <outlet property="cnpcPrice" destination="2Rj-bY-bWT" id="YWN-CR-awz"/>
