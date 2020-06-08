@@ -39,11 +39,13 @@
 		13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */; };
 		13B05452247CE9A000B85357 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05451247CE9A000B85357 /* ClientManager.swift */; };
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
-		13B05457247CEB0700B85357 /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05456247CEB0700B85357 /* WetherModel.swift */; };
+		13B05457247CEB0700B85357 /* OldWetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05456247CEB0700B85357 /* OldWetherModel.swift */; };
 		13B1B33C247E48EF003FC8F2 /* AQIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B33B247E48EF003FC8F2 /* AQIModel.swift */; };
 		13B1B33E247E5496003FC8F2 /* UVIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B33D247E5496003FC8F2 /* UVIModel.swift */; };
 		13B1B340247E65F6003FC8F2 /* PopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B33F247E65F6003FC8F2 /* PopModel.swift */; };
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
+		13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25A9248E27F80044DFAA /* NetStatus.swift */; };
+		13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25AB248E2F640044DFAA /* WetherModel.swift */; };
 		771B19AAD36A9DCABFCC81DC /* Pods_LifeAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,11 +84,13 @@
 		13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		13B05451247CE9A000B85357 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		13B05456247CEB0700B85357 /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
+		13B05456247CEB0700B85357 /* OldWetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldWetherModel.swift; sourceTree = "<group>"; };
 		13B1B33B247E48EF003FC8F2 /* AQIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIModel.swift; sourceTree = "<group>"; };
 		13B1B33D247E5496003FC8F2 /* UVIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVIModel.swift; sourceTree = "<group>"; };
 		13B1B33F247E65F6003FC8F2 /* PopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopModel.swift; sourceTree = "<group>"; };
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
+		13EA25A9248E27F80044DFAA /* NetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
+		13EA25AB248E2F640044DFAA /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
 		18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.debug.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.release.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				13B05453247CE9AD00B85357 /* DataManager.swift */,
 				13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */,
 				13243BD52489DA7A00962D50 /* LinkPresentationItemSource.swift */,
+				13EA25A9248E27F80044DFAA /* NetStatus.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -203,7 +208,7 @@
 		13B05455247CEAF000B85357 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				13B05456247CEB0700B85357 /* WetherModel.swift */,
+				13B05456247CEB0700B85357 /* OldWetherModel.swift */,
 				13B1B33B247E48EF003FC8F2 /* AQIModel.swift */,
 				13B1B33D247E5496003FC8F2 /* UVIModel.swift */,
 				13B1B33F247E65F6003FC8F2 /* PopModel.swift */,
@@ -211,6 +216,7 @@
 				1347E5DE2485EC9A0036E4A2 /* RainfallModel.swift */,
 				1347E5E02485F87E0036E4A2 /* CWBModel.swift */,
 				1347E6172487757D0036E4A2 /* OilModel.swift */,
+				13EA25AB248E2F640044DFAA /* WetherModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -361,12 +367,13 @@
 				1347E6182487757D0036E4A2 /* OilModel.swift in Sources */,
 				13B05454247CE9AD00B85357 /* DataManager.swift in Sources */,
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
+				13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
 				1347E5E12485F87E0036E4A2 /* CWBModel.swift in Sources */,
 				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
 				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
 				13B1B340247E65F6003FC8F2 /* PopModel.swift in Sources */,
-				13B05457247CEB0700B85357 /* WetherModel.swift in Sources */,
+				13B05457247CEB0700B85357 /* OldWetherModel.swift in Sources */,
 				1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */,
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,
 				13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */,
@@ -381,6 +388,7 @@
 				1347E5DF2485EC9A0036E4A2 /* RainfallModel.swift in Sources */,
 				131EEB7A2480FEF700D69C86 /* OneWeekWetherModel.swift in Sources */,
 				1347E5E424862BFD0036E4A2 /* MenuVC.swift in Sources */,
+				13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

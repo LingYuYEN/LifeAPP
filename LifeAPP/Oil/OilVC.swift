@@ -12,8 +12,8 @@ import GoogleMobileAds
 class OilVC: UIViewController {
     
     let oilNameArr = ["92  無鉛", "95  無鉛", "98  無鉛", "高級柴油"]
-    var cnpcPriceArr = ["--------", "--------", "--------", "--------"]
-    var formosaPriceArr = ["--------", "--------", "--------", "--------"]
+    var cnpcPriceArr = ["        ", "        ", "        ", "        "]
+    var formosaPriceArr = ["        ", "        ", "        ", "        "]
     var oilCompareArr = [0, 1, 2, 1]
     let cellHeight = 60 * screenSceleHeight
     var shareMessage = ""
@@ -39,6 +39,7 @@ class OilVC: UIViewController {
             gradientView.layer.addSublayer(gradientLayer)
         }
     }
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
     @IBOutlet var dieselOilWidthConstraint: NSLayoutConstraint!
     @IBOutlet var levelIconWidthConstraint: NSLayoutConstraint!
@@ -147,6 +148,8 @@ class OilVC: UIViewController {
                 
                 self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
 
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.isHidden = true
                 self.collectionView.reloadData()
             }
         }
@@ -154,8 +157,12 @@ class OilVC: UIViewController {
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         bannerView.rootViewController = self
+        
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView.load(GADRequest())
         bannerView.delegate = self
+        
+        activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
     }
     @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
         let menuVC = MenuVC.loadFromNib()

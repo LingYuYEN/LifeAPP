@@ -34,7 +34,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>開啟權限以取得定位</string>
+	<string>點選「允許」：使用 App 期間，將可取得您目前座標來呈現該區域的天氣。</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

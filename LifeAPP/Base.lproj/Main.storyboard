@@ -76,7 +76,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="clA-v9-orB">
                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="46"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wetherIcon1" translatesAutoresizingMaskIntoConstraints="NO" id="TFr-lD-Vpv">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dayIcon" translatesAutoresizingMaskIntoConstraints="NO" id="TFr-lD-Vpv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="46" id="SR8-tr-lpk"/>
@@ -94,7 +94,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="hA6-YV-XXV">
                                                         <rect key="frame" x="204" y="0.0" width="110" height="46"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wetherIcon3" translatesAutoresizingMaskIntoConstraints="NO" id="BXd-hb-2h7">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nightIcon" translatesAutoresizingMaskIntoConstraints="NO" id="BXd-hb-2h7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="46" id="p1I-Pd-oCy"/>
@@ -352,7 +352,7 @@
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="MbY-0s-grR"/>
                                                 </connections>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="59" translatesAutoresizingMaskIntoConstraints="NO" id="Ekq-Dx-vAl">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="59" translatesAutoresizingMaskIntoConstraints="NO" id="Ekq-Dx-vAl">
                                                 <rect key="frame" x="142" y="57" width="130" height="117"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="117" id="qiD-QU-200"/>
@@ -582,10 +582,10 @@
     </scenes>
     <resources>
         <image name="dangerIcon" width="18" height="18"/>
+        <image name="dayIcon" width="46" height="46"/>
         <image name="down" width="16" height="16"/>
         <image name="hambergerIcon" width="23" height="23"/>
+        <image name="nightIcon" width="46" height="46"/>
         <image name="share" width="23" height="23"/>
-        <image name="wetherIcon1" width="46" height="46"/>
-        <image name="wetherIcon3" width="46" height="46"/>
     </resources>
 </document>
