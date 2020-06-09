@@ -26,6 +26,7 @@ struct OilResult: Codable {
     var fpcOil92, fpcOil95, fpcOil98, fpcDieselOil: Double
     var oilChange: Double
     var lastUpdatedAt: String
+    var announceStatus: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,5 +46,6 @@ struct OilResult: Codable {
         case fpcDieselOil = "FPC_diesel_oil"
         case oilChange = "oil_change"
         case lastUpdatedAt = "last_updated_at"
+        case announceStatus = "announce_status"
     }
 }

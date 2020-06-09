@@ -8,9 +8,11 @@
 
 import UIKit
 import GoogleMobileAds
+import Network
 
 class OilVC: UIViewController {
     
+    let monitor = NWPathMonitor()
     let oilNameArr = ["92  無鉛", "95  無鉛", "98  無鉛", "高級柴油"]
     var cnpcPriceArr = ["        ", "        ", "        ", "        "]
     var formosaPriceArr = ["        ", "        ", "        ", "        "]
@@ -41,6 +43,7 @@ class OilVC: UIViewController {
     }
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
+    @IBOutlet var oilTitleLabel: UILabel!
     @IBOutlet var dieselOilWidthConstraint: NSLayoutConstraint!
     @IBOutlet var levelIconWidthConstraint: NSLayoutConstraint!
     
@@ -51,8 +54,6 @@ class OilVC: UIViewController {
     @IBOutlet var averageIconImageView: UIImageView!
     @IBOutlet var levelTextLabel: UILabel!
     @IBOutlet var levelIconImageView: UIImageView!
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
@@ -66,93 +67,13 @@ class OilVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isConnect()
+        
         
         let nib = UINib(nibName: "OilCollectionViewCell", bundle: nil)
         
         collectionViewHeightConstraint.constant = CGFloat(cellHeight * CGFloat(oilNameArr.count) + CGFloat(96))
         collectionView.register(nib, forCellWithReuseIdentifier: "OilCollectionViewCell")
-        
-        DataManager.shared.getOil { (data) -> (Void) in
-            guard let data = data?.results.first else { return }
-            self.cnpcPriceArr = [String]()
-            self.formosaPriceArr = [String]()
-            self.oilCompareArr = [Int]()
-            
-            self.cnpcPriceArr.append("中油  \(data.cpcOil92)")
-            self.cnpcPriceArr.append("中油  \(data.cpcOil95)")
-            self.cnpcPriceArr.append("中油  \(data.cpcOil98)")
-            self.cnpcPriceArr.append("中油  \(data.cpcDieselOil)")
-            
-            self.formosaPriceArr.append("台塑  \(data.fpcOil92)")
-            self.formosaPriceArr.append("台塑  \(data.fpcOil95)")
-            self.formosaPriceArr.append("台塑  \(data.fpcOil98)")
-            self.formosaPriceArr.append("台塑  \(data.fpcDieselOil)")
-            
-            // 0: 持平, 1:中油低於台塑, 2: 台塑低於中油
-            self.oilCompareArr.append(data.cpcOil92 == data.fpcOil92 ? 0 : data.cpcOil92 < data.fpcOil92 ? 1 : 2)
-            self.oilCompareArr.append(data.cpcOil95 == data.fpcOil95 ? 0 : data.cpcOil95 < data.fpcOil95 ? 1 : 2)
-            self.oilCompareArr.append(data.cpcOil98 == data.fpcOil98 ? 0 : data.cpcOil98 < data.fpcOil98 ? 1 : 2)
-            self.oilCompareArr.append(data.cpcDieselOil == data.fpcDieselOil ? 0 : data.cpcDieselOil < data.fpcDieselOil ? 1 : 2)
-            
-            DispatchQueue.main.async {
-                
-                // 一般油價
-                self.oilChangeLabel.text = "\(data.oilChange)"
-                switch data.oilChange {
-                case 0:
-                    self.levelTextLabel.text = "持平"
-                    self.levelTextLabel.textColor = .setPriceNormal()
-                    self.levelIconImageView.image = UIImage(named: "noneIcon")
-                    self.oilChangeLabel.textColor = .setPriceNormal()
-                case 0...:
-                    self.levelTextLabel.text = "漲"
-                    self.levelTextLabel.textColor = .setPriceUp()
-                    self.levelIconImageView.image = UIImage(named: "priceUpIcon")
-                    self.oilChangeLabel.textColor = .setPriceUp()
-                case ..<0:
-                    self.levelTextLabel.text = "跌"
-                    self.levelTextLabel.textColor = .setPriceDown()
-                    self.levelIconImageView.image = UIImage(named: "priceDownIcon")
-                    self.oilChangeLabel.textColor = .setPriceDown()
-                    self.oilChangeLabel.text = "\(data.oilChange * -1)"
-                default:
-                    break
-                }
-              
-                // 柴油油價
-                self.dieselOilChangeLabel.text = "\(data.dieselChange)"
-                switch data.dieselChange {
-                case 0:
-                    self.dieselOilChangeLabel.textColor = .setPriceNormal()
-                    self.dieselOilChangeLabel.textColor = .setPriceNormal()
-                    self.dieselOilLevelImageView.image = UIImage(named: "noneIcon")
-                    self.dieselOilWidthConstraint.constant = 0
-                case 0...:
-                    self.dieselOilChangeLabel.textColor = .setPriceUp()
-                    self.dieselOilChangeLabel.textColor = .setPriceUp()
-                    self.dieselOilLevelImageView.image = UIImage(named: "priceUpIcon")
-                case ..<0:
-                    self.dieselOilChangeLabel.textColor = .setPriceDown()
-                    self.dieselOilChangeLabel.textColor = .setPriceDown()
-                    self.dieselOilLevelImageView.image = UIImage(named: "priceDownIcon")
-                    self.dieselOilChangeLabel.text = "\(data.dieselChange * -1)"
-                default:
-                    break
-                }
-                
-                // 平均
-                self.averageLabel.text = self.levelTextMap[data.priceLevel95]
-                self.averageLabel.textColor = self.levelTextColorMap[data.priceLevel95]
-                self.averageIconImageView.image = UIImage(named: self.levelIconMap[data.priceLevel95] ?? "")
-                self.levelIconWidthConstraint.constant = data.priceLevel95 == 0 ? 0 : self.levelIconWidthConstraint.constant
-                
-                self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
-
-                self.activityIndicatorView.stopAnimating()
-                self.activityIndicatorView.isHidden = true
-                self.collectionView.reloadData()
-            }
-        }
         
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
@@ -163,6 +84,141 @@ class OilVC: UIViewController {
         bannerView.delegate = self
         
         activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
+    }
+    /// 錯誤請求 Alert
+    func apiErrorAlert() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "載入失敗", message: "資料更新中，請稍後再試", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "完成", style: .cancel) { _ in
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.isHidden = true
+            }
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func isConnect() {
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("connected")
+                DataManager.shared.getOil { (data, apiStatus) -> (Void) in
+                    if let apiStatus = apiStatus {
+                        if apiStatus {
+                            print("油價載入失敗...............")
+                            self.apiErrorAlert()
+                        }
+                    }
+                    guard let data = data?.results.first else { return }
+                    self.cnpcPriceArr = [String]()
+                    self.formosaPriceArr = [String]()
+                    self.oilCompareArr = [Int]()
+                    
+                    self.cnpcPriceArr.append("中油  \(data.cpcOil92)")
+                    self.cnpcPriceArr.append("中油  \(data.cpcOil95)")
+                    self.cnpcPriceArr.append("中油  \(data.cpcOil98)")
+                    self.cnpcPriceArr.append("中油  \(data.cpcDieselOil)")
+                    
+                    self.formosaPriceArr.append("台塑  \(data.fpcOil92)")
+                    self.formosaPriceArr.append("台塑  \(data.fpcOil95)")
+                    self.formosaPriceArr.append("台塑  \(data.fpcOil98)")
+                    self.formosaPriceArr.append("台塑  \(data.fpcDieselOil)")
+                    
+                    // 0: 持平, 1:中油低於台塑, 2: 台塑低於中油
+                    self.oilCompareArr.append(data.cpcOil92 == data.fpcOil92 ? 0 : data.cpcOil92 < data.fpcOil92 ? 1 : 2)
+                    self.oilCompareArr.append(data.cpcOil95 == data.fpcOil95 ? 0 : data.cpcOil95 < data.fpcOil95 ? 1 : 2)
+                    self.oilCompareArr.append(data.cpcOil98 == data.fpcOil98 ? 0 : data.cpcOil98 < data.fpcOil98 ? 1 : 2)
+                    self.oilCompareArr.append(data.cpcDieselOil == data.fpcDieselOil ? 0 : data.cpcDieselOil < data.fpcDieselOil ? 1 : 2)
+                    
+                    DispatchQueue.main.async {
+                        
+                        // 一般油價
+                        self.oilChangeLabel.text = "\(data.oilChange)"
+                        switch data.oilChange {
+                        case 0:
+                            self.levelTextLabel.text = "持平"
+                            self.levelTextLabel.textColor = .setPriceNormal()
+                            self.levelIconImageView.image = UIImage(named: "noneIcon")
+                            self.oilChangeLabel.textColor = .setPriceNormal()
+                        case 0...:
+                            self.levelTextLabel.text = "漲"
+                            self.levelTextLabel.textColor = .setPriceUp()
+                            self.levelIconImageView.image = UIImage(named: "priceUpIcon")
+                            self.oilChangeLabel.textColor = .setPriceUp()
+                        case ..<0:
+                            self.levelTextLabel.text = "跌"
+                            self.levelTextLabel.textColor = .setPriceDown()
+                            self.levelIconImageView.image = UIImage(named: "priceDownIcon")
+                            self.oilChangeLabel.textColor = .setPriceDown()
+                            self.oilChangeLabel.text = "\(data.oilChange * -1)"
+                        default:
+                            break
+                        }
+                      
+                        // 柴油油價
+                        self.dieselOilChangeLabel.text = "\(data.dieselChange)"
+                        switch data.dieselChange {
+                        case 0:
+                            self.dieselOilChangeLabel.textColor = .setPriceNormal()
+                            self.dieselOilChangeLabel.textColor = .setPriceNormal()
+                            self.dieselOilLevelImageView.image = UIImage(named: "noneIcon")
+                            self.dieselOilWidthConstraint.constant = 0
+                        case 0...:
+                            self.dieselOilChangeLabel.textColor = .setPriceUp()
+                            self.dieselOilChangeLabel.textColor = .setPriceUp()
+                            self.dieselOilLevelImageView.image = UIImage(named: "priceUpIcon")
+                        case ..<0:
+                            self.dieselOilChangeLabel.textColor = .setPriceDown()
+                            self.dieselOilChangeLabel.textColor = .setPriceDown()
+                            self.dieselOilLevelImageView.image = UIImage(named: "priceDownIcon")
+                            self.dieselOilChangeLabel.text = "\(data.dieselChange * -1)"
+                        default:
+                            break
+                        }
+                        
+                        // 平均
+                        self.averageLabel.text = self.levelTextMap[data.priceLevel95]
+                        self.averageLabel.textColor = self.levelTextColorMap[data.priceLevel95]
+                        self.averageIconImageView.image = UIImage(named: self.levelIconMap[data.priceLevel95] ?? "")
+                        self.levelIconWidthConstraint.constant = data.priceLevel95 == 0 ? 0 : self.levelIconWidthConstraint.constant
+                        
+                        self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
+                        
+                        let today = Date()
+                        let dateComponents = Calendar.current.dateComponents(in: TimeZone.current, from: today)
+                        let weekday = dateComponents.weekday!
+                        
+                        switch weekday {
+                        case 1:
+                            self.oilTitleLabel.text = data.announceStatus ? "中油公告本週油價" : "本週油價預測"
+                        case 2...6:
+                            self.oilTitleLabel.text = "預測下週油價"
+                        case 7:
+                            self.oilTitleLabel.text = data.announceStatus ? "中油公告明日油價" : "明日油價預測"
+                        default:
+                            break
+                        }
+                        
+                        self.activityIndicatorView.stopAnimating()
+                        self.activityIndicatorView.isHidden = true
+                        self.collectionView.reloadData()
+                    }
+                }
+            } else {
+                print("no connection")
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "網路中斷", message: "為了更好的APP使用體驗，請檢查您的網路連線", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "完成", style: .cancel) { _ in
+                        print("done")
+                        self.activityIndicatorView.stopAnimating()
+                        self.activityIndicatorView.isHidden = true
+                    }
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+        monitor.start(queue: DispatchQueue.global())
     }
     @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
         let menuVC = MenuVC.loadFromNib()
