@@ -174,7 +174,7 @@ class ViewController: UIViewController {
         pickerContentView.heightAnchor.constraint(equalToConstant: 216).isActive = true
         pickerContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         pickerContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        let pickerBottomAnchor = pickerContentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 216)
+        let pickerBottomAnchor = pickerContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 216)
         pickerBottomAnchor.identifier = "bottom"
         pickerBottomAnchor.isActive = true
         super.viewWillAppear(animated)
@@ -577,6 +577,7 @@ class ViewController: UIViewController {
     }
     
     func pickerViewIsHidden(bool: Bool) {
+        let isHidden = bool
         for constraint in view.constraints {
             if constraint.identifier == "bottom" {
                 constraint.constant = bool ? 216 : -50
@@ -586,6 +587,18 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
+        
+        switch isHidden {
+        case true:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.pickerContentView.isHidden = isHidden
+            }
+        case false:
+            self.pickerContentView.isHidden = isHidden
+        }
+        
+        
+        
     }
     
     @objc func loadData(){
@@ -1112,7 +1125,7 @@ extension ViewController: CLLocationManagerDelegate {
         self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         self.bannerView.rootViewController = self
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         self.bannerView.load(GADRequest())
         self.bannerView.delegate = self
     }

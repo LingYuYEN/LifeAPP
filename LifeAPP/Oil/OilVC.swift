@@ -79,7 +79,7 @@ class OilVC: UIViewController {
         bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         bannerView.rootViewController = self
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView.load(GADRequest())
         bannerView.delegate = self
         
@@ -224,7 +224,6 @@ class OilVC: UIViewController {
         let menuVC = MenuVC.loadFromNib()
         menuVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.show(menuVC, sender: self)
-//        self.navigationController?.pushViewController(menuVC, animated: true)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
         let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
