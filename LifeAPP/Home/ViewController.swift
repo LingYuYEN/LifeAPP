@@ -1273,7 +1273,7 @@ extension ViewController: CLLocationManagerDelegate {
         self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         self.bannerView.rootViewController = self
         
-//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+        //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         self.bannerView.load(GADRequest())
         self.bannerView.delegate = self
     }
