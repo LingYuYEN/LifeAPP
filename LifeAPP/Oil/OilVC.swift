@@ -79,6 +79,7 @@ class OilVC: UIViewController {
         bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         bannerView.rootViewController = self
         
+        // 確認有無merge
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         bannerView.load(GADRequest())
         bannerView.delegate = self
