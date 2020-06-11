@@ -137,12 +137,12 @@
 		13552E85247B8E5A00CA895E = {
 			isa = PBXGroup;
 			children = (
-				13EA25D7249200DE0044DFAA /*  .gitattributes */,
-				13EA25D12491E0740044DFAA /* README.md */,
 				13552E90247B8E5A00CA895E /* LifeAPP */,
 				13552E8F247B8E5A00CA895E /* Products */,
 				7258B536EACDA84FD3D08B93 /* Pods */,
 				21C428370620DA8021B83854 /* Frameworks */,
+				13EA25D7249200DE0044DFAA /*  .gitattributes */,
+				13EA25D12491E0740044DFAA /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
