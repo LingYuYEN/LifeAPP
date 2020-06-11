@@ -38,8 +38,6 @@
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
 		13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25A9248E27F80044DFAA /* NetStatus.swift */; };
 		13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25AB248E2F640044DFAA /* WetherModel.swift */; };
-		13EA25DE249204400044DFAA /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25DD249204400044DFAA /* .gitattributes */; };
-		13EA25E0249204590044DFAA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25DF249204590044DFAA /* README.md */; };
 		771B19AAD36A9DCABFCC81DC /* Pods_LifeAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +75,6 @@
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
 		13EA25A9248E27F80044DFAA /* NetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
 		13EA25AB248E2F640044DFAA /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
-		13EA25DD249204400044DFAA /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
-		13EA25DF249204590044DFAA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.debug.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.release.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,8 +133,6 @@
 		13552E85247B8E5A00CA895E = {
 			isa = PBXGroup;
 			children = (
-				13EA25DF249204590044DFAA /* README.md */,
-				13EA25DD249204400044DFAA /* .gitattributes */,
 				13552E90247B8E5A00CA895E /* LifeAPP */,
 				13552E8F247B8E5A00CA895E /* Products */,
 				7258B536EACDA84FD3D08B93 /* Pods */,
@@ -291,8 +285,6 @@
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
 				1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */,
 				13552E99247B8E5A00CA895E /* Main.storyboard in Resources */,
-				13EA25DE249204400044DFAA /* .gitattributes in Resources */,
-				13EA25E0249204590044DFAA /* README.md in Resources */,
 				1347E5E524862BFD0036E4A2 /* MenuVC.xib in Resources */,
 				1347E5F024863C0F0036E4A2 /* OilVC.xib in Resources */,
 			);
