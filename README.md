@@ -14,10 +14,9 @@ Before you submit your app to the App Store, all of its content and metadata mus
 解決方案：
 APPLE 認為開發完整性不夠，並且不該使用占位字符（lorem ipsum）
 移除該問題後，並加上 API Loading 中的 loadingView
-
+```
 2. Your app crashed on iPad running iOS 13.5 on WiFi when we:
 
-```
 1: launch the app
 2: tap on 所有区域
 3: app crash 
