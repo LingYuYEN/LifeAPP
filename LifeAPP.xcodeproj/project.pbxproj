@@ -39,7 +39,7 @@
 		13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25A9248E27F80044DFAA /* NetStatus.swift */; };
 		13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25AB248E2F640044DFAA /* WetherModel.swift */; };
 		13EA25D22491E0740044DFAA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25D12491E0740044DFAA /* README.md */; };
-		13EA25D8249200DE0044DFAA /*  .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25D7249200DE0044DFAA /*  .gitattributes */; };
+		13EA25DA249201670044DFAA /*  .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25D9249201670044DFAA /*  .gitattributes */; };
 		771B19AAD36A9DCABFCC81DC /* Pods_LifeAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +78,7 @@
 		13EA25A9248E27F80044DFAA /* NetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
 		13EA25AB248E2F640044DFAA /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
 		13EA25D12491E0740044DFAA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		13EA25D7249200DE0044DFAA /*  .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = " .gitattributes"; sourceTree = "<group>"; };
+		13EA25D9249201670044DFAA /*  .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = " .gitattributes"; sourceTree = "<group>"; };
 		18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.debug.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.release.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 				13552E8F247B8E5A00CA895E /* Products */,
 				7258B536EACDA84FD3D08B93 /* Pods */,
 				21C428370620DA8021B83854 /* Frameworks */,
-				13EA25D7249200DE0044DFAA /*  .gitattributes */,
+				13EA25D9249201670044DFAA /*  .gitattributes */,
 				13EA25D12491E0740044DFAA /* README.md */,
 			);
 			sourceTree = "<group>";
@@ -280,7 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13EA25D8249200DE0044DFAA /*  .gitattributes in Resources */,
+				13EA25DA249201670044DFAA /*  .gitattributes in Resources */,
 				13EA25D22491E0740044DFAA /* README.md in Resources */,
 				13552E9E247B8E5B00CA895E /* LaunchScreen.storyboard in Resources */,
 				1347E5DD2484C4470036E4A2 /* CardDetailTableViewCell.xib in Resources */,
