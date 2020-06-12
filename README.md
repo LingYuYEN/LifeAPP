@@ -57,3 +57,4 @@ Please only include footage in your demo video of your app running on a physical
 （建議未來如有定位功能，送審的 Metadata 一律要提供 Demo Video）
 
 測試 Merge
+測試 Merge 2
