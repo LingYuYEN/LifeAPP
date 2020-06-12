@@ -568,6 +568,43 @@
             </objects>
             <point key="canvasLocation" x="1044.9275362318842" y="137.36413043478262"/>
         </scene>
+        <!--New HomeVC-->
+        <scene sceneID="tGw-mi-w2s">
+            <objects>
+                <viewController id="Yzj-Pg-FEF" customClass="NewHomeVC" customModule="LifeAPP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6ZH-m5-QBM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newHomeBgImg" translatesAutoresizingMaskIntoConstraints="NO" id="YpW-8d-mlF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YpW-8d-mlF" firstAttribute="trailing" secondItem="emL-X6-o5U" secondAttribute="trailing" id="6bn-MY-PgS"/>
+                            <constraint firstItem="YpW-8d-mlF" firstAttribute="top" secondItem="6ZH-m5-QBM" secondAttribute="top" id="Ifx-1C-uL9"/>
+                            <constraint firstItem="YpW-8d-mlF" firstAttribute="leading" secondItem="emL-X6-o5U" secondAttribute="leading" id="YBJ-zT-q5m"/>
+                            <constraint firstItem="YpW-8d-mlF" firstAttribute="bottom" secondItem="emL-X6-o5U" secondAttribute="bottom" id="nEe-3q-SRq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="emL-X6-o5U"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="clv-qB-Ieq">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cnr-E3-be0">
+                            <rect key="frame" x="186" y="1" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="21"/>
+                            <state key="normal" title="首頁">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oDe-BN-fF2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045" y="962"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZAH-3d-ZMH">
             <objects>
@@ -592,12 +629,31 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.77173913043478"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mLX-nd-kPG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uZp-qV-iVq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pHR-5M-9bG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yzj-Pg-FEF" kind="relationship" relationship="rootViewController" id="rEF-XM-ELs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Ma-mB-Hh0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="962"/>
+        </scene>
     </scenes>
     <resources>
         <image name="dangerIcon" width="18" height="18"/>
         <image name="dayIcon" width="46" height="46"/>
         <image name="down" width="16" height="16"/>
         <image name="hambergerIcon" width="23" height="23"/>
+        <image name="newHomeBgImg" width="414" height="736"/>
         <image name="nightIcon" width="46" height="46"/>
         <image name="share" width="23" height="23"/>
     </resources>
