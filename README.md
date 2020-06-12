@@ -12,6 +12,7 @@ Before you submit your app to the App Store, all of its content and metadata mus
 ```
 
 解決方案：
+
 APPLE 認為開發完整性不夠，並且不該使用占位字符（lorem ipsum）
 移除該問題後，並加上 API Loading 中的 loadingView
 ```
@@ -25,6 +26,7 @@ We have attached detailed crash logs to help troubleshoot this issue.
 ```
 
 解決方案：
+
 此為閃退問題，主要為點擊"所有區域"時，action 需調用 bannerView，但該時間序尚未建構 bannerView，造成 nil 閃退
 已調整bannerView 生成以及使用時機。
 
@@ -35,6 +37,7 @@ We have attached detailed crash logs to help troubleshoot this issue.
 ```
 
 解決方案：
+
 主要為 APPLE 認為欲取得使用者定位權限，在 info.plist 中未描述清楚。
 故調整 info.plist
 key: Privacy - Location When In Use Usage Description
@@ -51,6 +54,7 @@ We have started the review of your app, but we are not able to continue because 
 
 Please only include footage in your demo video of your app running on a physical iOS device, and not on a simulator. It is acceptable to use a screen recorder to capture footage of your app in use. Make sure all relevant app features, services, and permissions are clearly documented in the demo video.
 ```
+解決方案：
 
 主要為，此 APP 目前僅適合台灣使用，但審查團隊並未定位在台灣座標，將造成 APP 操作問題，
 或為審查人員不清楚該 APP 如何操作時會要求提供 Demo Video
