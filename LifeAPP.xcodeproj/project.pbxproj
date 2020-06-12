@@ -34,6 +34,8 @@
 		13552EDC247CBEC400CA895E /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */; };
 		13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */; };
 		1359A57024935FD60076E9F1 /* TicketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359A56F24935FD60076E9F1 /* TicketVC.swift */; };
+		1359A57324936D420076E9F1 /* TicketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */; };
+		1359A57424936D420076E9F1 /* TicketCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */; };
 		13B05452247CE9A000B85357 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05451247CE9A000B85357 /* ClientManager.swift */; };
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
@@ -78,6 +80,8 @@
 		13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		1359A56F24935FD60076E9F1 /* TicketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketVC.swift; sourceTree = "<group>"; };
+		1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCollectionViewCell.swift; sourceTree = "<group>"; };
+		1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketCollectionViewCell.xib; sourceTree = "<group>"; };
 		13B05451247CE9A000B85357 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
@@ -219,9 +223,11 @@
 			children = (
 				13EA25E82493135D0044DFAA /* NaviNewHomeVC.swift */,
 				13EA25E6249306830044DFAA /* NewHomeVC.swift */,
-				13EA25EB24931DBE0044DFAA /* NewHomeCollectionViewCell.xib */,
 				13EA25EA24931DBE0044DFAA /* NewHomeCollectionViewCell.swift */,
+				13EA25EB24931DBE0044DFAA /* NewHomeCollectionViewCell.xib */,
 				1359A56F24935FD60076E9F1 /* TicketVC.swift */,
+				1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */,
+				1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */,
 			);
 			path = "New Home";
 			sourceTree = "<group>";
@@ -314,6 +320,7 @@
 				13EA25ED24931DBE0044DFAA /* NewHomeCollectionViewCell.xib in Resources */,
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
 				1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */,
+				1359A57424936D420076E9F1 /* TicketCollectionViewCell.xib in Resources */,
 				13552E99247B8E5A00CA895E /* Main.storyboard in Resources */,
 				13EA25E2249209DD0044DFAA /* .gitattributes in Resources */,
 				13EA25E424920A0B0044DFAA /* README.md in Resources */,
@@ -373,6 +380,7 @@
 			files = (
 				13552EDC247CBEC400CA895E /* ImageCollectionViewCell.swift in Sources */,
 				1347E6182487757D0036E4A2 /* OilModel.swift in Sources */,
+				1359A57324936D420076E9F1 /* TicketCollectionViewCell.swift in Sources */,
 				13B05454247CE9AD00B85357 /* DataManager.swift in Sources */,
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
 				13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */,

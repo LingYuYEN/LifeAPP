@@ -19,8 +19,13 @@ class NewHomeVC: UIViewController {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage = image
+        
+        let backImageView = UIImageView()
+        backImageView.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+        backImageView.image = UIImage(named: "naviBackIcon")
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(customView: backImageView)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +34,8 @@ class NewHomeVC: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "NewHomeCollectionViewCell")
         
     }
+    
+    
 }
 
 extension NewHomeVC: UICollectionViewDataSource {
