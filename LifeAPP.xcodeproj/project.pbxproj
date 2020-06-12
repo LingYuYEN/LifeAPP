@@ -41,6 +41,7 @@
 		13EA25E2249209DD0044DFAA /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25E1249209DD0044DFAA /* .gitattributes */; };
 		13EA25E424920A0B0044DFAA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25E324920A0B0044DFAA /* README.md */; };
 		13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25E6249306830044DFAA /* NewHomeVC.swift */; };
+		13EA25E92493135D0044DFAA /* NaviNewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25E82493135D0044DFAA /* NaviNewHomeVC.swift */; };
 		771B19AAD36A9DCABFCC81DC /* Pods_LifeAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		13EA25E1249209DD0044DFAA /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		13EA25E324920A0B0044DFAA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		13EA25E6249306830044DFAA /* NewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeVC.swift; sourceTree = "<group>"; };
+		13EA25E82493135D0044DFAA /* NaviNewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviNewHomeVC.swift; sourceTree = "<group>"; };
 		18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.debug.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.release.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				13EA25E6249306830044DFAA /* NewHomeVC.swift */,
+				13EA25E82493135D0044DFAA /* NaviNewHomeVC.swift */,
 			);
 			path = "New Home";
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
 				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
 				13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */,
+				13EA25E92493135D0044DFAA /* NaviNewHomeVC.swift in Sources */,
 				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
 				1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */,
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,

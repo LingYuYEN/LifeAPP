@@ -36,46 +36,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
 
+        if #available(iOS 13.0, *) {
+            let statusBar : UIView = UIView.init(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.init(x: 0, y: 0, width: screen.width, height: 20))
+            statusBar.backgroundColor = .white
+            UIApplication.shared.keyWindow?.addSubview(statusBar)
+            
+        } else {
+            // Fallback on earlier versions
+            let statusBarWindow : UIView = UIApplication.shared.value(forKey: "statusBarWindow") as! UIView
+            let statusBar : UIView = statusBarWindow.value(forKey: "statusBar") as! UIView
+            if statusBar.responds(to:#selector(setter: UIView.backgroundColor)) {
+                statusBar.backgroundColor = .white
+            }
+        }
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
-        // 先建立 Main SB
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let initVC = sb.instantiateViewController(withIdentifier: "main")
-        let nav = UINavigationController(rootViewController: initVC)
-//        let controllers = navigationController.viewControllers
-//        var newStack = [UIViewController]()
-//        if controllers.count > 0 {
-//            let rootVC = controllers[0]
-//            newStack.append(rootVC)
-//        }
-//        if let initVC = sb.instantiateViewController(withIdentifier: "navi") as? ViewController {
-//            newStack.append(initVC)
-//        }
+//        // 先建立 Main SB
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        let initVC = sb.instantiateViewController(withIdentifier: "main")
+//        let nav = UINavigationController(rootViewController: initVC)
 //
-//        if let vc = sb.instantiateViewController(withIdentifier: "main") as? ViewController {
-//            newStack.append(vc)
-//        }
-//
-//        let detailVC = DetailVC.loadFromNib()
-//        newStack.append(detailVC)
-//
-//        let oilVC = OilVC.loadFromNib()
-//        newStack.append(oilVC)
-//        if let detailVC = sb.instantiateViewController(withIdentifier: "detailVC") as? DetailVC {
-//            newStack.append(detailVC)
-//        }
-//        if let oilVC = sb.instantiateViewController(withIdentifier: "oilVC") as? OilVC {
-//            newStack.append(oilVC)
-//        }
-//        navigationController.setViewControllers(newStack, animated: true)
-        
-        // window 滿版
-        window = UIWindow(frame: UIScreen.main.bounds)
-        // 指定 rootViewController
-        window?.rootViewController = nav
-        // 顯示當前窗口(將 UIWindow 設置可見的)
-        window?.makeKeyAndVisible()
+//        // window 滿版
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        // 指定 rootViewController
+//        window?.rootViewController = nav
+//        // 顯示當前窗口(將 UIWindow 設置可見的)
+//        window?.makeKeyAndVisible()
         
         return true
     }
