@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "scale" : "1x",
+      "filename" : "cellBgImg.jpg",
       "idiom" : "universal",
-      "filename" : "newHomeBgImg.jpg"
+      "scale" : "1x"
     },
     {
-      "filename" : "newHomeBgImg@2x.jpg",
+      "filename" : "cellBgImg@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "idiom" : "universal",
+      "filename" : "cellBgImg@3x.jpg",
       "scale" : "3x",
-      "filename" : "newHomeBgImg@3x.jpg"
+      "idiom" : "universal"
     }
   ],
   "info" : {
