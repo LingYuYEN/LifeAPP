@@ -12,6 +12,9 @@ class NewHomeVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     
+    let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomeCityIcon", "newHomeQrcodeIcon", "newHomePostalIcon"]
+    let cellNames = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "各縣市大型旅遊景點", "發票開獎與掃描對獎", "郵遞區號快速查詢"]
+    let vcMap = [0 : "ticket", 1 : "ticket", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
@@ -30,18 +33,28 @@ class NewHomeVC: UIViewController {
 
 extension NewHomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return iconImageNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
+        cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+        cell.titleLabel.text = cellNames[indexPath.row]
         return cell
     }
     
     
 }
 extension NewHomeVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(cellNames[indexPath.row])
+        
+        guard let id = vcMap[indexPath.row] else { return }
+        if let vc = storyboard?.instantiateViewController(withIdentifier: id) {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
 }
 extension NewHomeVC: UICollectionViewDelegateFlowLayout {
     /// 設定 Collection View 距離 Super View上、下、左、下間的距離

@@ -13,6 +13,8 @@ class NewHomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet var gradientView: UIView!
     @IBOutlet var cellContentView: UIView!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var iconImageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

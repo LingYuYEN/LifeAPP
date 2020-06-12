@@ -33,6 +33,7 @@
 		13552ED9247CBEB300CA895E /* TextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13552ED7247CBEB300CA895E /* TextCollectionViewCell.xib */; };
 		13552EDC247CBEC400CA895E /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */; };
 		13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */; };
+		1359A57024935FD60076E9F1 /* TicketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359A56F24935FD60076E9F1 /* TicketVC.swift */; };
 		13B05452247CE9A000B85357 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05451247CE9A000B85357 /* ClientManager.swift */; };
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
@@ -76,6 +77,7 @@
 		13552ED7247CBEB300CA895E /* TextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextCollectionViewCell.xib; sourceTree = "<group>"; };
 		13552EDA247CBEC400CA895E /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		13552EDB247CBEC400CA895E /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		1359A56F24935FD60076E9F1 /* TicketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketVC.swift; sourceTree = "<group>"; };
 		13B05451247CE9A000B85357 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				13EA25E6249306830044DFAA /* NewHomeVC.swift */,
 				13EA25EB24931DBE0044DFAA /* NewHomeCollectionViewCell.xib */,
 				13EA25EA24931DBE0044DFAA /* NewHomeCollectionViewCell.swift */,
+				1359A56F24935FD60076E9F1 /* TicketVC.swift */,
 			);
 			path = "New Home";
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */,
 				13EA25E92493135D0044DFAA /* NaviNewHomeVC.swift in Sources */,
 				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
+				1359A57024935FD60076E9F1 /* TicketVC.swift in Sources */,
 				1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */,
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,
 				13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */,
