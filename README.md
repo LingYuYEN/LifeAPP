@@ -30,9 +30,3 @@ Please only include footage in your demo video of your app running on a physical
 主要為，此 APP 目前僅適合台灣使用，但審查團隊並未定位在台灣座標，將造成 APP 操作問題，
 或為審查人員不清楚該 APP 如何操作時會要求提供 Demo Video
 （建議未來如有定位功能，送審的 Metadata 一律要提供 Demo Video）
-
-測試 Merge
-測試 Merge 2
-測試 Merge 3
-測試 Merge 4
-測試 Merge 5
