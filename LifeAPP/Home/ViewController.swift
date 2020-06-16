@@ -316,7 +316,8 @@ class ViewController: UIViewController {
         self.navigationController?.show(menuVC, sender: self)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
-        let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
+        let shareUrlStr = "https://apps.apple.com/tw/app/生活小百科/id1515688778"
+        let activityVC = UIActivityViewController(activityItems: [shareMessage, shareUrlStr], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
             if completed {
                 self.interstitial = self.createAndLoadInterstitial()
@@ -351,7 +352,9 @@ class ViewController: UIViewController {
             
             let descriptionsCount = model.descriptions.count
             let random = Int.random(in: 0 ... descriptionsCount - 1)
-            self.shareMessage = model.descriptions[random].descriptionDescription ?? ""
+            self.shareMessage = "生活小百科提醒： "
+            self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
+             
             
             for weekMaxT in model.weather.weekMaxT {
                 self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
@@ -634,7 +637,8 @@ class ViewController: UIViewController {
                     
                     let descriptionsCount = model.descriptions.count
                     let random = Int.random(in: 0 ... descriptionsCount - 1)
-                    self.shareMessage = model.descriptions[random].descriptionDescription ?? ""
+                    self.shareMessage = "生活小百科提醒： "
+                    self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
                     
                     for weekMaxT in model.weather.weekMaxT {
                         self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
@@ -773,7 +777,8 @@ class ViewController: UIViewController {
                     
                     let descriptionsCount = model.descriptions.count
                     let random = Int.random(in: 0 ... descriptionsCount - 1)
-                    self.shareMessage = model.descriptions[random].descriptionDescription ?? ""
+                    self.shareMessage = "生活小百科提醒： "
+                    self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
                     
                     for weekMaxT in model.weather.weekMaxT {
                         self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
@@ -1140,7 +1145,8 @@ extension ViewController: CLLocationManagerDelegate {
                     
                     let descriptionsCount = model.descriptions.count
                     let random = Int.random(in: 0 ... descriptionsCount - 1)
-                    self.shareMessage = model.descriptions[random].descriptionDescription ?? ""
+                    self.shareMessage = "生活小百科提醒： "
+                    self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
                     
                     for weekMaxT in model.weather.weekMaxT {
                         self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
@@ -1303,7 +1309,8 @@ extension ViewController: CLLocationManagerDelegate {
                 
                 let descriptionsCount = model.descriptions.count
                 let random = Int.random(in: 0 ... descriptionsCount - 1)
-                self.shareMessage = model.descriptions[random].descriptionDescription ?? ""
+                self.shareMessage = "生活小百科提醒： "
+                self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
                 
                 for weekMaxT in model.weather.weekMaxT {
                     self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")

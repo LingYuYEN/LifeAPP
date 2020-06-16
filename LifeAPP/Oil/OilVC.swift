@@ -182,22 +182,26 @@ class OilVC: UIViewController {
                         self.averageIconImageView.image = UIImage(named: self.levelIconMap[data.priceLevel95] ?? "")
                         self.levelIconWidthConstraint.constant = data.priceLevel95 == 0 ? 0 : self.levelIconWidthConstraint.constant
                         
-                        self.shareMessage = "下週油價漲幅預測，漲 \(data.oilChange)"
+                        
+                        
+                        
                         
                         let today = Date()
                         let dateComponents = Calendar.current.dateComponents(in: TimeZone.current, from: today)
-                        let weekday = dateComponents.weekday!
+                        let weekday = dateComponents.weekday!                        
                         
                         switch weekday {
-                        case 1:
-                            self.oilTitleLabel.text = data.announceStatus ? "中油公告本週油價" : "本週油價預測"
-                        case 2...6:
-                            self.oilTitleLabel.text = "預測下週油價"
-                        case 7:
+                        case 1:     // 星期日
                             self.oilTitleLabel.text = data.announceStatus ? "中油公告明日油價" : "明日油價預測"
+                        case 2:     // 星期一
+                            self.oilTitleLabel.text = data.announceStatus ? "中油公告本週油價" : "本週油價預測"
+                        case 3 ... 7:   // 星期三~六
+                            self.oilTitleLabel.text = "預測下週油價"
                         default:
                             break
                         }
+                        
+                        self.shareMessage = "生活小百科提醒： \(self.oilTitleLabel.text ?? "油價漲幅")，漲 \(data.oilChange)"
                         
                         self.activityIndicatorView.stopAnimating()
                         self.activityIndicatorView.isHidden = true
@@ -226,7 +230,8 @@ class OilVC: UIViewController {
         self.navigationController?.show(menuVC, sender: self)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
-        let activityVC = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
+        let shareUrlStr = "https://apps.apple.com/tw/app/生活小百科/id1515688778"
+        let activityVC = UIActivityViewController(activityItems: [shareMessage, shareUrlStr], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
             if completed {
                 self.interstitial = self.createAndLoadInterstitial()
