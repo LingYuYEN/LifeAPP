@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import Firebase
 
 
 let screen = UIScreen.main.bounds.size
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
         
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar

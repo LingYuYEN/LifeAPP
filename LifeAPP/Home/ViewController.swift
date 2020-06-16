@@ -90,6 +90,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var locationContentView: UIView!
     @IBOutlet var locationsBtn: UIButton!
+    @IBOutlet var dataSourceStrTextView: UITextView!
     
     var myLocationManager: CLLocationManager!
     var urlOfImageToShare: URL?
@@ -158,6 +159,7 @@ class ViewController: UIViewController {
     var wxDescription = ""
     
     override func viewWillAppear(_ animated: Bool) {
+        
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage = image
@@ -176,7 +178,6 @@ class ViewController: UIViewController {
         pickerBottomAnchor.identifier = "bottom"
         pickerBottomAnchor.isActive = true
         super.viewWillAppear(animated)
-        
     }
     func setupUI() {
         chWeekArr = [String]()
@@ -303,6 +304,13 @@ class ViewController: UIViewController {
         locationsBtn.addTarget(self, action: #selector(onSelectLocationClick), for: .touchUpInside)
         pickerView.setValue(UIColor.black, forKey: "textColor")
         
+        let attributedString = NSMutableAttributedString(string: "資料來源： 氣象資料開放平臺")
+        attributedString.addAttribute(.link, value: "https://opendata.cwb.gov.tw/index", range: NSRange(location: 0, length: attributedString.length))
+        
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle().isSubset(of: .single) , range: NSRange(location: 6, length: attributedString.length - 6))
+        
+        dataSourceStrTextView.attributedText = attributedString
+        dataSourceStrTextView.tintColor = .white
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {
@@ -606,8 +614,6 @@ class ViewController: UIViewController {
     
     @objc func loadData(){
         
-        
-        
         switch CLLocationManager.authorizationStatus() {
         case .denied:
             // 提示可至[設定]中開啟權限
@@ -755,9 +761,10 @@ class ViewController: UIViewController {
                 }
             }
         default:
+            
             guard let lat = myLocationManager.location?.coordinate.latitude else { return }
             guard let lon = myLocationManager.location?.coordinate.longitude else { return }
-
+            
             GeocodeManager.shared.geocode(latitude: lat, longitude: lon) { placemark, error in
                 guard let placemark = placemark, error == nil else { return }
                 guard let city = placemark.subAdministrativeArea else { return }
