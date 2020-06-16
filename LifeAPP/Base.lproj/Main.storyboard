@@ -467,7 +467,7 @@
                                 <constraint firstItem="T0Y-F9-bJh" firstAttribute="centerY" secondItem="8SL-m0-55M" secondAttribute="centerY" id="N0c-11-SJp"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="share" id="wBj-sF-ttm">
+                        <barButtonItem key="rightBarButtonItem" title="分享" id="wBj-sF-ttm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onShareClick:" destination="BYZ-38-t0r" id="a3v-lY-wB5"/>
@@ -744,6 +744,5 @@
         <image name="hambergerIcon" width="23" height="23"/>
         <image name="newHomeBgImg" width="414" height="736"/>
         <image name="nightIcon" width="46" height="46"/>
-        <image name="share" width="23" height="23"/>
     </resources>
 </document>

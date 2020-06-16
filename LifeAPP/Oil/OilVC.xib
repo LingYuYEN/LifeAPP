@@ -57,8 +57,8 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaB-KE-0OA">
-                                    <rect key="frame" x="128.33333333333337" y="103.66666666666664" width="157.66666666666663" height="137.33333333333337"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaB-KE-0OA">
+                                    <rect key="frame" x="192.66666666666666" y="103.66666666666664" width="28.666666666666657" height="137.33333333333337"/>
                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="117"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -130,14 +130,14 @@
                                         <constraint firstItem="Vwj-pt-E6Z" firstAttribute="height" secondItem="Pkp-sF-zqz" secondAttribute="height" id="Goi-ma-7Sp"/>
                                     </constraints>
                                 </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="漲" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDg-yA-3nW">
-                                    <rect key="frame" x="92" y="184.33333333333334" width="26.333333333333329" height="36.666666666666657"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDg-yA-3nW">
+                                    <rect key="frame" x="174" y="184.33333333333334" width="8.6666666666666572" height="36.666666666666657"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="26"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vDG-BQ-UAP">
-                                    <rect key="frame" x="92" y="145" width="26.333333333333329" height="26.333333333333343"/>
+                                    <rect key="frame" x="174" y="162.66666666666666" width="8.6666666666666572" height="8.6666666666666572"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="vDG-BQ-UAP" secondAttribute="height" id="Xj1-r4-wz0"/>
                                     </constraints>
@@ -233,7 +233,7 @@
                                     <constraint firstItem="Ohp-Ye-Yuh" firstAttribute="centerX" secondItem="JbF-82-Rw4" secondAttribute="centerX" id="qUf-Fm-U2i"/>
                                 </constraints>
                             </view>
-                            <barButtonItem key="rightBarButtonItem" image="share" id="g12-p0-gOw">
+                            <barButtonItem key="rightBarButtonItem" title="分享" id="g12-p0-gOw">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="onShareClick:" destination="-1" id="wAg-Yq-tmS"/>
@@ -290,6 +290,5 @@
     </objects>
     <resources>
         <image name="hambergerIcon" width="23" height="23"/>
-        <image name="share" width="23" height="23"/>
     </resources>
 </document>
