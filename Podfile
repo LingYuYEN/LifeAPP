@@ -9,5 +9,6 @@ target 'LifeAPP' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Fabric'
   
 end
