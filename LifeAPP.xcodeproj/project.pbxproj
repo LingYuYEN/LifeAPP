@@ -36,7 +36,7 @@
 		1359A57024935FD60076E9F1 /* TicketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359A56F24935FD60076E9F1 /* TicketVC.swift */; };
 		1359A57324936D420076E9F1 /* TicketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */; };
 		1359A57424936D420076E9F1 /* TicketCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */; };
-		1396B98A2498B42600C2AEAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1396B9892498B42600C2AEAE /* GoogleService-Info.plist */; };
+		1396B9B32499CB3E00C2AEAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1396B9B22499CB3E00C2AEAE /* GoogleService-Info.plist */; };
 		13B05452247CE9A000B85357 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05451247CE9A000B85357 /* ClientManager.swift */; };
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
@@ -83,7 +83,8 @@
 		1359A56F24935FD60076E9F1 /* TicketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketVC.swift; sourceTree = "<group>"; };
 		1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCollectionViewCell.swift; sourceTree = "<group>"; };
 		1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketCollectionViewCell.xib; sourceTree = "<group>"; };
-		1396B9892498B42600C2AEAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1396B9AF2499C38D00C2AEAE /* LifeAPP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeAPP.entitlements; sourceTree = "<group>"; };
+		1396B9B22499CB3E00C2AEAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B05451247CE9A000B85357 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		13552E90247B8E5A00CA895E /* LifeAPP */ = {
 			isa = PBXGroup;
 			children = (
+				1396B9AF2499C38D00C2AEAE /* LifeAPP.entitlements */,
 				13552E91247B8E5A00CA895E /* AppDelegate.swift */,
 				13552E93247B8E5A00CA895E /* SceneDelegate.swift */,
 				13B05455247CEAF000B85357 /* model */,
@@ -185,7 +187,7 @@
 				13552E9A247B8E5B00CA895E /* Assets.xcassets */,
 				13552E9C247B8E5B00CA895E /* LaunchScreen.storyboard */,
 				13552E9F247B8E5B00CA895E /* Info.plist */,
-				1396B9892498B42600C2AEAE /* GoogleService-Info.plist */,
+				1396B9B22499CB3E00C2AEAE /* GoogleService-Info.plist */,
 				13552EA5247B915100CA895E /* Extension.swift */,
 				13552ECD247C994500CA895E /* font */,
 			);
@@ -317,7 +319,6 @@
 				1347E5DD2484C4470036E4A2 /* CardDetailTableViewCell.xib in Resources */,
 				1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */,
 				13552E9B247B8E5B00CA895E /* Assets.xcassets in Resources */,
-				1396B98A2498B42600C2AEAE /* GoogleService-Info.plist in Resources */,
 				13552ED5247C9C1B00CA895E /* Lato-Regular.ttf in Resources */,
 				1347E5F4248654370036E4A2 /* OilCollectionViewCell.xib in Resources */,
 				13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */,
@@ -325,6 +326,7 @@
 				13EA25ED24931DBE0044DFAA /* NewHomeCollectionViewCell.xib in Resources */,
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
 				1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */,
+				1396B9B32499CB3E00C2AEAE /* GoogleService-Info.plist in Resources */,
 				1359A57424936D420076E9F1 /* TicketCollectionViewCell.xib in Resources */,
 				13552E99247B8E5A00CA895E /* Main.storyboard in Resources */,
 				13EA25E2249209DD0044DFAA /* .gitattributes in Resources */,
@@ -567,6 +569,7 @@
 			baseConfigurationReference = 73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LifeAPP/LifeAPP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -590,6 +593,7 @@
 			baseConfigurationReference = 9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LifeAPP/LifeAPP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

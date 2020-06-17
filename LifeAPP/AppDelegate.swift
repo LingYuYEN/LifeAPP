@@ -29,6 +29,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 上傳 Debug 至 Firebase
         Fabric.sharedSDK().debug = true
         
+        // Set Firebase messaging delegate
+        Messaging.messaging().delegate = self
+        
+        // show the dialog at a more appropriate time move this registration accordingly.
+        if #available(iOS 10.0, *) {
+          UNUserNotificationCenter.current().delegate = self
+         
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in
+            
+          }
+        } else {
+          let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar
         UINavigationBar.appearance().tintColor = .white
@@ -90,6 +109,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        var tokenString = ""
+        for byte in deviceToken {
+            let hexString = String(format: "%02x", byte)
+            tokenString += hexString
+        }
+    }
 
 
+}
+
+@available(iOS 10,*)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+  // Receive displayed notifications for iOS 10 devices.
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+    let userInfo = notification.request.content.userInfo
+    print("willPresent userInfo: \(userInfo)")
+        
+    completionHandler([.badge, .sound, .alert])
+  }
+    
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+    let userInfo = response.notification.request.content.userInfo
+    print("didPresent userInfo: \(userInfo)")
+        
+    completionHandler()
+  }
+}
+
+extension AppDelegate: MessagingDelegate {
+    
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    print("Firebase registration token: \(fcmToken)")
+        
+    let dataDict:[String: String] = ["token": fcmToken]
+    NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+  }
+    
+  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+    print("Received data message: \(remoteMessage.appData)")
+  }
 }
