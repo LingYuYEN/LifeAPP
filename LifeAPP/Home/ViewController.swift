@@ -314,6 +314,7 @@ class ViewController: UIViewController {
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {
+        
         self.locationsBtn.setImage(UIImage(named: "up"), for: .normal)
         pickerViewIsHidden(bool: false)
         

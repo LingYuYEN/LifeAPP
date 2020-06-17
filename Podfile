@@ -7,8 +7,8 @@ target 'LifeAPP' do
 
   # Pods for LifeAPP
   pod 'Google-Mobile-Ads-SDK'
-  pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
-  pod 'Fabric'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
   
 end

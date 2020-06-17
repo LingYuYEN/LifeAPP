@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMobileAds
 import Firebase
+import Fabric
+ 
 
 
 let screen = UIScreen.main.bounds.size
@@ -22,7 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // 連線至 Firebase
         FirebaseApp.configure()
+        // 上傳 Debug 至 Firebase
+        Fabric.sharedSDK().debug = true
         
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar
