@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "wetherIcon1.png"
+      "filename" : "oilBgImg.jpg",
+      "scale" : "1x"
     },
     {
-      "idiom" : "universal",
-      "filename" : "wetherIcon1@2x.png",
-      "scale" : "2x"
+      "filename" : "oilBgImg@2x.jpg",
+      "scale" : "2x",
+      "idiom" : "universal"
     },
     {
       "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "wetherIcon1@3x.png"
+      "filename" : "oilBgImg@3x.jpg"
     }
   ],
   "info" : {

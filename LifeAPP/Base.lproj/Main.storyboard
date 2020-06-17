@@ -25,7 +25,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1029"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRG-ax-kQ9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homeBgImg" translatesAutoresizingMaskIntoConstraints="NO" id="VCP-af-WjV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1029"/>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRG-ax-kQ9">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1029"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -361,7 +364,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="資料來源： 氣象資料開放平臺" translatesAutoresizingMaskIntoConstraints="NO" id="hTz-bi-9Rr">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="資料來源： 氣象資料開放平臺" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTz-bi-9Rr">
                                                 <rect key="frame" x="26" y="898" width="362" height="37"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -435,15 +438,19 @@
                         <constraints>
                             <constraint firstItem="gRG-ax-kQ9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6ZM-4G-MAS"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="6bq-Ch-MA1"/>
+                            <constraint firstItem="VCP-af-WjV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9as-8j-YLq"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Abe-dV-GLv"/>
                             <constraint firstItem="Aq8-HX-6K4" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.241546" id="D80-Ld-Aen"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gRG-ax-kQ9" secondAttribute="bottom" id="F9K-mc-oKF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VCP-af-WjV" secondAttribute="trailing" id="J4N-dx-4tn"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LtB-Vv-zVE"/>
+                            <constraint firstItem="VCP-af-WjV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MAt-oF-rmh"/>
                             <constraint firstItem="67h-1f-Bc5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NE7-7R-1mk"/>
                             <constraint firstItem="gRG-ax-kQ9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ai2-5d-PIP"/>
                             <constraint firstItem="Aq8-HX-6K4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="e8y-wy-vzz"/>
                             <constraint firstItem="YOo-Nh-g3s" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="i9B-Hz-Qal"/>
                             <constraint firstItem="Aq8-HX-6K4" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-25" id="pal-d8-Kxd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VCP-af-WjV" secondAttribute="bottom" id="qSe-Wx-hIj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gRG-ax-kQ9" secondAttribute="trailing" id="w3p-PU-EJY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -753,10 +760,11 @@
     </scenes>
     <resources>
         <image name="dangerIcon" width="18" height="18"/>
-        <image name="dayIcon" width="46" height="46"/>
+        <image name="dayIcon" width="38.666667938232422" height="44.666667938232422"/>
         <image name="down" width="16" height="16"/>
         <image name="hambergerIcon" width="23" height="23"/>
+        <image name="homeBgImg" width="414" height="736"/>
         <image name="newHomeBgImg" width="414" height="736"/>
-        <image name="nightIcon" width="46" height="46"/>
+        <image name="nightIcon" width="38.666667938232422" height="44.666667938232422"/>
     </resources>
 </document>
