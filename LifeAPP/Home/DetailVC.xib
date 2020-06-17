@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC" customModule="LifeAPP" customModuleProvider="target">
             <connections>
+                <outlet property="cardContentView" destination="SKK-XB-WSw" id="2sq-N3-QlN"/>
+                <outlet property="dismiaaBtn" destination="Phz-mZ-sWu" id="IXK-XO-aUj"/>
                 <outlet property="gradientView" destination="ked-7S-8yn" id="TPk-GT-knj"/>
                 <outlet property="momoLabel" destination="GhQ-Be-PIg" id="xH4-Fr-8kT"/>
                 <outlet property="publishTimeLabel" destination="rFC-xx-NWP" id="fuV-R0-ZsA"/>
@@ -39,9 +41,6 @@
                                 <constraint firstAttribute="width" secondItem="Phz-mZ-sWu" secondAttribute="height" multiplier="21:22" id="27U-QX-FJH"/>
                             </constraints>
                             <state key="normal" image="dismissIcon"/>
-                            <connections>
-                                <action selector="onDismissClick:" destination="-1" eventType="touchUpInside" id="tzU-bZ-EOP"/>
-                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空氣品質指標 AQI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eXE-Jj-7t1">
                             <rect key="frame" x="26" y="58.666666666666671" width="310" height="28"/>

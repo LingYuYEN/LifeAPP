@@ -32,6 +32,8 @@ class DetailVC: UIViewController {
     @IBOutlet var momoLabel: UILabel!
     @IBOutlet var statusImageView: UIImageView!
     @IBOutlet var publishTimeLabel: UILabel!
+    @IBOutlet var dismiaaBtn: UIButton!
+    @IBOutlet var cardContentView: UIView!
     
     var rowCount: Int?
     
@@ -63,10 +65,13 @@ class DetailVC: UIViewController {
 
     func setUI() {
         
-//        guard let publishTimeValue = publishTimeValue else { return }
-//        let dateStr = string2Date(publishTimeValue, dateFormat: "yyyy-MM-dd HH:mm")
-//        print(dateStr)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewDismissAction))
+        let btnTap = UITapGestureRecognizer(target: self, action: #selector(btnDismissAction))
+        let cardTap = UITapGestureRecognizer(target: self, action: #selector(cardDismissAction))
         
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+        self.dismiaaBtn.addGestureRecognizer(btnTap)
+        self.cardContentView.addGestureRecognizer(cardTap)
         
         self.tableViewHeightConstraint.constant = CGFloat(rowHight * (cellLabelStatus.count))
         
@@ -81,6 +86,17 @@ class DetailVC: UIViewController {
         tableView.reloadData()
     }
     
+    @objc func viewDismissAction() {
+        self.dismiss(animated: false, completion: nil)
+    }
+    @objc func btnDismissAction() {
+        self.dismiss(animated: false, completion: nil)
+    }
+    @objc func cardDismissAction() {
+        print("no action")
+    }
+    
+    
     //字符串 -> 日期
     func string2Date(_ string:String, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> Date {
         let formatter = DateFormatter()
@@ -89,19 +105,6 @@ class DetailVC: UIViewController {
         let date = formatter.date(from: string)
         return date!
     }
-
-    @IBAction func onDismissClick(_ sender: UIButton) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

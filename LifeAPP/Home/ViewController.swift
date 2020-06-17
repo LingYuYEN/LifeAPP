@@ -304,13 +304,6 @@ class ViewController: UIViewController {
         locationsBtn.addTarget(self, action: #selector(onSelectLocationClick), for: .touchUpInside)
         pickerView.setValue(UIColor.black, forKey: "textColor")
         
-        let attributedString = NSMutableAttributedString(string: "資料來源： 氣象資料開放平臺")
-        attributedString.addAttribute(.link, value: "https://opendata.cwb.gov.tw/index", range: NSRange(location: 0, length: attributedString.length))
-        
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle().isSubset(of: .single) , range: NSRange(location: 6, length: attributedString.length - 6))
-        
-        dataSourceStrTextView.attributedText = attributedString
-        dataSourceStrTextView.tintColor = .white
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {

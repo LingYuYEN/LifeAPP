@@ -361,7 +361,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="資料來源： 中央氣象局" translatesAutoresizingMaskIntoConstraints="NO" id="hTz-bi-9Rr">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="資料來源： 氣象資料開放平臺" translatesAutoresizingMaskIntoConstraints="NO" id="hTz-bi-9Rr">
                                                 <rect key="frame" x="26" y="898" width="362" height="37"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
