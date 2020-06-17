@@ -754,156 +754,20 @@ class ViewController: UIViewController {
                             self.popDangerImage.isHidden = false
                         }
                         
-                        self.activityIndicatorView.stopAnimating()
-                        self.activityIndicatorView.isHidden = true
-                        self.weekendCollectionView.reloadData()
-                    }
-                    
-                }
-            }
-        default:
-            
-            guard let lat = myLocationManager.location?.coordinate.latitude else { return }
-            guard let lon = myLocationManager.location?.coordinate.longitude else { return }
-            
-            GeocodeManager.shared.geocode(latitude: lat, longitude: lon) { placemark, error in
-                guard let placemark = placemark, error == nil else { return }
-                guard let city = placemark.subAdministrativeArea else { return }
-                
-                DataManager.shared.getWeather(lat: lat, lon: lon, city: city) { (model, apiStatus) -> (Void) in
-                    self.oneWeekMaxTemp = [String]()
-                    self.oneWeekMinTemp = [String]()
-                    self.oneWeekWx = [String]()
-                    self.weatherImageNameArr = [String]()
-                    if let apiStatus = apiStatus {
-                        if apiStatus {
-                            print("請求失敗")
-                            self.apiErrorAlert()
-                        }
-                    }
-                    guard let model = model else { return }
-                    
-                    let descriptionsCount = model.descriptions.count
-                    let random = Int.random(in: 0 ... descriptionsCount - 1)
-                    self.shareMessage = "生活小百科提醒： "
-                    self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
-                    
-                    for weekMaxT in model.weather.weekMaxT {
-                        self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
-                    }
-                    
-                    for weekMinT in model.weather.weekMinT {
-                        self.oneWeekMinTemp.append(weekMinT.value ?? "NA")
-                    }
-                    
-                    for weekWx in model.weather.weekWx {
-                        guard let wxMapping = self.wxMappingDic[weekWx.value ?? "NA"] else { return }
-                        self.weatherImageNameArr.append(wxMapping)
-                    }
-                    
-                    if let aqi = model.aqi.aqi, let pm25 = model.aqi.pm25, let pm10 = model.aqi.pm10, let o3 = model.aqi.o3, let uvi = model.uvi.uvi {
-                        self.aqiValue = "\(lrint(aqi))"
-                        self.pm25 = pm25
-                        self.pm10 = pm10
-                        self.o3 = o3
-                        self.uviValue = "\(uvi)"
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.locationsBtn.setTitle(city, for: .normal)
-                        
-                        self.wxDescriptionLabel.text = model.weather.wxDescription
-                        
-                        let temp = model.weather.temp ?? -99
-                        let maxT = model.weather.maxT ?? -99
-                        let minT = model.weather.minT ?? -99
-                        self.nowTempLabel.text = temp == -99 ? "NA" : "\(temp)"
-                        self.todayDTXLabel.text = maxT == -99 ? "NA" : "\(maxT)°"
-                        self.todayDTNLabel.text = minT == -99 ? "NA" : "\(minT)°"
-                        self.symbolLabel.isHidden = self.nowTempLabel.text == "" ? true : false
-                        
-                        guard let aqi = model.aqi.aqi else { return }
-                        switch lrint(aqi) {
-                        case 0 ... 50:
-                            self.aqiLabel.text = "空氣品質良好"
-                            self.memoValue = self.aqiLabel.text
-                            self.memoHeaderValue = "好"
-                            self.aqiStatusImage.image = UIImage(named: "smileIcon")
-                            self.statusValue = "smileIcon"
-                            self.aqiMemoLabel.text = "正常戶外活動"
-                            self.aqiDangerImage.isHidden = true
-                        case 51 ... 100:
-                            self.aqiLabel.text = "空氣品質欠佳"
-                            self.memoValue = self.aqiLabel.text
-                            self.memoHeaderValue = "不佳"
-                            self.aqiStatusImage.image = UIImage(named: "normalSmileIcon")
-                            self.statusValue = "normalSmileIcon"
-
-                            self.aqiMemoLabel.text = "記得戴口罩"
-                            self.aqiDangerImage.isHidden = false
-                        default:
-                            self.aqiLabel.text = "空氣品質不良"
-                            self.memoValue = self.aqiLabel.text
-                            self.memoHeaderValue = "差"
-                            self.aqiStatusImage.image = UIImage(named: "unsmileIcon")
-                            self.statusValue = "unsmileIcon"
-                            self.aqiMemoLabel.text = "減少戶外活動"
-                            self.aqiDangerImage.isHidden = false
-                        }
-                        
-                        guard let uvi = model.uvi.uvi else { return }
-                        switch lrint(uvi) {
-                        case 0 ... 2:
-                            self.uviLabel.text = "紫外線正常"
-                            self.uviStatusImage.image = UIImage(named: "smileIcon")
-                            self.uviMemoLabel.text = "基礎防曬安心外出"
-                            self.uviDangerImage.isHidden = true
-                        case 3 ... 5:
-                            self.uviLabel.text = "紫外線中級"
-                            self.uviStatusImage.image = UIImage(named: "normalSmileIcon")
-                            self.uviMemoLabel.text = "隨時補擦防曬"
-                            self.uviDangerImage.isHidden = true
-                        default:
-                            self.uviLabel.text = "紫外線過高"
-                            self.uviStatusImage.image = UIImage(named: "unsmileIcon")
-                            self.uviMemoLabel.text = "請待在室內或做加倍防曬"
-                            self.uviDangerImage.isHidden = false
-                        }
-                        
-                        
-                        self.popLabel.text = "降雨機率 \(model.rain.pop ?? 0)％"
-                        self.popValue = "\(model.rain.pop ?? 0)"
-
-                        switch model.rain.pop ?? -99 {
-                        case 0 ... 10:
-                            self.popStatusImage.image = UIImage(named: "smileIcon")
-                            self.popMemoLabel.text = "是個好天氣"
-                            self.popDangerImage.isHidden = true
-                        case 11 ... 40:
-                            self.popStatusImage.image = UIImage(named: "normalSmileIcon")
-                            self.popMemoLabel.text = "記得攜帶雨具"
-                            self.popDangerImage.isHidden = true
-                        case 41 ... 80:
-                            self.popStatusImage.image = UIImage(named: "normalSmileIcon")
-                            self.popMemoLabel.text = "記得攜帶雨具"
-                            self.popDangerImage.isHidden = false
-                        case 81 ... 100:
-                            self.popStatusImage.image = UIImage(named: "unsmileIcon")
-                            self.popMemoLabel.text = "務必攜帶雨具"
-                            self.popDangerImage.isHidden = false
-                        default:
-                            self.popStatusImage.image = UIImage(named: "unsmileIcon")
-                            self.popMemoLabel.text = "測站維護中..."
-                            self.popDangerImage.isHidden = false
-                        }
                         
                         self.activityIndicatorView.stopAnimating()
                         self.activityIndicatorView.isHidden = true
                         self.weekendCollectionView.reloadData()
                         self.refreshControl.endRefreshing()
                     }
+                    
                 }
             }
+        default:
+            
+            // 進入 delegate
+            self.myLocationManager.startUpdatingLocation()
+            
         }
     }
     
@@ -1287,7 +1151,7 @@ extension ViewController: CLLocationManagerDelegate {
         self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         self.bannerView.rootViewController = self
         
-//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         self.bannerView.load(GADRequest())
         self.bannerView.delegate = self
     }
@@ -1296,6 +1160,7 @@ extension ViewController: CLLocationManagerDelegate {
         
         guard let lat = manager.location?.coordinate.latitude else { return }
         guard let lon = manager.location?.coordinate.longitude else { return }
+        print("delegate裡面： ", lat, lon)
         manager.stopUpdatingLocation()
         // 取得使用者座標後更新數據
         GeocodeManager.shared.geocode(latitude: lat, longitude: lon) { placemark, error in
@@ -1432,6 +1297,7 @@ extension ViewController: CLLocationManagerDelegate {
                     self.activityIndicatorView.stopAnimating()
                     self.activityIndicatorView.isHidden = true
                     self.weekendCollectionView.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
                 
             }
