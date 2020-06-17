@@ -1160,7 +1160,7 @@ extension ViewController: CLLocationManagerDelegate {
         
         guard let lat = manager.location?.coordinate.latitude else { return }
         guard let lon = manager.location?.coordinate.longitude else { return }
-        print("delegate裡面： ", lat, lon)
+        
         manager.stopUpdatingLocation()
         // 取得使用者座標後更新數據
         GeocodeManager.shared.geocode(latitude: lat, longitude: lon) { placemark, error in
