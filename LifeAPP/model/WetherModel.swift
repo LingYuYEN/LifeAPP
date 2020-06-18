@@ -70,11 +70,11 @@ struct Weather: Codable {
 struct Week: Codable {
     let startTime, endTime, value: String?
     let location: String?
-    let valueDescription: String?
+//    let valueDescription: String?
 
     enum CodingKeys: String, CodingKey {
         case startTime, endTime, value, location
-        case valueDescription = "value_description"
+//        case valueDescription = "value_description"
     }
 }
 

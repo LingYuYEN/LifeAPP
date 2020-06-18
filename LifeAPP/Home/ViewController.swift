@@ -126,7 +126,7 @@ class ViewController: UIViewController {
     let weekArr = ["五", "六", "日", "一", "二", "三"]
     var weatherImageNameArr = ["-", "-", "-", "-", "-", "-"]
     let wxMappingDic = [
-        "01" : "wetherIcon1", "02" : "wetherIcon2", "03" : "wetherIcon2", "04" : "wetherIcon4", "05" : "wetherIcon4", "06" : "wetherIcon4", "07" : "wetherIcon4", "08" : "wetherIcon3", "09" : "wetherIcon5", "10" : "wetherIcon5", "11" : "wetherIcon5", "12" : "wetherIcon5", "13" : "wetherIcon5", "14" : "wetherIcon5", "15" : "wetherIcon6", "16" : "wetherIcon6", "17" : "wetherIcon6", "18" : "wetherIcon6", "19" : "wetherIcon3", "20" : "wetherIcon3", "21" : "wetherIcon6", "22" : "wetherIcon6", "23" : "wetherIcon7", "24" : "wetherIcon7", "25" : "wetherIcon7", "26" : "wetherIcon7", "27" : "wetherIcon7", "28" : "wetherIcon7", "29" : "wetherIcon7", "30" : "wetherIcon7", "31" : "wetherIcon7", "32" : "wetherIcon7", "33" : "wetherIcon6", "34" : "wetherIcon6", "35" : "wetherIcon7", "36" : "wetherIcon7", "37" : "wetherIcon7", "38" : "wetherIcon7", "39" : "wetherIcon7", "40" : "wetherIcon7", "41" : "wetherIcon7", "42" : "wetherIcon7"
+        "01" : "weatherIcon1", "02" : "weatherIcon2", "03" : "weatherIcon2", "04" : "weatherIcon4", "05" : "weatherIcon4", "06" : "weatherIcon4", "07" : "weatherIcon4", "08" : "weatherIcon3", "09" : "weatherIcon5", "10" : "weatherIcon5", "11" : "weatherIcon5", "12" : "weatherIcon5", "13" : "weatherIcon5", "14" : "weatherIcon5", "15" : "weatherIcon6", "16" : "weatherIcon6", "17" : "weatherIcon6", "18" : "weatherIcon6", "19" : "weatherIcon3", "20" : "weatherIcon3", "21" : "weatherIcon6", "22" : "weatherIcon6", "23" : "weatherIcon7", "24" : "weatherIcon7", "25" : "weatherIcon7", "26" : "weatherIcon7", "27" : "weatherIcon7", "28" : "weatherIcon7", "29" : "weatherIcon7", "30" : "weatherIcon7", "31" : "weatherIcon7", "32" : "weatherIcon7", "33" : "weatherIcon6", "34" : "weatherIcon6", "35" : "weatherIcon7", "36" : "weatherIcon7", "37" : "weatherIcon7", "38" : "weatherIcon7", "39" : "weatherIcon7", "40" : "weatherIcon7", "41" : "weatherIcon7", "42" : "weatherIcon7"
     ]
     
     let coordinateMapping = [
@@ -757,7 +757,6 @@ class ViewController: UIViewController {
                 }
             }
         default:
-            
             // 進入 delegate
             self.myLocationManager.startUpdatingLocation()
             
@@ -896,7 +895,6 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextCollectionViewCell", for: indexPath) as! TextCollectionViewCell
         
         switch indexPath.section {
@@ -909,10 +907,8 @@ extension ViewController: UICollectionViewDataSource {
             return cell
         case 2:
             cell.textLabel.text = oneWeekMaxTemp[indexPath.row]
-            
         case 3:
             cell.textLabel.text = oneWeekMinTemp[indexPath.row]
-            
         default:
             break
         }
@@ -991,16 +987,12 @@ extension ViewController: CLLocationManagerDelegate {
                 preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "確認", style: .default) { _ in
-                self.refreshControl.endRefreshing()
-            }
-            alertController.addAction(okAction)
-            
-            self.present(alertController, animated: true) {
                 DataManager.shared.getWeather(lat: 25.0375417, lon: 121.562244, city: "台北市") { (model, apiStatus) -> (Void) in
-                    self.oneWeekMaxTemp = [String]()
-                    self.oneWeekMinTemp = [String]()
-                    self.oneWeekWx = [String]()
-                    self.weatherImageNameArr = [String]()
+                    
+                    var newOneWeekMaxTemp = [String]()
+                    var newOneWeekMinTemp = [String]()
+                    var newWeatherImageNameArr = [String]()
+                    var newShareMessage = String()
                     if let apiStatus = apiStatus {
                         if apiStatus {
                             self.apiErrorAlert()
@@ -1010,21 +1002,26 @@ extension ViewController: CLLocationManagerDelegate {
                     
                     let descriptionsCount = model.descriptions.count
                     let random = Int.random(in: 0 ... descriptionsCount - 1)
-                    self.shareMessage = "生活小百科提醒： "
-                    self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
+                    newShareMessage = "生活小百科提醒： "
+                    newShareMessage += model.descriptions[random].descriptionDescription ?? ""
+                    self.shareMessage = newShareMessage
                     
                     for weekMaxT in model.weather.weekMaxT {
-                        self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
+                        newOneWeekMaxTemp.append(weekMaxT.value ?? "NA")
                     }
-
+                    
                     for weekMinT in model.weather.weekMinT {
-                        self.oneWeekMinTemp.append(weekMinT.value ?? "NA")
+                        newOneWeekMinTemp.append(weekMinT.value ?? "NA")
                     }
-
+                    
                     for weekWx in model.weather.weekWx {
-                        guard let wxMapping = self.wxMappingDic[weekWx.value ?? "01"] else { return }
-                        self.weatherImageNameArr.append(wxMapping)
+                        guard let wxMapping = self.wxMappingDic[weekWx.value ?? "NA"] else { return }
+                        newWeatherImageNameArr.append(wxMapping)
                     }
+                    
+                    self.oneWeekMaxTemp = newOneWeekMaxTemp
+                    self.oneWeekMinTemp = newOneWeekMinTemp
+                    self.weatherImageNameArr = newWeatherImageNameArr
 
 
                     
@@ -1127,11 +1124,13 @@ extension ViewController: CLLocationManagerDelegate {
                         self.activityIndicatorView.stopAnimating()
                         self.activityIndicatorView.isHidden = true
                         self.weekendCollectionView.reloadData()
-//                        self.refreshControl.endRefreshing()
+                        self.refreshControl.endRefreshing()
                     }
                     
                 }
             }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
             
         case .authorizedWhenInUse:
             // 開始定位自身位置
@@ -1151,20 +1150,22 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        guard let lat = manager.location?.coordinate.latitude else { return }
-        guard let lon = manager.location?.coordinate.longitude else { return }
+        guard let lat = locations.first?.coordinate.latitude else { return }
+        guard let lon = locations.first?.coordinate.longitude else { return }
         
         manager.stopUpdatingLocation()
+        
         // 取得使用者座標後更新數據
         GeocodeManager.shared.geocode(latitude: lat, longitude: lon) { placemark, error in
             guard let placemark = placemark, error == nil else { return }
             guard let city = placemark.subAdministrativeArea else { return }
             
             DataManager.shared.getWeather(lat: lat, lon: lon, city: city) { (model, apiStatus) -> (Void) in
-                self.oneWeekMaxTemp = [String]()
-                self.oneWeekMinTemp = [String]()
-                self.oneWeekWx = [String]()
-                self.weatherImageNameArr = [String]()
+                
+                var newOneWeekMaxTemp = [String]()
+                var newOneWeekMinTemp = [String]()
+                var newWeatherImageNameArr = [String]()
+                var newShareMessage = String()
                 
                 if let apiStatus = apiStatus {
                     if apiStatus {
@@ -1175,21 +1176,26 @@ extension ViewController: CLLocationManagerDelegate {
                 
                 let descriptionsCount = model.descriptions.count
                 let random = Int.random(in: 0 ... descriptionsCount - 1)
-                self.shareMessage = "生活小百科提醒： "
-                self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
+                newShareMessage = "生活小百科提醒： "
+                newShareMessage += model.descriptions[random].descriptionDescription ?? ""
+                self.shareMessage = newShareMessage
                 
                 for weekMaxT in model.weather.weekMaxT {
-                    self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
+                    newOneWeekMaxTemp.append(weekMaxT.value ?? "NA")
                 }
                 
                 for weekMinT in model.weather.weekMinT {
-                    self.oneWeekMinTemp.append(weekMinT.value ?? "NA")
+                    newOneWeekMinTemp.append(weekMinT.value ?? "NA")
                 }
                 
                 for weekWx in model.weather.weekWx {
                     guard let wxMapping = self.wxMappingDic[weekWx.value ?? "NA"] else { return }
-                    self.weatherImageNameArr.append(wxMapping)
+                    newWeatherImageNameArr.append(wxMapping)
                 }
+                
+                self.oneWeekMaxTemp = newOneWeekMaxTemp
+                self.oneWeekMinTemp = newOneWeekMinTemp
+                self.weatherImageNameArr = newWeatherImageNameArr
                 
                 if let aqi = model.aqi.aqi, let pm25 = model.aqi.pm25, let pm10 = model.aqi.pm10, let o3 = model.aqi.o3, let uvi = model.uvi.uvi {
                     self.aqiValue = "\(lrint(aqi))"
@@ -1291,6 +1297,7 @@ extension ViewController: CLLocationManagerDelegate {
                     self.activityIndicatorView.isHidden = true
                     self.weekendCollectionView.reloadData()
                     self.refreshControl.endRefreshing()
+                    
                 }
                 
             }
