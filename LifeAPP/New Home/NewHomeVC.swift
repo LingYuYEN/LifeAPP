@@ -45,8 +45,8 @@ extension NewHomeVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
-        cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
-        cell.titleLabel.text = cellNames[indexPath.row]
+//        cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+//        cell.titleLabel.text = cellNames[indexPath.row]
         return cell
     }
     

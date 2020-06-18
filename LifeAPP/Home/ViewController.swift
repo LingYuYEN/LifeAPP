@@ -813,7 +813,7 @@ class ViewController: UIViewController {
         gradientLayer.cornerRadius = 8
         gradientLayer.frame = wetherView.bounds
         
-        gradientLayer.colors = [UIColor.set(red: 0, green: 171, blue: 255).cgColor, UIColor.set(red: 0, green: 152, blue: 249).cgColor]
+        gradientLayer.colors = [UIColor.set(red: 19, green: 51, blue: 255).cgColor, UIColor.set(red: 19, green: 51, blue: 179).cgColor]
         gradientLayer.startPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 0, y: 0.5)
         gradientView.layer.addSublayer(gradientLayer)
