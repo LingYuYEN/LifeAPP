@@ -338,10 +338,11 @@ class ViewController: UIViewController {
         guard let coordinate = coordinateMapping[city] else { return }
         
         DataManager.shared.getWeather(lat: coordinate.0, lon: coordinate.1, city: city) { (model, apiStatus) -> (Void) in
-            self.oneWeekMaxTemp = [String]()
-            self.oneWeekMinTemp = [String]()
-            self.oneWeekWx = [String]()
-            self.weatherImageNameArr = [String]()
+            
+            var newOneWeekMaxTemp = [String]()
+            var newOneWeekMinTemp = [String]()
+            var newWeatherImageNameArr = [String]()
+            var newShareMessage = String()
             
             if let apiStatus = apiStatus {
                 if apiStatus {
@@ -354,22 +355,27 @@ class ViewController: UIViewController {
             
             let descriptionsCount = model.descriptions.count
             let random = Int.random(in: 0 ... descriptionsCount - 1)
-            self.shareMessage = "生活小百科提醒： "
-            self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
+            newShareMessage = "生活小百科提醒： "
+            newShareMessage += model.descriptions[random].descriptionDescription ?? ""
+            self.shareMessage = newShareMessage
              
             
             for weekMaxT in model.weather.weekMaxT {
-                self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
+                newOneWeekMaxTemp.append(weekMaxT.value ?? "NA")
             }
-
+            
             for weekMinT in model.weather.weekMinT {
-                self.oneWeekMinTemp.append(weekMinT.value ?? "NA")
+                newOneWeekMinTemp.append(weekMinT.value ?? "NA")
             }
-
+            
             for weekWx in model.weather.weekWx {
-                guard let wxMapping = self.wxMappingDic[weekWx.value ?? "01"] else { return }
-                self.weatherImageNameArr.append(wxMapping)
+                guard let wxMapping = self.wxMappingDic[weekWx.value ?? "NA"] else { return }
+                newWeatherImageNameArr.append(wxMapping)
             }
+            
+            self.oneWeekMaxTemp = newOneWeekMaxTemp
+            self.oneWeekMinTemp = newOneWeekMinTemp
+            self.weatherImageNameArr = newWeatherImageNameArr
             
             if let aqi = model.aqi.aqi, let pm25 = model.aqi.pm25, let pm10 = model.aqi.pm10, let o3 = model.aqi.o3, let uvi = model.uvi.uvi {
                 self.aqiValue = "\(lrint(aqi))"
@@ -623,10 +629,12 @@ class ViewController: UIViewController {
             alertController.addAction(okAction)
             self.present(alertController, animated: true) {
                 DataManager.shared.getWeather(lat: 25.0375417, lon: 121.562244, city: "台北市") { (model, apiStatus) -> (Void) in
-                    self.oneWeekMaxTemp = [String]()
-                    self.oneWeekMinTemp = [String]()
-                    self.oneWeekWx = [String]()
-                    self.weatherImageNameArr = [String]()
+                    
+                    var newOneWeekMaxTemp = [String]()
+                    var newOneWeekMinTemp = [String]()
+                    var newWeatherImageNameArr = [String]()
+                    var newShareMessage = String()
+                    
                     if let apiStatus = apiStatus {
                         if apiStatus {
                             print("請求失敗")
@@ -637,21 +645,26 @@ class ViewController: UIViewController {
                     
                     let descriptionsCount = model.descriptions.count
                     let random = Int.random(in: 0 ... descriptionsCount - 1)
-                    self.shareMessage = "生活小百科提醒： "
-                    self.shareMessage += model.descriptions[random].descriptionDescription ?? ""
+                    newShareMessage = "生活小百科提醒： "
+                    newShareMessage += model.descriptions[random].descriptionDescription ?? ""
+                    self.shareMessage = newShareMessage
                     
                     for weekMaxT in model.weather.weekMaxT {
-                        self.oneWeekMaxTemp.append(weekMaxT.value ?? "NA")
+                        newOneWeekMaxTemp.append(weekMaxT.value ?? "NA")
                     }
                     
                     for weekMinT in model.weather.weekMinT {
-                        self.oneWeekMinTemp.append(weekMinT.value ?? "NA")
+                        newOneWeekMinTemp.append(weekMinT.value ?? "NA")
                     }
                     
                     for weekWx in model.weather.weekWx {
-                        guard let wxMapping = self.wxMappingDic[weekWx.value ?? "01"] else { return }
-                        self.weatherImageNameArr.append(wxMapping)
+                        guard let wxMapping = self.wxMappingDic[weekWx.value ?? "NA"] else { return }
+                        newWeatherImageNameArr.append(wxMapping)
                     }
+                    
+                    self.oneWeekMaxTemp = newOneWeekMaxTemp
+                    self.oneWeekMinTemp = newOneWeekMinTemp
+                    self.weatherImageNameArr = newWeatherImageNameArr
                     
                     if let aqi = model.aqi.aqi, let pm25 = model.aqi.pm25, let pm10 = model.aqi.pm10, let o3 = model.aqi.o3, let uvi = model.uvi.uvi {
                         self.aqiValue = "\(lrint(aqi))"
@@ -993,6 +1006,7 @@ extension ViewController: CLLocationManagerDelegate {
                     var newOneWeekMinTemp = [String]()
                     var newWeatherImageNameArr = [String]()
                     var newShareMessage = String()
+                    
                     if let apiStatus = apiStatus {
                         if apiStatus {
                             self.apiErrorAlert()
