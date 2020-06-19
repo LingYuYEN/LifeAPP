@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133645EB249C4CB300A157BA /* NewHomeWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133645E9249C4CB300A157BA /* NewHomeWeatherCell.swift */; };
+		133645EC249C4CB300A157BA /* NewHomeWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133645EA249C4CB300A157BA /* NewHomeWeatherCell.xib */; };
+		133645EF249C5D1B00A157BA /* NewHomeOilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133645ED249C5D1B00A157BA /* NewHomeOilCell.swift */; };
+		133645F0249C5D1B00A157BA /* NewHomeOilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133645EE249C5D1B00A157BA /* NewHomeOilCell.xib */; };
 		1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5D624848ADF0036E4A2 /* DetailVC.swift */; };
 		1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5D724848ADF0036E4A2 /* DetailVC.xib */; };
 		1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */; };
@@ -41,7 +45,7 @@
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
 		13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25A9248E27F80044DFAA /* NetStatus.swift */; };
-		13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25AB248E2F640044DFAA /* WetherModel.swift */; };
+		13EA25AC248E2F640044DFAA /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25AB248E2F640044DFAA /* WeatherModel.swift */; };
 		13EA25E2249209DD0044DFAA /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25E1249209DD0044DFAA /* .gitattributes */; };
 		13EA25E424920A0B0044DFAA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25E324920A0B0044DFAA /* README.md */; };
 		13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25E6249306830044DFAA /* NewHomeVC.swift */; };
@@ -52,6 +56,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		133645E9249C4CB300A157BA /* NewHomeWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeWeatherCell.swift; sourceTree = "<group>"; };
+		133645EA249C4CB300A157BA /* NewHomeWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewHomeWeatherCell.xib; sourceTree = "<group>"; };
+		133645ED249C5D1B00A157BA /* NewHomeOilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeOilCell.swift; sourceTree = "<group>"; };
+		133645EE249C5D1B00A157BA /* NewHomeOilCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewHomeOilCell.xib; sourceTree = "<group>"; };
 		1347E5D624848ADF0036E4A2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1347E5D724848ADF0036E4A2 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -89,7 +97,7 @@
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
 		13EA25A9248E27F80044DFAA /* NetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
-		13EA25AB248E2F640044DFAA /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
+		13EA25AB248E2F640044DFAA /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		13EA25E1249209DD0044DFAA /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		13EA25E324920A0B0044DFAA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		13EA25E6249306830044DFAA /* NewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeVC.swift; sourceTree = "<group>"; };
@@ -113,6 +121,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		133645E8249C40DD00A157BA /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				1359A56F24935FD60076E9F1 /* TicketVC.swift */,
+				1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */,
+				1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */,
+			);
+			path = Ticket;
+			sourceTree = "<group>";
+		};
 		1347E5E6248631BE0036E4A2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +201,7 @@
 				1347E5EC24863BF00036E4A2 /* Oil */,
 				1347E5E6248631BE0036E4A2 /* Home */,
 				13EA25E5249306480044DFAA /* New Home */,
+				133645E8249C40DD00A157BA /* Ticket */,
 				13552E97247B8E5A00CA895E /* Main.storyboard */,
 				13552E9A247B8E5B00CA895E /* Assets.xcassets */,
 				13552E9C247B8E5B00CA895E /* LaunchScreen.storyboard */,
@@ -218,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				1347E6172487757D0036E4A2 /* OilModel.swift */,
-				13EA25AB248E2F640044DFAA /* WetherModel.swift */,
+				13EA25AB248E2F640044DFAA /* WeatherModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -230,9 +249,10 @@
 				13EA25E6249306830044DFAA /* NewHomeVC.swift */,
 				13EA25EA24931DBE0044DFAA /* NewHomeCollectionViewCell.swift */,
 				13EA25EB24931DBE0044DFAA /* NewHomeCollectionViewCell.xib */,
-				1359A56F24935FD60076E9F1 /* TicketVC.swift */,
-				1359A57124936D420076E9F1 /* TicketCollectionViewCell.swift */,
-				1359A57224936D420076E9F1 /* TicketCollectionViewCell.xib */,
+				133645E9249C4CB300A157BA /* NewHomeWeatherCell.swift */,
+				133645EA249C4CB300A157BA /* NewHomeWeatherCell.xib */,
+				133645ED249C5D1B00A157BA /* NewHomeOilCell.swift */,
+				133645EE249C5D1B00A157BA /* NewHomeOilCell.xib */,
 			);
 			path = "New Home";
 			sourceTree = "<group>";
@@ -317,6 +337,7 @@
 			files = (
 				13552E9E247B8E5B00CA895E /* LaunchScreen.storyboard in Resources */,
 				1347E5DD2484C4470036E4A2 /* CardDetailTableViewCell.xib in Resources */,
+				133645F0249C5D1B00A157BA /* NewHomeOilCell.xib in Resources */,
 				1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */,
 				13552E9B247B8E5B00CA895E /* Assets.xcassets in Resources */,
 				13552ED5247C9C1B00CA895E /* Lato-Regular.ttf in Resources */,
@@ -325,6 +346,7 @@
 				13552ED9247CBEB300CA895E /* TextCollectionViewCell.xib in Resources */,
 				13EA25ED24931DBE0044DFAA /* NewHomeCollectionViewCell.xib in Resources */,
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
+				133645EC249C4CB300A157BA /* NewHomeWeatherCell.xib in Resources */,
 				1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */,
 				1396B9B32499CB3E00C2AEAE /* GoogleService-Info.plist in Resources */,
 				1359A57424936D420076E9F1 /* TicketCollectionViewCell.xib in Resources */,
@@ -407,7 +429,7 @@
 				1359A57324936D420076E9F1 /* TicketCollectionViewCell.swift in Sources */,
 				13B05454247CE9AD00B85357 /* DataManager.swift in Sources */,
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
-				13EA25AC248E2F640044DFAA /* WetherModel.swift in Sources */,
+				13EA25AC248E2F640044DFAA /* WeatherModel.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
 				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
 				13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */,
@@ -418,12 +440,14 @@
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,
 				13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */,
 				1347E5F3248654370036E4A2 /* OilCollectionViewCell.swift in Sources */,
+				133645EF249C5D1B00A157BA /* NewHomeOilCell.swift in Sources */,
 				13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */,
 				1347E5EA248632060036E4A2 /* MenuTableViewCell.swift in Sources */,
 				1347E5EF24863C0F0036E4A2 /* OilVC.swift in Sources */,
 				13552EA6247B915100CA895E /* Extension.swift in Sources */,
 				13EA25EC24931DBE0044DFAA /* NewHomeCollectionViewCell.swift in Sources */,
 				1347E5E424862BFD0036E4A2 /* MenuVC.swift in Sources */,
+				133645EB249C4CB300A157BA /* NewHomeWeatherCell.swift in Sources */,
 				13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

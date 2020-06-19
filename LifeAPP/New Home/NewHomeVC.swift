@@ -10,6 +10,8 @@ import UIKit
 
 class NewHomeVC: UIViewController {
     
+    
+    
     @IBOutlet var collectionView: UICollectionView!
     
     let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomeCityIcon", "newHomeQrcodeIcon", "newHomePostalIcon"]
@@ -30,9 +32,9 @@ class NewHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nib = UINib(nibName: "NewHomeCollectionViewCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: "NewHomeCollectionViewCell")
-        
+        collectionView.register(UINib(nibName: "NewHomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeCollectionViewCell")
+        collectionView.register(UINib(nibName: "NewHomeWeatherCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeWeatherCell")
+        collectionView.register(UINib(nibName: "NewHomeOilCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeOilCell")
     }
     
     
@@ -44,10 +46,22 @@ extension NewHomeVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
-//        cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
-//        cell.titleLabel.text = cellNames[indexPath.row]
-        return cell
+        
+        switch indexPath.row {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeWeatherCell", for: indexPath) as! NewHomeWeatherCell
+            cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+            return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeOilCell", for: indexPath) as! NewHomeOilCell
+            cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
+            cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+            cell.titleLabel.text = cellNames[indexPath.row]
+            return cell
+        }
     }
     
     
@@ -72,7 +86,7 @@ extension NewHomeVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 40, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
+        return UIEdgeInsets(top: 40 * screenSceleHeight, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
     }
     
     ///  設定 CollectionViewCell 的寬、高
@@ -83,7 +97,15 @@ extension NewHomeVC: UICollectionViewDelegateFlowLayout {
     ///   - indexPath: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 364 * screenScaleWidth , height: 119)
+        switch indexPath.row {
+        case 0:
+            return CGSize(width: 364 * screenScaleWidth , height: 119 * screenSceleHeight)
+        case 1:
+            return CGSize(width: 364 * screenScaleWidth , height: 148 * screenSceleHeight)
+        default:
+            return CGSize(width: 364 * screenScaleWidth , height: 86 * screenSceleHeight)
+        }
+        
     }
     
     /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)

@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "newHomeOilIcon.pdf"
+      "filename" : "newHomeOilIcon.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

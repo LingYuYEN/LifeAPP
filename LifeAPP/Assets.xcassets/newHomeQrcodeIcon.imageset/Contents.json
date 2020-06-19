@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "newHomeQrcodeIcon.pdf",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "newHomeQrcodeIcon.pdf"
     }
   ],
   "info" : {

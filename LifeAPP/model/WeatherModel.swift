@@ -11,7 +11,7 @@
 import Foundation
 
 // MARK: - WetherModel
-struct WetherModel: Codable {
+struct WeatherModel: Codable {
     let weather: Weather
     let aqi: Aqi
     let uvi: Uvi

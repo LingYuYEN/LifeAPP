@@ -33,20 +33,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         
         // show the dialog at a more appropriate time move this registration accordingly.
-        if #available(iOS 10.0, *) {
-          UNUserNotificationCenter.current().delegate = self
-         
-          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-          UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in
-            
-          }
-        } else {
-          let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-          application.registerUserNotificationSettings(settings)
-        }
+        UNUserNotificationCenter.current().delegate = self
         
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in}
         application.registerForRemoteNotifications()
+
+//        if #available(iOS 10.0, *) {
+//          UNUserNotificationCenter.current().delegate = self
+//
+//          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//          UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in
+//
+//          }
+//        } else {
+//          let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+//          application.registerUserNotificationSettings(settings)
+//        }
         
+
         
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar
@@ -65,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if #available(iOS 13.0, *) {
             let statusBar : UIView = UIView.init(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.init(x: 0, y: 0, width: screen.width, height: 20))
-            statusBar.backgroundColor = .white
+            statusBar.backgroundColor = .clear
             UIApplication.shared.keyWindow?.addSubview(statusBar)
             
         } else {
@@ -73,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let statusBarWindow : UIView = UIApplication.shared.value(forKey: "statusBarWindow") as! UIView
             let statusBar : UIView = statusBarWindow.value(forKey: "statusBar") as! UIView
             if statusBar.responds(to:#selector(setter: UIView.backgroundColor)) {
-                statusBar.backgroundColor = .white
+                statusBar.backgroundColor = .clear
             }
         }
         
