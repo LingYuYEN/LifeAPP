@@ -13,6 +13,7 @@ import Network
 class NewHomeVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
     let monitor = NWPathMonitor()
     let locationManager = CLLocationManager()
@@ -37,7 +38,7 @@ class NewHomeVC: UIViewController {
     var oil98 = ""
     var oilDiesel = ""
     
-    var userLocation = (25.0375417, 121.562244)
+    var defaultLocation = (25.0375417, 121.562244)
     let defaultCity = "台北市"
     
     var weatherModel: WeatherModel?
@@ -76,6 +77,8 @@ class NewHomeVC: UIViewController {
         refreshControl.attributedTitle = attrStr
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         collectionView.addSubview(refreshControl)
+        
+        activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
         
         isConnect()
         getLocationManager()
@@ -171,12 +174,68 @@ class NewHomeVC: UIViewController {
             message:
             "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
             preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "確認", style: .default, handler:nil)
+        let okAction = UIAlertAction(title: "確認", style: .default) { _ in
+            self.getWeatherData(locationLat: self.defaultLocation.0, locationLon: self.defaultLocation.1, city: self.defaultCity)
+        }
         alertController.addAction(okAction)
         self.present(
             alertController,
             animated: true, completion: nil)
+    }
+    
+    func getWeatherData(locationLat: CLLocationDegrees, locationLon: CLLocationDegrees, city: String) {
+        DataManager.shared.getWeather(lat: locationLat, lon: locationLon, city: city) { (model, _) -> (Void) in
+            guard let model = model else { return }
+            self.weatherModel = model
+            
+            var oneWeekWx = [String]()
+            var oneWeekMaxTemp = [String]()
+            var oneWeekMinTemp = [String]()
+            
+            for weekWx in model.weather.weekWx {
+                guard let wx = weekWx.value else { return }
+                oneWeekWx.append(wx)
+            }
+            
+            for weekMaxT in model.weather.weekMaxT {
+                guard let maxT = weekMaxT.value else { return }
+                oneWeekMaxTemp.append(maxT)
+            }
+            
+            for weekMinT in model.weather.weekMinT {
+                guard let minT = weekMinT.value else { return }
+                oneWeekMinTemp.append(minT)
+            }
+            
+            self.oneWeekWx = oneWeekWx
+            self.oneWeekMaxTemp = oneWeekMaxTemp
+            self.oneWeekMinTemp = oneWeekMinTemp
+            
+            if let temp = model.weather.temp,
+                let maxTemp = model.weather.maxT,
+                let minTemp = model.weather.minT,
+                let pop = model.rain.pop,
+                let uvi = model.uvi.uvi
+            {
+                self.cityTemp = "\(city)  \(temp)°"
+                self.maxAndMinTemp = "\(maxTemp)° / \(minTemp)°"
+                self.pop = "降雨機率 \(pop) %"
+
+                switch lrint(uvi) {
+                case 0 ... 2:
+                    self.uvi = "紫外線正常"
+                case 3 ... 5:
+                    self.uvi = "紫外線中級"
+                default:
+                    self.uvi = "紫外線過高"
+                }
+            }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.isHidden = true
+                self.collectionView.reloadData()
+            }
+        }
     }
     
 }
@@ -204,56 +263,7 @@ extension NewHomeVC: CLLocationManagerDelegate {
         GeocodeManager.shared.geocode(latitude: locationLat, longitude: locationLon) { (placemark, error) in
             guard let city = placemark?.subAdministrativeArea, error == nil else { return }
             self.positionCity = city
-            DataManager.shared.getWeather(lat: locationLat, lon: locationLon, city: city) { (model, _) -> (Void) in
-                guard let model = model else { return }
-                self.weatherModel = model
-                
-                var oneWeekWx = [String]()
-                var oneWeekMaxTemp = [String]()
-                var oneWeekMinTemp = [String]()
-                
-                for weekWx in model.weather.weekWx {
-                    guard let wx = weekWx.value else { return }
-                    oneWeekWx.append(wx)
-                }
-                
-                for weekMaxT in model.weather.weekMaxT {
-                    guard let maxT = weekMaxT.value else { return }
-                    oneWeekMaxTemp.append(maxT)
-                }
-                
-                for weekMinT in model.weather.weekMinT {
-                    guard let minT = weekMinT.value else { return }
-                    oneWeekMinTemp.append(minT)
-                }
-                
-                self.oneWeekWx = oneWeekWx
-                self.oneWeekMaxTemp = oneWeekMaxTemp
-                self.oneWeekMinTemp = oneWeekMinTemp
-                
-                if let temp = model.weather.temp,
-                    let maxTemp = model.weather.maxT,
-                    let minTemp = model.weather.minT,
-                    let pop = model.rain.pop,
-                    let uvi = model.uvi.uvi
-                {
-                    self.cityTemp = "\(city)  \(temp)°"
-                    self.maxAndMinTemp = "\(maxTemp)° / \(minTemp)°"
-                    self.pop = "降雨機率 \(pop) %"
-
-                    switch lrint(uvi) {
-                    case 0 ... 2:
-                        self.uvi = "紫外線正常"
-                    case 3 ... 5:
-                        self.uvi = "紫外線中級"
-                    default:
-                        self.uvi = "紫外線過高"
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
+            self.getWeatherData(locationLat: locationLat, locationLon: locationLon, city: city)
         }
     }
 }

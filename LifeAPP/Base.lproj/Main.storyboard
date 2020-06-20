@@ -629,13 +629,23 @@
                                     <outlet property="delegate" destination="Yzj-Pg-FEF" id="EVW-I1-XiJ"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UVn-Kw-zh8">
+                                <rect key="frame" x="157" y="318" width="100" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="ToG-vk-KZv"/>
+                                    <constraint firstAttribute="height" constant="100" id="hBY-DR-1hn"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="UVn-Kw-zh8" firstAttribute="centerY" secondItem="6ZH-m5-QBM" secondAttribute="centerY" id="1Km-sd-Eny"/>
                             <constraint firstItem="YpW-8d-mlF" firstAttribute="trailing" secondItem="emL-X6-o5U" secondAttribute="trailing" id="6bn-MY-PgS"/>
                             <constraint firstItem="emL-X6-o5U" firstAttribute="bottom" secondItem="lqg-5X-6jJ" secondAttribute="bottom" id="AY9-xA-ikW"/>
                             <constraint firstItem="YpW-8d-mlF" firstAttribute="top" secondItem="6ZH-m5-QBM" secondAttribute="top" id="Ifx-1C-uL9"/>
                             <constraint firstItem="lqg-5X-6jJ" firstAttribute="top" secondItem="emL-X6-o5U" secondAttribute="top" id="Vu4-Iz-6gE"/>
+                            <constraint firstItem="UVn-Kw-zh8" firstAttribute="centerX" secondItem="6ZH-m5-QBM" secondAttribute="centerX" id="WKF-KT-GZU"/>
                             <constraint firstItem="lqg-5X-6jJ" firstAttribute="leading" secondItem="emL-X6-o5U" secondAttribute="leading" id="Y6D-hH-E6z"/>
                             <constraint firstItem="YpW-8d-mlF" firstAttribute="leading" secondItem="emL-X6-o5U" secondAttribute="leading" id="YBJ-zT-q5m"/>
                             <constraint firstItem="emL-X6-o5U" firstAttribute="trailing" secondItem="lqg-5X-6jJ" secondAttribute="trailing" id="c3w-dm-wSf"/>
@@ -655,6 +665,7 @@
                         </button>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="UVn-Kw-zh8" id="SI4-QL-Xej"/>
                         <outlet property="collectionView" destination="lqg-5X-6jJ" id="5ba-rh-72f"/>
                     </connections>
                 </viewController>
@@ -723,6 +734,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ZAH-3d-ZMH">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9A2-xB-dnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="navi" automaticallyAdjustsScrollViewInsets="NO" id="raR-Sc-alm" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mhV-Cq-Wct">
@@ -740,7 +752,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="suC-ZW-nsj"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9A2-xB-dnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.77173913043478"/>
         </scene>
