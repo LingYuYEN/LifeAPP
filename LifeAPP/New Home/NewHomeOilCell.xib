@@ -130,6 +130,14 @@
             <connections>
                 <outlet property="effectView" destination="mEn-8m-N4a" id="Swj-tz-Xhv"/>
                 <outlet property="iconImageView" destination="Uga-v0-tms" id="c2E-Bc-7di"/>
+                <outlet property="oil92Label" destination="Wn2-Qr-V1w" id="KHc-2j-SHB"/>
+                <outlet property="oil95Label" destination="k1X-gJ-LKV" id="eY9-kC-UbS"/>
+                <outlet property="oil98Label" destination="CF8-0D-f3M" id="gLm-Ud-WqP"/>
+                <outlet property="oilChangeLabel" destination="EOZ-V9-fpS" id="bJe-hl-Z7O"/>
+                <outlet property="oilDieselLabel" destination="rdd-cU-KGW" id="voJ-bN-dEa"/>
+                <outlet property="oilTitleLabel" destination="9og-eW-qXJ" id="OQH-iB-VGn"/>
+                <outlet property="oilUpAndDownImageView" destination="TO1-WQ-t7v" id="YDf-A0-dWh"/>
+                <outlet property="oilUpAndDownTextLabel" destination="R2k-38-YQn" id="JLN-kD-tgt"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="113.83928571428571"/>
         </collectionViewCell>

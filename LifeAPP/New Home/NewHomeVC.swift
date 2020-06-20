@@ -7,16 +7,38 @@
 //
 
 import UIKit
+import CoreLocation
+import Network
 
 class NewHomeVC: UIViewController {
     
-    
-    
     @IBOutlet var collectionView: UICollectionView!
+    
+    let monitor = NWPathMonitor()
+    let locationManager = CLLocationManager()
     
     let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomeCityIcon", "newHomeQrcodeIcon", "newHomePostalIcon"]
     let cellNames = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "各縣市大型旅遊景點", "發票開獎與掃描對獎", "郵遞區號快速查詢"]
     let vcMap = [0 : "ticket", 1 : "ticket", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
+    
+    var cityTemp = ""
+    var maxAndMinTemp = ""
+    var pop = ""
+    var uvi = ""
+    
+    var isAnnouncement = false
+    var oilTitle = ""
+    var oilUpAndDownImageName = ""
+    var oilUpAndDownText = ""
+    var oilChange = ""
+    var oilTextColor: UIColor = .clear
+    var oil92 = ""
+    var oil95 = ""
+    var oil98 = ""
+    var oilDiesel = ""
+    
+    var userLocation = (25.0375417, 121.562244)
+    let defaultCity = "台北市"
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
@@ -35,9 +57,146 @@ class NewHomeVC: UIViewController {
         collectionView.register(UINib(nibName: "NewHomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeCollectionViewCell")
         collectionView.register(UINib(nibName: "NewHomeWeatherCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeWeatherCell")
         collectionView.register(UINib(nibName: "NewHomeOilCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeOilCell")
+        
+        isConnect()
+        getLocationManager()
+        
+        DataManager.shared.getOil { (model, _) -> (Void) in
+            guard let model = model else { return }
+            
+            if let isAnnouncement = model.results.first?.announceStatus,
+                let price = model.results.first?.oilChange,
+                let oil92 = model.results.first?.cpcOil92,
+                let oil95 = model.results.first?.cpcOil95,
+                let oil98 = model.results.first?.cpcOil98,
+                let oilDiesel = model.results.first?.cpcDieselOil
+            {
+                self.isAnnouncement = isAnnouncement
+                self.oilTitle = isAnnouncement ? "油價公告" : "下週油價預測"
+                self.oilChange = "\(price)"
+                self.oil92 = "92 無鉛 \(oil92)"
+                self.oil95 = "95 無鉛 \(oil95)"
+                self.oil98 = "98 無鉛 \(oil98)"
+                self.oilDiesel = "柴油 \(oilDiesel)"
+                
+                switch price {
+                case 0:
+                    self.oilUpAndDownImageName = ""
+                    self.oilUpAndDownText = "平"
+                    self.oilTextColor = .setPriceNormal()
+                case 0...:
+                    self.oilUpAndDownImageName = "priceUpIcon"
+                    self.oilUpAndDownText = "漲"
+                    self.oilTextColor = .setPriceUp()
+                case ..<0:
+                    self.oilUpAndDownImageName = "priceDownIcon"
+                    self.oilUpAndDownText = "跌"
+                    self.oilTextColor = .setPriceDown()
+                default:
+                    break
+                }
+            }
+            
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        
+        
     }
     
+    func getLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+    }
     
+    func isConnect() {
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("connected")
+            } else {
+                print("no connection")
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "網路中斷", message: "為了更好的APP使用體驗，請檢查您的網路連線", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "完成", style: .cancel) { _ in
+//                        self.activityIndicatorView.isHidden = true
+                    }
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true, completion: nil)
+//                    self.pickerContentView.isHidden = true
+                }
+            }
+        }
+        monitor.start(queue: DispatchQueue.global())
+    }
+    
+}
+
+extension NewHomeVC: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        switch status {
+        case .denied:
+            // 提示可至[設定]中開啟權限
+            let alertController = UIAlertController(
+                title: "定位權限已關閉",
+                message:
+                "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "確認", style: .default, handler:nil)
+            alertController.addAction(okAction)
+            self.present(
+                alertController,
+                animated: true, completion: nil)
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            break
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locationLat = locations.last?.coordinate.latitude else { return }
+        guard let locationLon = locations.last?.coordinate.longitude else { return }
+        locationManager.stopUpdatingLocation()
+
+        GeocodeManager.shared.geocode(latitude: locationLat, longitude: locationLon) { (placemark, error) in
+            guard let city = placemark?.subAdministrativeArea, error == nil else { return }
+            
+            DataManager.shared.getWeather(lat: locationLat, lon: locationLon, city: city) { (model, _) -> (Void) in
+                guard let model = model else { return }
+                print(model)
+                if let temp = model.weather.temp,
+                    let maxTemp = model.weather.maxT,
+                    let minTemp = model.weather.minT,
+                    let pop = model.rain.pop,
+                    let uvi = model.uvi.uvi
+                {
+                    self.cityTemp = "\(city)  \(temp)°"
+                    self.maxAndMinTemp = "\(maxTemp)° / \(minTemp)°"
+                    self.pop = "降雨機率 \(pop) %"
+
+                    switch lrint(uvi) {
+                    case 0 ... 2:
+                        self.uvi = "紫外線正常"
+                    case 3 ... 5:
+                        self.uvi = "紫外線中級"
+                    default:
+                        self.uvi = "紫外線過高"
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
 }
 
 extension NewHomeVC: UICollectionViewDataSource {
@@ -51,10 +210,24 @@ extension NewHomeVC: UICollectionViewDataSource {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeWeatherCell", for: indexPath) as! NewHomeWeatherCell
             cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+            cell.cityAndTempLabel.text = self.cityTemp
+            cell.maxAndMinTempLabel.text = self.maxAndMinTemp
+            cell.popLabel.text = self.pop
+            cell.uviLabel.text = self.uvi
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeOilCell", for: indexPath) as! NewHomeOilCell
             cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
+            cell.oilTitleLabel.text = self.oilTitle
+            cell.oilUpAndDownImageView.image = UIImage(named: self.oilUpAndDownImageName)
+            cell.oilUpAndDownTextLabel.text = self.oilUpAndDownText
+            cell.oilUpAndDownTextLabel.textColor = self.oilTextColor
+            cell.oilChangeLabel.text = self.oilChange
+            cell.oilChangeLabel.textColor = self.oilTextColor
+            cell.oil92Label.text = self.oil92
+            cell.oil95Label.text = self.oil95
+            cell.oil98Label.text = self.oil98
+            cell.oilDieselLabel.text = self.oilDiesel
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
@@ -86,7 +259,7 @@ extension NewHomeVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 40 * screenSceleHeight, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
+        return UIEdgeInsets(top: 20 * screenSceleHeight, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
     }
     
     ///  設定 CollectionViewCell 的寬、高

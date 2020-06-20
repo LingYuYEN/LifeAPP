@@ -13,13 +13,18 @@ class NewHomeOilCell: UICollectionViewCell {
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var effectView: UIView!
     
+    @IBOutlet var oilTitleLabel: UILabel!
+    @IBOutlet var oilUpAndDownImageView: UIImageView!
+    @IBOutlet var oilUpAndDownTextLabel: UILabel!
+    @IBOutlet var oilChangeLabel: UILabel!
+    @IBOutlet var oil92Label: UILabel!
+    @IBOutlet var oil98Label: UILabel!
+    @IBOutlet var oil95Label: UILabel!
+    @IBOutlet var oilDieselLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        
-        
-        
         
         
         setUI()

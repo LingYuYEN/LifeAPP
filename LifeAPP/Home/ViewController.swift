@@ -96,13 +96,10 @@ class ViewController: UIViewController {
     var urlOfImageToShare: URL?
     
     var intWeekArr = [Int]()
-    
     var chWeekArr = ["-", "-", "-", "-", "-", "-"]
     var oneWeekMaxTemp = ["-", "-", "-", "-", "-", "-"]
     var oneWeekMinTemp = ["-", "-", "-", "-", "-", "-"]
     var oneWeekWx = ["-", "-", "-", "-", "-", "-"]
-    var apiLoadingStatus = [false, false, false, false, false, false]
-    
     
     var aqiValue: String?
     var uviValue: String?
