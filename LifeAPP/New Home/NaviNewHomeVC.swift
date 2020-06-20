@@ -25,6 +25,7 @@ class NaviNewHomeVC: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.navigationItem.backBarButtonItem?.image = UIImage(named: "")
         
     }
     

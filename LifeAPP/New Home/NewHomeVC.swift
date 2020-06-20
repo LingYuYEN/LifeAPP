@@ -367,6 +367,9 @@ extension NewHomeVC: UICollectionViewDelegate {
             if let vc = storyboard?.instantiateViewController(withIdentifier: id) {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+        case 5:
+            let postalVC = PostalVC.loadFromNib()
+            self.navigationController?.pushViewController(postalVC, animated: true)
         default:
             break
         }

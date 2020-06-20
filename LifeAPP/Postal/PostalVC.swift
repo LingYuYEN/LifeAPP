@@ -10,6 +10,17 @@ import UIKit
 
 class PostalVC: UIViewController {
 
+    
+    @IBOutlet var naviBar: UINavigationBar!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let image = UIImage()
+        naviBar.setBackgroundImage(image, for: .default)
+        naviBar.shadowImage = image
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

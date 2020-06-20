@@ -62,8 +62,6 @@ class OilVC: UIViewController {
         naviBar.shadowImage = image
         
         self.navigationController?.navigationBar.isHidden = true
-        
-        
     }
     
     override func viewDidLoad() {
