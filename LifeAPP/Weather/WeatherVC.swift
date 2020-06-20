@@ -11,13 +11,8 @@ import GoogleMobileAds
 import CoreLocation
 import Network
 
-class ViewController: UIViewController {
+class WeatherVC: UIViewController {
     
-    let monitor = NWPathMonitor()
-    var bannerView: GADBannerView!
-    var interstitial: GADInterstitial?
-    
-    var refreshControl:UIRefreshControl!
     @IBOutlet var scrollView: UIScrollView!
     
     @IBOutlet var pickerContentView: UIView!
@@ -41,7 +36,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet var refreshBtnItem: UIBarButtonItem!
+    @IBOutlet var leftBtnItem: UIBarButtonItem!
     @IBOutlet var shareBtnItem: UIBarButtonItem!
     
     
@@ -90,17 +85,25 @@ class ViewController: UIViewController {
     
     @IBOutlet var locationContentView: UIView!
     @IBOutlet var locationsBtn: UIButton!
-    @IBOutlet var dataSourceStrTextView: UITextView!
+
+    @IBOutlet var bannerContentView: UIView!
     
+    let monitor = NWPathMonitor()
+    var bannerView: GADBannerView!
+    var interstitial: GADInterstitial?
+    var refreshControl:UIRefreshControl!
     var myLocationManager: CLLocationManager!
+    var weatherModel: WeatherModel?
+    
     var urlOfImageToShare: URL?
     
     var intWeekArr = [Int]()
     var chWeekArr = ["-", "-", "-", "-", "-", "-"]
+    
+    var oneWeekWx = ["-", "-", "-", "-", "-", "-"]
     var oneWeekMaxTemp = ["-", "-", "-", "-", "-", "-"]
     var oneWeekMinTemp = ["-", "-", "-", "-", "-", "-"]
-    var oneWeekWx = ["-", "-", "-", "-", "-", "-"]
-    
+
     var aqiValue: String?
     var uviValue: String?
     var popValue: String?
@@ -114,7 +117,7 @@ class ViewController: UIViewController {
     var o3: Double?
     
     var the3R = "", the24R = ""
-    
+    var positionCity = ""
     
     
     let locationArr = [
@@ -212,49 +215,10 @@ class ViewController: UIViewController {
         
     }
     
-    // 首次使用 向使用者詢問定位自身位置權限
-    func getAuthorization() {
-        if CLLocationManager.authorizationStatus() == .notDetermined {
-            // 取得定位服務授權
-            myLocationManager.requestWhenInUseAuthorization()
-            // 開始定位自身位置
-            myLocationManager.startUpdatingLocation()
-        }
-            // 使用者已經拒絕定位自身位置權限
-        else if CLLocationManager.authorizationStatus() == .denied {
-            // 提示可至[設定]中開啟權限
-            let alertController = UIAlertController(
-                title: "定位權限已關閉",
-                message:
-                "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
-                preferredStyle: .alert)
-            let okAction = UIAlertAction(
-                title: "確認", style: .default, handler:nil)
-            alertController.addAction(okAction)
-            self.present(
-                alertController,
-                animated: true, completion: nil)
-        }
-            // 使用者已經同意定位自身位置權限
-        else if CLLocationManager.authorizationStatus()
-            == .authorizedWhenInUse {
-            // 開始定位自身位置
-            myLocationManager.startUpdatingLocation()
-        }
-    }
-    
     func isConnect() {
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 print("connected")
-                DispatchQueue.main.async {
-                    // 經緯度管理
-                    self.myLocationManager = CLLocationManager()
-                    self.myLocationManager.delegate = self
-                    // 取得自身定位位置的精確度
-                    self.myLocationManager.desiredAccuracy = kCLLocationAccuracyBest
-                    self.pickerContentView.isHidden = false
-                }
             } else {
                 print("no connection")
                 DispatchQueue.main.async {
@@ -264,7 +228,7 @@ class ViewController: UIViewController {
                     }
                     alertController.addAction(alertAction)
                     self.present(alertController, animated: true, completion: nil)
-                    self.pickerContentView.isHidden = true
+//                    self.pickerContentView.isHidden = true
                 }
             }
         }
@@ -301,6 +265,109 @@ class ViewController: UIViewController {
         locationsBtn.addTarget(self, action: #selector(onSelectLocationClick), for: .touchUpInside)
         pickerView.setValue(UIColor.black, forKey: "textColor")
         
+        loadBannerView()
+        
+        loadDefaultData()
+    }
+    
+    func loadDefaultData() {
+        guard let model = self.weatherModel else { return }
+        guard let temp = model.weather.temp else { return }
+        guard let maxT = model.weather.maxT else { return }
+        guard let minT = model.weather.minT else { return }
+        guard let aqi = model.aqi.aqi else { return }
+        guard let uvi = model.uvi.uvi else { return }
+        guard let pop = model.rain.pop else { return }
+        
+        self.locationsBtn.setTitle(self.positionCity, for: .normal)
+        self.wxDescriptionLabel.text = model.weather.wxDescription
+        self.nowTempLabel.text = "\(temp)"
+        self.symbolLabel.isHidden = self.nowTempLabel.text == "" ? true : false
+        self.todayDTXLabel.text = "\(maxT)°"
+        self.todayDTNLabel.text = "\(minT)°"
+        
+        
+        switch lrint(aqi) {
+        case 0 ... 50:
+            self.aqiLabel.text = "空氣品質良好"
+            self.memoValue = self.aqiLabel.text
+            self.memoHeaderValue = "好"
+            self.aqiStatusImage.image = UIImage(named: "smileIcon")
+            self.statusValue = "smileIcon"
+            self.aqiMemoLabel.text = "正常戶外活動"
+            self.aqiDangerImage.isHidden = true
+        case 51 ... 100:
+            self.aqiLabel.text = "空氣品質欠佳"
+            self.memoValue = self.aqiLabel.text
+            self.memoHeaderValue = "不佳"
+            self.aqiStatusImage.image = UIImage(named: "normalSmileIcon")
+            self.statusValue = "normalSmileIcon"
+
+            self.aqiMemoLabel.text = "記得戴口罩"
+            self.aqiDangerImage.isHidden = false
+        default:
+            self.aqiLabel.text = "空氣品質不良"
+            self.memoValue = self.aqiLabel.text
+            self.memoHeaderValue = "差"
+            self.aqiStatusImage.image = UIImage(named: "unsmileIcon")
+            self.statusValue = "unsmileIcon"
+            self.aqiMemoLabel.text = "減少戶外活動"
+            self.aqiDangerImage.isHidden = false
+        }
+
+        switch lrint(uvi) {
+        case 0 ... 2:
+            self.uviLabel.text = "紫外線正常"
+            self.uviStatusImage.image = UIImage(named: "smileIcon")
+            self.uviMemoLabel.text = "基礎防曬安心外出"
+            self.uviDangerImage.isHidden = true
+        case 3 ... 5:
+            self.uviLabel.text = "紫外線中級"
+            self.uviStatusImage.image = UIImage(named: "normalSmileIcon")
+            self.uviMemoLabel.text = "隨時補擦防曬"
+            self.uviDangerImage.isHidden = true
+        default:
+            self.uviLabel.text = "紫外線過高"
+            self.uviStatusImage.image = UIImage(named: "unsmileIcon")
+            self.uviMemoLabel.text = "請待在室內或做加倍防曬"
+            self.uviDangerImage.isHidden = false
+        }
+
+        self.popLabel.text = "降雨機率 \(pop)％"
+
+        switch model.rain.pop ?? -99 {
+        case 0 ... 10:
+            self.popStatusImage.image = UIImage(named: "smileIcon")
+            self.popMemoLabel.text = "是個好天氣"
+            self.popDangerImage.isHidden = true
+        case 11 ... 40:
+            self.popStatusImage.image = UIImage(named: "normalSmileIcon")
+            self.popMemoLabel.text = "記得攜帶雨具"
+            self.popDangerImage.isHidden = true
+        case 41 ... 80:
+            self.popStatusImage.image = UIImage(named: "normalSmileIcon")
+            self.popMemoLabel.text = "記得攜帶雨具"
+            self.popDangerImage.isHidden = false
+        case 81 ... 100:
+            self.popStatusImage.image = UIImage(named: "unsmileIcon")
+            self.popMemoLabel.text = "務必攜帶雨具"
+            self.popDangerImage.isHidden = false
+        default:
+            self.popStatusImage.image = UIImage(named: "unsmileIcon")
+            self.popMemoLabel.text = "測站維護中..."
+            self.popDangerImage.isHidden = false
+        }
+        
+    }
+    
+    func loadBannerView() {
+        self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
+        self.bannerView.rootViewController = self
+        
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+        self.bannerView.load(GADRequest())
+        self.bannerView.delegate = self
     }
     
     @objc func onSelectLocationClick(_ sender: UIButton) {
@@ -309,10 +376,8 @@ class ViewController: UIViewController {
         pickerViewIsHidden(bool: false)
         
     }
-    @IBAction func onMenuPageClick(_ sender: UIBarButtonItem) {
-        let menuVC = MenuVC.loadFromNib()
-        menuVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.show(menuVC, sender: self)
+    @IBAction func onleftButtonItemClick(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func onShareClick(_ sender: UIBarButtonItem) {
         let shareUrlStr = "https://apps.apple.com/tw/app/生活小百科/id1515688778"
@@ -872,10 +937,11 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: GADBannerViewDelegate {
+extension WeatherVC: GADBannerViewDelegate {
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("Banner loaded successfully")
+        bannerContentView.isHidden = false
         addBannerViewToView(bannerView)
     }
     
@@ -885,7 +951,7 @@ extension ViewController: GADBannerViewDelegate {
     }
 }
 
-extension ViewController: GADInterstitialDelegate {
+extension WeatherVC: GADInterstitialDelegate {
     
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
         print("Interstitial loaded successfully")
@@ -897,7 +963,7 @@ extension ViewController: GADInterstitialDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension WeatherVC: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4
     }
@@ -915,7 +981,11 @@ extension ViewController: UICollectionViewDataSource {
             cell.textLabel.font = UIFont(name: "PingFangTC-Regular", size: 17)
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-            cell.imageView.image = UIImage(named: weatherImageNameArr[indexPath.row])
+            
+            if let wxImageName = wxMappingDic[oneWeekWx[indexPath.row]] {
+                cell.imageView.image = UIImage(named: wxImageName)
+            }
+            
             return cell
         case 2:
             cell.textLabel.text = oneWeekMaxTemp[indexPath.row]
@@ -930,12 +1000,12 @@ extension ViewController: UICollectionViewDataSource {
 }
 
 
-extension ViewController: UICollectionViewDelegate {
+extension WeatherVC: UICollectionViewDelegate {
     
 }
 
 // MARK: - 設定 CollectionView Cell 與 Cell 之間的間距、距確 Super View 的距離等等
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension WeatherVC: UICollectionViewDelegateFlowLayout {
     
     /// 設定 Collection View 距離 Super View上、下、左、下間的距離
     ///
@@ -982,7 +1052,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension WeatherVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
@@ -1151,14 +1221,6 @@ extension ViewController: CLLocationManagerDelegate {
         default:
             break
         }
-        
-        self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
-        self.bannerView.rootViewController = self
-        
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
-        self.bannerView.load(GADRequest())
-        self.bannerView.delegate = self
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -1312,14 +1374,13 @@ extension ViewController: CLLocationManagerDelegate {
                     self.refreshControl.endRefreshing()
                     
                 }
-                
             }
         }
     }
     
 }
 
-extension ViewController: UIPickerViewDataSource {
+extension WeatherVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -1335,12 +1396,12 @@ extension ViewController: UIPickerViewDataSource {
     
 }
 
-extension ViewController: UIPickerViewDelegate {
+extension WeatherVC: UIPickerViewDelegate {
     
     
     
 }
 
-extension ViewController: UIScrollViewDelegate {
+extension WeatherVC: UIScrollViewDelegate {
     
 }

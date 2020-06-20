@@ -18,8 +18,8 @@ class NewHomeVC: UIViewController {
     let locationManager = CLLocationManager()
     
     let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomeCityIcon", "newHomeQrcodeIcon", "newHomePostalIcon"]
-    let cellNames = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "各縣市大型旅遊景點", "發票開獎與掃描對獎", "郵遞區號快速查詢"]
-    let vcMap = [0 : "ticket", 1 : "ticket", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
+    let vcIdMap = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "各縣市大型旅遊景點", "發票開獎與掃描對獎", "郵遞區號快速查詢"]
+    let vcMap = [0 : "main", 1 : "oilVC", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
     
     var cityTemp = ""
     var maxAndMinTemp = ""
@@ -39,6 +39,16 @@ class NewHomeVC: UIViewController {
     
     var userLocation = (25.0375417, 121.562244)
     let defaultCity = "台北市"
+    
+    var weatherModel: WeatherModel?
+    var oilModel: OilModel?
+    var refreshControl:UIRefreshControl!
+    
+    var positionCity = ""
+    var oneWeekWx = ["-", "-", "-", "-", "-", "-"]
+    var oneWeekMaxTemp = ["-", "-", "-", "-", "-", "-"]
+    var oneWeekMinTemp = ["-", "-", "-", "-", "-", "-"]
+    
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
@@ -49,6 +59,7 @@ class NewHomeVC: UIViewController {
         backImageView.image = UIImage(named: "naviBackIcon")
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(customView: backImageView)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidLoad() {
@@ -58,12 +69,40 @@ class NewHomeVC: UIViewController {
         collectionView.register(UINib(nibName: "NewHomeWeatherCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeWeatherCell")
         collectionView.register(UINib(nibName: "NewHomeOilCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeOilCell")
         
+        let attrStr = NSMutableAttributedString(string: "下滑更新最新資訊")
+        attrStr.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: attrStr.length))
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .white
+        refreshControl.attributedTitle = attrStr
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        
         isConnect()
         getLocationManager()
+        refreshData()
+    }
+    
+    @objc func refreshData() {
+        switch CLLocationManager.authorizationStatus() {
+        case .denied:
+            presentDenineAlert()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            break
+        }
+        getOilData()
         
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func getOilData () {
         DataManager.shared.getOil { (model, _) -> (Void) in
             guard let model = model else { return }
-            
+            self.oilModel = model
             if let isAnnouncement = model.results.first?.announceStatus,
                 let price = model.results.first?.oilChange,
                 let oil92 = model.results.first?.cpcOil92,
@@ -96,14 +135,7 @@ class NewHomeVC: UIViewController {
                     break
                 }
             }
-            
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
         }
-        
-        
     }
     
     func getLocationManager() {
@@ -132,6 +164,21 @@ class NewHomeVC: UIViewController {
         monitor.start(queue: DispatchQueue.global())
     }
     
+    func presentDenineAlert() {
+        // 提示可至[設定]中開啟權限
+        let alertController = UIAlertController(
+            title: "定位權限已關閉",
+            message:
+            "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "確認", style: .default, handler:nil)
+        alertController.addAction(okAction)
+        self.present(
+            alertController,
+            animated: true, completion: nil)
+    }
+    
 }
 
 extension NewHomeVC: CLLocationManagerDelegate {
@@ -140,18 +187,7 @@ extension NewHomeVC: CLLocationManagerDelegate {
         
         switch status {
         case .denied:
-            // 提示可至[設定]中開啟權限
-            let alertController = UIAlertController(
-                title: "定位權限已關閉",
-                message:
-                "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
-                preferredStyle: .alert)
-            let okAction = UIAlertAction(
-                title: "確認", style: .default, handler:nil)
-            alertController.addAction(okAction)
-            self.present(
-                alertController,
-                animated: true, completion: nil)
+            presentDenineAlert()
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
         default:
@@ -167,10 +203,34 @@ extension NewHomeVC: CLLocationManagerDelegate {
 
         GeocodeManager.shared.geocode(latitude: locationLat, longitude: locationLon) { (placemark, error) in
             guard let city = placemark?.subAdministrativeArea, error == nil else { return }
-            
+            self.positionCity = city
             DataManager.shared.getWeather(lat: locationLat, lon: locationLon, city: city) { (model, _) -> (Void) in
                 guard let model = model else { return }
-                print(model)
+                self.weatherModel = model
+                
+                var oneWeekWx = [String]()
+                var oneWeekMaxTemp = [String]()
+                var oneWeekMinTemp = [String]()
+                
+                for weekWx in model.weather.weekWx {
+                    guard let wx = weekWx.value else { return }
+                    oneWeekWx.append(wx)
+                }
+                
+                for weekMaxT in model.weather.weekMaxT {
+                    guard let maxT = weekMaxT.value else { return }
+                    oneWeekMaxTemp.append(maxT)
+                }
+                
+                for weekMinT in model.weather.weekMinT {
+                    guard let minT = weekMinT.value else { return }
+                    oneWeekMinTemp.append(minT)
+                }
+                
+                self.oneWeekWx = oneWeekWx
+                self.oneWeekMaxTemp = oneWeekMaxTemp
+                self.oneWeekMinTemp = oneWeekMinTemp
+                
                 if let temp = model.weather.temp,
                     let maxTemp = model.weather.maxT,
                     let minTemp = model.weather.minT,
@@ -190,7 +250,6 @@ extension NewHomeVC: CLLocationManagerDelegate {
                         self.uvi = "紫外線過高"
                     }
                 }
-                
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -232,7 +291,7 @@ extension NewHomeVC: UICollectionViewDataSource {
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
             cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
-            cell.titleLabel.text = cellNames[indexPath.row]
+            cell.titleLabel.text = vcIdMap[indexPath.row]
             return cell
         }
     }
@@ -241,12 +300,29 @@ extension NewHomeVC: UICollectionViewDataSource {
 }
 extension NewHomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(cellNames[indexPath.row])
-        
         guard let id = vcMap[indexPath.row] else { return }
-        if let vc = storyboard?.instantiateViewController(withIdentifier: id) {
-            self.navigationController?.pushViewController(vc, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            let weatherVC = storyboard?.instantiateViewController(withIdentifier: id) as! WeatherVC
+            weatherVC.weatherModel = self.weatherModel
+            weatherVC.positionCity = self.positionCity
+            weatherVC.oneWeekWx = self.oneWeekWx
+            weatherVC.oneWeekMaxTemp = self.oneWeekMaxTemp
+            weatherVC.oneWeekMinTemp = self.oneWeekMinTemp
+            self.navigationController?.pushViewController(weatherVC, animated: true)
+        case 1:
+            let oilVC = OilVC.loadFromNib()
+            oilVC.oilModel = self.oilModel
+            self.navigationController?.pushViewController(oilVC, animated: true)
+        case 2:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: id) {
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        default:
+            break
         }
+        
         
     }
 }

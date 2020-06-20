@@ -212,7 +212,7 @@
                     <items>
                         <navigationItem id="cC2-YC-m7B">
                             <nil key="title"/>
-                            <barButtonItem key="leftBarButtonItem" image="hambergerIcon" id="xaA-01-WxH">
+                            <barButtonItem key="leftBarButtonItem" image="arrow.left" catalog="system" id="xaA-01-WxH">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="onMenuPageClick:" destination="-1" id="GrC-cX-j1a"/>
@@ -276,7 +276,7 @@
         </view>
     </objects>
     <resources>
-        <image name="hambergerIcon" width="23" height="23"/>
+        <image name="arrow.left" catalog="system" width="64" height="48"/>
         <image name="oilBgImg" width="414" height="736"/>
     </resources>
 </document>

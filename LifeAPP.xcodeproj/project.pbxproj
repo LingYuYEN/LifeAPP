@@ -26,7 +26,7 @@
 		1347E6182487757D0036E4A2 /* OilModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E6172487757D0036E4A2 /* OilModel.swift */; };
 		13552E92247B8E5A00CA895E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E91247B8E5A00CA895E /* AppDelegate.swift */; };
 		13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E93247B8E5A00CA895E /* SceneDelegate.swift */; };
-		13552E96247B8E5A00CA895E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E95247B8E5A00CA895E /* ViewController.swift */; };
+		13552E96247B8E5A00CA895E /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552E95247B8E5A00CA895E /* WeatherVC.swift */; };
 		13552E99247B8E5A00CA895E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13552E97247B8E5A00CA895E /* Main.storyboard */; };
 		13552E9B247B8E5B00CA895E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13552E9A247B8E5B00CA895E /* Assets.xcassets */; };
 		13552E9E247B8E5B00CA895E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13552E9C247B8E5B00CA895E /* LaunchScreen.storyboard */; };
@@ -76,7 +76,7 @@
 		13552E8E247B8E5A00CA895E /* LifeAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13552E91247B8E5A00CA895E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13552E93247B8E5A00CA895E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		13552E95247B8E5A00CA895E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		13552E95247B8E5A00CA895E /* WeatherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
 		13552E98247B8E5A00CA895E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		13552E9A247B8E5B00CA895E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13552E9D247B8E5B00CA895E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 			path = Ticket;
 			sourceTree = "<group>";
 		};
-		1347E5E6248631BE0036E4A2 /* Home */ = {
+		1347E5E6248631BE0036E4A2 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
 				13552ED6247CBEB300CA895E /* TextCollectionViewCell.swift */,
@@ -142,9 +142,9 @@
 				1347E5DB2484C4470036E4A2 /* CardDetailTableViewCell.xib */,
 				1347E5D624848ADF0036E4A2 /* DetailVC.swift */,
 				1347E5D724848ADF0036E4A2 /* DetailVC.xib */,
-				13552E95247B8E5A00CA895E /* ViewController.swift */,
+				13552E95247B8E5A00CA895E /* WeatherVC.swift */,
 			);
-			path = Home;
+			path = Weather;
 			sourceTree = "<group>";
 		};
 		1347E5E7248631D50036E4A2 /* Menu */ = {
@@ -199,7 +199,7 @@
 				13B05450247CE98700B85357 /* Manager */,
 				1347E5E7248631D50036E4A2 /* Menu */,
 				1347E5EC24863BF00036E4A2 /* Oil */,
-				1347E5E6248631BE0036E4A2 /* Home */,
+				1347E5E6248631BE0036E4A2 /* Weather */,
 				13EA25E5249306480044DFAA /* New Home */,
 				133645E8249C40DD00A157BA /* Ticket */,
 				13552E97247B8E5A00CA895E /* Main.storyboard */,
@@ -431,7 +431,7 @@
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
 				13EA25AC248E2F640044DFAA /* WeatherModel.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
-				13552E96247B8E5A00CA895E /* ViewController.swift in Sources */,
+				13552E96247B8E5A00CA895E /* WeatherVC.swift in Sources */,
 				13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */,
 				13EA25E92493135D0044DFAA /* NaviNewHomeVC.swift in Sources */,
 				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
