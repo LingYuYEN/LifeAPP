@@ -55,7 +55,6 @@ class DetailVC: UIViewController {
     let rowHight = 58
     
     var memoTextArr = [NSMutableAttributedString]()
-    var popMemoTextArr = ["1 小時雨量      0 毫米", "24 小時雨量    12 毫米"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

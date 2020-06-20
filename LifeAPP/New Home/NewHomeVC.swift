@@ -26,7 +26,11 @@ class NewHomeVC: UIViewController {
     var maxAndMinTemp = ""
     var pop = ""
     var uvi = ""
-    
+    var aqi = ""
+    var pm25: Double = 0
+    var pm10: Double = 0
+    var o3: Double = 0
+    var uviDescription = ""
     var isAnnouncement = false
     var oilTitle = ""
     var oilUpAndDownImageName = ""
@@ -49,6 +53,8 @@ class NewHomeVC: UIViewController {
     var oneWeekWx = ["-", "-", "-", "-", "-", "-"]
     var oneWeekMaxTemp = ["-", "-", "-", "-", "-", "-"]
     var oneWeekMinTemp = ["-", "-", "-", "-", "-", "-"]
+    
+    var shareMessage = ""
     
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
@@ -138,6 +144,10 @@ class NewHomeVC: UIViewController {
                     break
                 }
             }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -214,22 +224,41 @@ class NewHomeVC: UIViewController {
             if let temp = model.weather.temp,
                 let maxTemp = model.weather.maxT,
                 let minTemp = model.weather.minT,
+                let aqi = model.aqi.aqi,
+                let uvi = model.uvi.uvi,
                 let pop = model.rain.pop,
-                let uvi = model.uvi.uvi
+                let pm25 = model.aqi.pm25,
+                let pm10 = model.aqi.pm10,
+                let o3 = model.aqi.o3
             {
                 self.cityTemp = "\(city)  \(temp)°"
                 self.maxAndMinTemp = "\(maxTemp)° / \(minTemp)°"
-                self.pop = "降雨機率 \(pop) %"
-
+                self.aqi = "\(aqi)"
+                self.uvi = "\(uvi)"
+                self.pop = "\(pop)"
+                self.pm25 = pm25
+                self.pm10 = pm10
+                self.o3 = o3
+                
                 switch lrint(uvi) {
                 case 0 ... 2:
-                    self.uvi = "紫外線正常"
+                    self.uviDescription = "紫外線正常"
                 case 3 ... 5:
-                    self.uvi = "紫外線中級"
+                    self.uviDescription = "紫外線中級"
                 default:
-                    self.uvi = "紫外線過高"
+                    self.uviDescription = "紫外線過高"
                 }
             }
+            
+
+            
+            
+            let descriptionsCount = model.descriptions.count
+            let random = Int.random(in: 0 ... descriptionsCount - 1)
+            var newShareMessage = "生活小百科提醒： "
+            newShareMessage += model.descriptions[random].descriptionDescription ?? ""
+            self.shareMessage = newShareMessage
+            
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
                 self.activityIndicatorView.isHidden = true
@@ -281,8 +310,8 @@ extension NewHomeVC: UICollectionViewDataSource {
             cell.iconImageView.image = UIImage(named: iconImageNames[indexPath.row])
             cell.cityAndTempLabel.text = self.cityTemp
             cell.maxAndMinTempLabel.text = self.maxAndMinTemp
-            cell.popLabel.text = self.pop
-            cell.uviLabel.text = self.uvi
+            cell.popLabel.text = "降雨機率 \(self.pop) %"
+            cell.uviLabel.text = self.uviDescription
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeOilCell", for: indexPath) as! NewHomeOilCell
@@ -320,10 +349,19 @@ extension NewHomeVC: UICollectionViewDelegate {
             weatherVC.oneWeekWx = self.oneWeekWx
             weatherVC.oneWeekMaxTemp = self.oneWeekMaxTemp
             weatherVC.oneWeekMinTemp = self.oneWeekMinTemp
+            weatherVC.shareMessage = self.shareMessage
+            weatherVC.aqiValue = self.aqi
+            weatherVC.uviValue = self.uvi
+            weatherVC.popValue = self.pop
+            print(self.pop)
+            weatherVC.pm25 = self.pm25
+            weatherVC.pm10 = self.pm10
+            weatherVC.o3 = self.o3
             self.navigationController?.pushViewController(weatherVC, animated: true)
         case 1:
             let oilVC = OilVC.loadFromNib()
             oilVC.oilModel = self.oilModel
+            
             self.navigationController?.pushViewController(oilVC, animated: true)
         case 2:
             if let vc = storyboard?.instantiateViewController(withIdentifier: id) {

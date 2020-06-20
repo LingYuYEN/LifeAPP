@@ -286,7 +286,7 @@ class WeatherVC: UIViewController {
         self.symbolLabel.isHidden = self.nowTempLabel.text == "" ? true : false
         self.todayDTXLabel.text = "\(maxT)°"
         self.todayDTNLabel.text = "\(minT)°"
-        
+        self.popLabel.text = "降雨機率 \(pop)％"
         
         switch lrint(aqi) {
         case 0 ... 50:
@@ -333,8 +333,6 @@ class WeatherVC: UIViewController {
             self.uviMemoLabel.text = "請待在室內或做加倍防曬"
             self.uviDangerImage.isHidden = false
         }
-        
-        self.popLabel.text = "降雨機率 \(pop)％"
         
         switch model.rain.pop ?? -99 {
         case 0 ... 10:
@@ -544,6 +542,7 @@ class WeatherVC: UIViewController {
         pickerViewIsHidden(bool: true)
         
     }
+    
     @IBAction func onPickerViewCancelClick(_ sender: UIButton) {
         self.locationsBtn.setImage(UIImage(named: "down"), for: .normal)
         pickerViewIsHidden(bool: true)
@@ -573,9 +572,10 @@ class WeatherVC: UIViewController {
         let detailVC = DetailVC.loadFromNib()
         detailVC.modalPresentationStyle = .overFullScreen
         detailVC.titleValue = "空氣品質指標 AQI"
-        detailVC.value = aqiValue
+        detailVC.value = self.aqiValue
         
         guard let memoHeaderValue = self.memoHeaderValue, let memoValue = self.memoValue else { return }
+        
         detailVC.memoValue = "\(memoHeaderValue) ｜ \(memoValue)"
         detailVC.statusValue = self.statusValue
         
