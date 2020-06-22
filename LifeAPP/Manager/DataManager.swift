@@ -59,5 +59,10 @@ class DataManager {
         }
         task.resume()
     }
+    
+    /// 取得郵遞資訊（3+2）
+    func getZipFive() {
+        
+    }
 }
 

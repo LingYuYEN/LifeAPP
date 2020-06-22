@@ -462,7 +462,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LgM-Wp-IHg">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.left" catalog="system" id="PLy-e2-HVm">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="leftBarButtonIcon" id="PLy-e2-HVm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onleftButtonItemClick:" destination="BYZ-38-t0r" id="Zbu-4q-phJ"/>
@@ -734,7 +734,6 @@
         <!--Navigation Controller-->
         <scene sceneID="ZAH-3d-ZMH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9A2-xB-dnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="navi" automaticallyAdjustsScrollViewInsets="NO" id="raR-Sc-alm" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mhV-Cq-Wct">
@@ -752,6 +751,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="suC-ZW-nsj"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9A2-xB-dnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.77173913043478"/>
         </scene>
@@ -775,11 +775,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.left" catalog="system" width="64" height="48"/>
         <image name="dangerIcon" width="18" height="18"/>
         <image name="dayIcon" width="38.666667938232422" height="44.666667938232422"/>
         <image name="down" width="16" height="16"/>
         <image name="homeBgImg" width="414" height="736"/>
+        <image name="leftBarButtonIcon" width="29" height="30"/>
         <image name="newHomeBgImg" width="414" height="736"/>
         <image name="nightIcon" width="38.666667938232422" height="44.666667938232422"/>
     </resources>

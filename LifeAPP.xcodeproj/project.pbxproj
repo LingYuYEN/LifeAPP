@@ -50,6 +50,7 @@
 		13B05452247CE9A000B85357 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05451247CE9A000B85357 /* ClientManager.swift */; };
 		13B05454247CE9AD00B85357 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B05453247CE9AD00B85357 /* DataManager.swift */; };
 		13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */; };
+		13CAC6EA24A057A300EEDA14 /* ZipJson in Resources */ = {isa = PBXBuildFile; fileRef = 13CAC6E924A057A300EEDA14 /* ZipJson */; };
 		13EA25AA248E27F80044DFAA /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25A9248E27F80044DFAA /* NetStatus.swift */; };
 		13EA25AC248E2F640044DFAA /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EA25AB248E2F640044DFAA /* WeatherModel.swift */; };
 		13EA25E2249209DD0044DFAA /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 13EA25E1249209DD0044DFAA /* .gitattributes */; };
@@ -108,6 +109,7 @@
 		13B05451247CE9A000B85357 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		13B05453247CE9AD00B85357 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeManager.swift; sourceTree = "<group>"; };
+		13CAC6E924A057A300EEDA14 /* ZipJson */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZipJson; sourceTree = "<group>"; };
 		13EA25A9248E27F80044DFAA /* NetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
 		13EA25AB248E2F640044DFAA /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		13EA25E1249209DD0044DFAA /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1325EA5424A056CE007F2B9D /* JsonFile */ = {
+			isa = PBXGroup;
+			children = (
+				13CAC6E924A057A300EEDA14 /* ZipJson */,
+			);
+			path = JsonFile;
+			sourceTree = "<group>";
+		};
 		133645E8249C40DD00A157BA /* Ticket */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +227,7 @@
 		13552E90247B8E5A00CA895E /* LifeAPP */ = {
 			isa = PBXGroup;
 			children = (
+				1325EA5424A056CE007F2B9D /* JsonFile */,
 				1396B9AF2499C38D00C2AEAE /* LifeAPP.entitlements */,
 				13552E91247B8E5A00CA895E /* AppDelegate.swift */,
 				13552E93247B8E5A00CA895E /* SceneDelegate.swift */,
@@ -373,6 +384,7 @@
 				13EA25ED24931DBE0044DFAA /* NewHomeCollectionViewCell.xib in Resources */,
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
 				133645F5249E094A00A157BA /* PostalVC.xib in Resources */,
+				13CAC6EA24A057A300EEDA14 /* ZipJson in Resources */,
 				133645EC249C4CB300A157BA /* NewHomeWeatherCell.xib in Resources */,
 				1347E5EB248632060036E4A2 /* MenuTableViewCell.xib in Resources */,
 				1396B9B32499CB3E00C2AEAE /* GoogleService-Info.plist in Resources */,
