@@ -19,6 +19,11 @@ class PostalVC: UIViewController {
     @IBOutlet var searchBtn: UIButton!
     
     let cellDefaultTitleArr = ["選擇縣市", "選擇區域", "選擇區域路名段號"]
+    var zipFiveArr = [String]()
+    var cityArr = [String]()
+    var areaArr = [String]()
+    var roadArr = [String]()
+    var scopeArr = [String]()
     
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
@@ -37,8 +42,44 @@ class PostalVC: UIViewController {
         
         collectionView.register(UINib(nibName: "PostalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostalCollectionViewCell")
         tableView.register(UINib(nibName: "PostalTableViewCell", bundle: nil), forCellReuseIdentifier: "PostalTableViewCell")
+        tableView.register(UINib(nibName: "PostalTableViewHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "PostalTableViewHeaderView")
+        
+        
+        
+        DataManager.shared.getZipFive { (model, error) -> (Void) in
+            guard let models = model else { return }
+            
+            var newZipFiveArr = [String]()
+            var newCityArr = [String]()
+            var newAreaArr = [String]()
+            var newRoadArr = [String]()
+            var newScopeArr = [String]()
+            
+            for model in models {
+                newZipFiveArr.append(model.zip5)
+                newCityArr.append(model.city)
+                newAreaArr.append(model.area)
+                newRoadArr.append(model.road)
+                newScopeArr.append(model.scope)
+            }
+            
+            self.zipFiveArr = newZipFiveArr
+            self.cityArr = newCityArr
+            self.areaArr = newAreaArr
+            self.roadArr = newRoadArr
+            self.scopeArr = newScopeArr
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+    
+        
         setUI()
     }
+    
+    
     
     func setUI() {
         gradientView.layer.applySketchShadow(color: .set(red: 13, green: 121, blue: 183), alpha: 1, x: 0, y: 0, blur: 5, spread: 0)
@@ -54,6 +95,7 @@ class PostalVC: UIViewController {
 }
 
 extension PostalVC: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cellDefaultTitleArr.count
     }
@@ -119,13 +161,20 @@ extension PostalVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension PostalVC: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return zipFiveArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostalTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostalTableViewCell", for: indexPath) as! PostalTableViewCell
+        cell.zipCodeLabel.text = self.zipFiveArr[indexPath.row]
+        cell.roadLabel.text = "\(self.areaArr[indexPath.row])  \(self.roadArr[indexPath.row])"
+        cell.numberLabel.text = self.scopeArr[indexPath.row]
         return cell
     }
     
@@ -133,5 +182,13 @@ extension PostalVC: UITableViewDataSource {
 }
 
 extension PostalVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 36 * screenSceleHeight
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "PostalTableViewHeaderView")
+        // 取消
+        
+        return headerView
+    }
 }

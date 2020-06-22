@@ -10,9 +10,15 @@ import UIKit
 
 class PostalTableViewCell: UITableViewCell {
 
+    @IBOutlet var zipCodeLabel: UILabel!
+    @IBOutlet var roadLabel: UILabel!
+    @IBOutlet var numberLabel: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

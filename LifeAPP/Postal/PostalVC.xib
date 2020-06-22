@@ -88,11 +88,11 @@
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofE-dE-HKg">
                                     <rect key="frame" x="0.0" y="303.33333333333331" width="389" height="310.99999999999994"/>
                                     <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-an-1ZZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="828" height="311"/>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-an-1ZZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="611" height="311"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="separatorColor" red="0.2901960784" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <inset key="separatorInset" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="-1" id="cTt-bt-00A"/>
                                                 <outlet property="delegate" destination="-1" id="JQw-y3-F7K"/>
@@ -117,7 +117,7 @@
                                 <constraint firstItem="ofE-dE-HKg" firstAttribute="top" secondItem="Rub-lk-fF0" secondAttribute="bottom" constant="20" id="4Q3-47-nOA"/>
                                 <constraint firstItem="Vvr-an-1ZZ" firstAttribute="height" secondItem="0bw-Eb-Emm" secondAttribute="height" multiplier="0.451379" id="8pV-cC-R3X"/>
                                 <constraint firstItem="FNf-JK-h3d" firstAttribute="trailing" secondItem="nBu-4h-N9C" secondAttribute="trailing" id="Arg-ly-aCL"/>
-                                <constraint firstItem="Vvr-an-1ZZ" firstAttribute="width" secondItem="0bw-Eb-Emm" secondAttribute="width" multiplier="2" id="EZf-ig-4jc"/>
+                                <constraint firstItem="Vvr-an-1ZZ" firstAttribute="width" secondItem="0bw-Eb-Emm" secondAttribute="width" multiplier="1.47585" id="FR3-1U-jzN"/>
                                 <constraint firstItem="ofE-dE-HKg" firstAttribute="leading" secondItem="0bw-Eb-Emm" secondAttribute="leading" id="HeC-It-94G"/>
                                 <constraint firstItem="Rub-lk-fF0" firstAttribute="centerX" secondItem="0bw-Eb-Emm" secondAttribute="centerX" id="IQj-XD-dOm"/>
                                 <constraint firstItem="Rub-lk-fF0" firstAttribute="width" secondItem="0bw-Eb-Emm" secondAttribute="width" multiplier="0.316667" id="JN5-1m-duq"/>
