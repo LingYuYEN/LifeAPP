@@ -10,9 +10,25 @@ import UIKit
 
 class PostalCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet var gradientBarderView: UIView!
+    @IBOutlet var cellContentView: UIView!
+    @IBOutlet var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        setUI()
     }
 
+    func setUI() {
+        gradientBarderView.setGradientBorder(
+            lineWidth: 1,
+            colors: [
+                UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
+                UIColor.set(red: 6, green: 168, blue: 255)
+            ]
+        )
+        
+        self.layoutIfNeeded()
+    }
 }

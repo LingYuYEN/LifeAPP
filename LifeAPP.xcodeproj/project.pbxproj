@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1325EA4E24A0370C007F2B9D /* PostalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1325EA4C24A0370C007F2B9D /* PostalCollectionViewCell.swift */; };
 		1325EA4F24A0370C007F2B9D /* PostalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1325EA4D24A0370C007F2B9D /* PostalCollectionViewCell.xib */; };
+		1325EA5224A04CF6007F2B9D /* PostalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1325EA5024A04CF6007F2B9D /* PostalTableViewCell.swift */; };
+		1325EA5324A04CF6007F2B9D /* PostalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1325EA5124A04CF6007F2B9D /* PostalTableViewCell.xib */; };
 		133645EB249C4CB300A157BA /* NewHomeWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133645E9249C4CB300A157BA /* NewHomeWeatherCell.swift */; };
 		133645EC249C4CB300A157BA /* NewHomeWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133645EA249C4CB300A157BA /* NewHomeWeatherCell.xib */; };
 		133645EF249C5D1B00A157BA /* NewHomeOilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133645ED249C5D1B00A157BA /* NewHomeOilCell.swift */; };
@@ -62,6 +64,8 @@
 /* Begin PBXFileReference section */
 		1325EA4C24A0370C007F2B9D /* PostalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalCollectionViewCell.swift; sourceTree = "<group>"; };
 		1325EA4D24A0370C007F2B9D /* PostalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostalCollectionViewCell.xib; sourceTree = "<group>"; };
+		1325EA5024A04CF6007F2B9D /* PostalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalTableViewCell.swift; sourceTree = "<group>"; };
+		1325EA5124A04CF6007F2B9D /* PostalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostalTableViewCell.xib; sourceTree = "<group>"; };
 		133645E9249C4CB300A157BA /* NewHomeWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeWeatherCell.swift; sourceTree = "<group>"; };
 		133645EA249C4CB300A157BA /* NewHomeWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewHomeWeatherCell.xib; sourceTree = "<group>"; };
 		133645ED249C5D1B00A157BA /* NewHomeOilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeOilCell.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				133645F3249E094A00A157BA /* PostalVC.xib */,
 				1325EA4C24A0370C007F2B9D /* PostalCollectionViewCell.swift */,
 				1325EA4D24A0370C007F2B9D /* PostalCollectionViewCell.xib */,
+				1325EA5024A04CF6007F2B9D /* PostalTableViewCell.swift */,
+				1325EA5124A04CF6007F2B9D /* PostalTableViewCell.xib */,
 			);
 			path = Postal;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				1396B9B32499CB3E00C2AEAE /* GoogleService-Info.plist in Resources */,
 				1325EA4F24A0370C007F2B9D /* PostalCollectionViewCell.xib in Resources */,
 				1359A57424936D420076E9F1 /* TicketCollectionViewCell.xib in Resources */,
+				1325EA5324A04CF6007F2B9D /* PostalTableViewCell.xib in Resources */,
 				13552E99247B8E5A00CA895E /* Main.storyboard in Resources */,
 				13EA25E2249209DD0044DFAA /* .gitattributes in Resources */,
 				13EA25E424920A0B0044DFAA /* README.md in Resources */,
@@ -452,6 +459,7 @@
 				13B05454247CE9AD00B85357 /* DataManager.swift in Sources */,
 				13552ED8247CBEB300CA895E /* TextCollectionViewCell.swift in Sources */,
 				1325EA4E24A0370C007F2B9D /* PostalCollectionViewCell.swift in Sources */,
+				1325EA5224A04CF6007F2B9D /* PostalTableViewCell.swift in Sources */,
 				13EA25AC248E2F640044DFAA /* WeatherModel.swift in Sources */,
 				13B05452247CE9A000B85357 /* ClientManager.swift in Sources */,
 				13552E96247B8E5A00CA895E /* WeatherVC.swift in Sources */,
