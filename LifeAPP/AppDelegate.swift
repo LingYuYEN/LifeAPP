@@ -51,12 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //          application.registerUserNotificationSettings(settings)
 //        }
         
-
-        
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar
         UINavigationBar.appearance().tintColor = .white
-
+        
         if #available(iOS 13.0, *) {
             let navigationBarAppearence = UINavigationBarAppearance()
             navigationBarAppearence.shadowColor = .clear

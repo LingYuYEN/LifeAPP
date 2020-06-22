@@ -25,7 +25,10 @@ class NaviNewHomeVC: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.navigationItem.backBarButtonItem?.image = UIImage(named: "")
+        let image = UIImage()
+        // 取消預設 back icon
+        self.navigationBar.backIndicatorImage = image
+        self.navigationBar.backIndicatorTransitionMaskImage = image
         
     }
     

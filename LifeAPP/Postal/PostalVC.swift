@@ -18,6 +18,10 @@ class PostalVC: UIViewController {
         naviBar.setBackgroundImage(image, for: .default)
         naviBar.shadowImage = image
         
+        // 取消預設 back icon
+        self.navigationController?.navigationBar.backIndicatorImage = image
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
+        
         self.navigationController?.navigationBar.isHidden = true
     }
     

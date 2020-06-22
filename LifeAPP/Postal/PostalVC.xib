@@ -27,7 +27,7 @@
                     <items>
                         <navigationItem id="7TI-jB-lTf">
                             <nil key="title"/>
-                            <barButtonItem key="leftBarButtonItem" image="arrow.left" catalog="system" id="t4i-ps-6uB">
+                            <barButtonItem key="leftBarButtonItem" title="Item" image="leftBarButtonIcon" id="t4i-ps-6uB">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </barButtonItem>
                             <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z9X-Pf-OCX">
@@ -57,7 +57,7 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow.left" catalog="system" width="64" height="48"/>
+        <image name="leftBarButtonIcon" width="29" height="30"/>
         <image name="newHomeBgImg" width="414" height="736"/>
     </resources>
 </document>
