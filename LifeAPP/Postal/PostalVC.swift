@@ -94,8 +94,6 @@ class PostalVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        self.navigationController?.navigationBar.shadowImage = image
         
         naviBar.setBackgroundImage(image, for: .default)
         naviBar.shadowImage = image
@@ -416,7 +414,7 @@ extension PostalVC: UIPickerViewDelegate {
 
 extension PostalVC {
     func pickerViewIsHidden(bool: Bool) {
-        self.pickerViewTop.constant = bool ? 0 : -257
+        self.pickerViewTop.constant = bool ? 50 : -257
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }

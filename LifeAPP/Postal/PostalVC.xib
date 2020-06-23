@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newHomeBgImg" translatesAutoresizingMaskIntoConstraints="NO" id="SLn-Kl-8bw">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newHomeBgImg" translatesAutoresizingMaskIntoConstraints="NO" id="SLn-Kl-8bw">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvZ-IY-C2P">
@@ -154,7 +154,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="azp-RF-E0b"/>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBA-U0-vHW" customClass="PickerView" customModule="LifeAPP" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="862" width="414" height="313"/>
+                    <rect key="frame" x="0.0" y="912" width="414" height="313"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-zk-Sb8">
@@ -177,7 +177,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hOe-ny-blu" secondAttribute="trailing" id="UfY-Ui-hln"/>
                 <constraint firstItem="SLn-Kl-8bw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z8N-yO-7ax"/>
                 <constraint firstItem="SLn-Kl-8bw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="d8R-G9-TLd"/>
-                <constraint firstItem="tBA-U0-vHW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="dw9-sE-Ha9"/>
+                <constraint firstItem="tBA-U0-vHW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="50" id="dw9-sE-Ha9"/>
                 <constraint firstItem="0bw-Eb-Emm" firstAttribute="width" secondItem="SLn-Kl-8bw" secondAttribute="width" id="hBb-t9-9Q4"/>
                 <constraint firstItem="n5D-zk-Sb8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="jKB-Hb-3yH"/>
                 <constraint firstItem="hOe-ny-blu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jQg-7H-nWr"/>
