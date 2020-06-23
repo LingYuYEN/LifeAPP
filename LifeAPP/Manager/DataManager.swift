@@ -61,14 +61,14 @@ class DataManager {
     }
     
     /// 取得郵遞資訊（3+2）
-    func getZipFive(completed: @escaping (PostalModel?, Error?) -> (Void)) {
+    func getZipFive(completed: @escaping ([ZipFiveModel]?, Error?) -> (Void)) {
         
         guard let url = Bundle.main.url(forResource: "Zip5", withExtension:"json") else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else { return }
             do {
-                let model = try JSONDecoder().decode(PostalModel.self, from: data)
+                let model = try JSONDecoder().decode([ZipFiveModel].self, from: data)
                 completed(model, nil)
             } catch {
                 print("error:\(error)")

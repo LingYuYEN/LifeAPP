@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Network
+import GoogleMobileAds
 
 class NewHomeVC: UIViewController {
     
@@ -19,6 +20,8 @@ class NewHomeVC: UIViewController {
     let locationManager = CLLocationManager()
     
     let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomeCityIcon", "newHomeQrcodeIcon", "newHomePostalIcon"]
+//    let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomePostalIcon"]
+
     let vcIdMap = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "各縣市大型旅遊景點", "發票開獎與掃描對獎", "郵遞區號快速查詢"]
     let vcMap = [0 : "main", 1 : "oilVC", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
     
@@ -56,6 +59,8 @@ class NewHomeVC: UIViewController {
     
     var shareMessage = ""
     
+    var bannerView: GADBannerView!
+    
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
@@ -89,6 +94,7 @@ class NewHomeVC: UIViewController {
         isConnect()
         getLocationManager()
         refreshData()
+        loadBannerView()
     }
     
     @objc func refreshData() {
@@ -386,7 +392,7 @@ extension NewHomeVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20 * screenSceleHeight, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
+        return UIEdgeInsets(top: 20 * screenSceleHeight, left: 25 * screenScaleWidth, bottom: 90, right: 25 * screenScaleWidth)
     }
     
     ///  設定 CollectionViewCell 的寬、高
@@ -428,5 +434,53 @@ extension NewHomeVC: UICollectionViewDelegateFlowLayout {
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0 * screenScaleWidth
+    }
+}
+
+extension NewHomeVC {
+    func loadBannerView() {
+        self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
+        self.bannerView.rootViewController = self
+        
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+        self.bannerView.load(GADRequest())
+        self.bannerView.delegate = self
+    }
+    
+    /// 加入橫幅廣告頁面
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.bringSubviewToFront(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: view.safeAreaLayoutGuide,
+                                attribute: .bottom,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+        ])
+    }
+}
+
+extension NewHomeVC: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner loaded successfully")
+        addBannerViewToView(bannerView)
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
     }
 }

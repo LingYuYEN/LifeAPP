@@ -181,6 +181,7 @@ class WeatherVC: UIViewController {
     }
     func setupUI() {
         chWeekArr = [String]()
+        var newChWeekArr = [String]()
         let chineseWeekDic = ["Monday" : "一", "Tuesday" : "二", "Wednesday" : "三", "Thursday" : "四", "Friday" : "五", "Saturday" : "六", "Sunday" : "日"]
         let enToIntDic: [String : Int] = ["Monday" : 1, "Tuesday" : 2, "Wednesday" : 3, "Thursday" : 4, "Friday" : 5, "Saturday" : 6, "Sunday" : 7]
         let intToStrDic = [1 : "一", 2 : "二", 3 : "三", 4 : "四", 5 : "五", 6 : "六", 7 : "日"]
@@ -201,12 +202,11 @@ class WeatherVC: UIViewController {
             if intWeek > 7 {
                 intWeek = 1
             }
-            
             intWeekArr.append(intWeek)
             guard let todayWeekCh = intToStrDic[intWeek] else { return }
-            chWeekArr.append(todayWeekCh)
+            newChWeekArr.append(todayWeekCh)
         }
-        
+        self.chWeekArr = newChWeekArr
         dateLabel.text = "\(nowFormatter)"
         
         setWetherView(wetherView: wetherViewFirst, gradientView: stackContentViewFirst)
@@ -670,9 +670,6 @@ class WeatherVC: UIViewController {
         case false:
             self.pickerContentView.isHidden = isHidden
         }
-        
-        
-        
     }
     
     @objc func loadData(){

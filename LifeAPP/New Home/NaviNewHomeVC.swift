@@ -26,6 +26,9 @@ class NaviNewHomeVC: UINavigationController {
         super.viewDidLoad()
 
         let image = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        self.navigationController?.navigationBar.shadowImage = image
+        
         // 取消預設 back icon
         self.navigationBar.backIndicatorImage = image
         self.navigationBar.backIndicatorTransitionMaskImage = image

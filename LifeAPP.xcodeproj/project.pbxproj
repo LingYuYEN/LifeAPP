@@ -62,6 +62,8 @@
 		13FB3A5724A07C1D00035321 /* PostalTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13FB3A5624A07C1D00035321 /* PostalTableViewHeaderView.xib */; };
 		13FB3A5B24A0819D00035321 /* PostalTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FB3A5A24A0819D00035321 /* PostalTableViewHeaderView.swift */; };
 		13FB3A6024A094A800035321 /* Zip5.json in Resources */ = {isa = PBXBuildFile; fileRef = 13FB3A5F24A094A800035321 /* Zip5.json */; };
+		13FB3A6224A1A53500035321 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FB3A6124A1A53500035321 /* PickerView.swift */; };
+		13FB3A6424A1A56600035321 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13FB3A6324A1A56600035321 /* PickerView.xib */; };
 		771B19AAD36A9DCABFCC81DC /* Pods_LifeAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +126,8 @@
 		13FB3A5624A07C1D00035321 /* PostalTableViewHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostalTableViewHeaderView.xib; sourceTree = "<group>"; };
 		13FB3A5A24A0819D00035321 /* PostalTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalTableViewHeaderView.swift; sourceTree = "<group>"; };
 		13FB3A5F24A094A800035321 /* Zip5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Zip5.json; sourceTree = "<group>"; };
+		13FB3A6124A1A53500035321 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		13FB3A6324A1A56600035321 /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		18BADF633DEE3E0B75E9AF37 /* Pods_LifeAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E141D7CBC0F22619B8487E /* Pods-LifeAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.debug.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		9E59EBCA612EEABEC325F829 /* Pods-LifeAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeAPP.release.xcconfig"; path = "Target Support Files/Pods-LifeAPP/Pods-LifeAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 				133645E8249C40DD00A157BA /* Ticket */,
 				133645F1249E092B00A157BA /* Postal */,
 				13552E97247B8E5A00CA895E /* Main.storyboard */,
+				13FB3A6124A1A53500035321 /* PickerView.swift */,
+				13FB3A6324A1A56600035321 /* PickerView.xib */,
 				13552E9A247B8E5B00CA895E /* Assets.xcassets */,
 				13552E9C247B8E5B00CA895E /* LaunchScreen.storyboard */,
 				13552E9F247B8E5B00CA895E /* Info.plist */,
@@ -383,6 +389,7 @@
 				1347E5F4248654370036E4A2 /* OilCollectionViewCell.xib in Resources */,
 				13552EDD247CBEC400CA895E /* ImageCollectionViewCell.xib in Resources */,
 				13552ED9247CBEB300CA895E /* TextCollectionViewCell.xib in Resources */,
+				13FB3A6424A1A56600035321 /* PickerView.xib in Resources */,
 				13EA25ED24931DBE0044DFAA /* NewHomeCollectionViewCell.xib in Resources */,
 				13552ED3247C9BFE00CA895E /* Roboto-Light.ttf in Resources */,
 				133645F5249E094A00A157BA /* PostalVC.xib in Resources */,
@@ -482,6 +489,7 @@
 				13EA25E7249306830044DFAA /* NewHomeVC.swift in Sources */,
 				13EA25E92493135D0044DFAA /* NaviNewHomeVC.swift in Sources */,
 				1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */,
+				13FB3A6224A1A53500035321 /* PickerView.swift in Sources */,
 				1359A57024935FD60076E9F1 /* TicketVC.swift in Sources */,
 				1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */,
 				13B1B342247F4A44003FC8F2 /* GeocodeManager.swift in Sources */,
@@ -643,7 +651,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LifeAPP/LifeAPP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7VWHLZ2Z9V;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
@@ -667,7 +675,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LifeAPP/LifeAPP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7VWHLZ2Z9V;
 				INFOPLIST_FILE = LifeAPP/Info.plist;
