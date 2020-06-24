@@ -58,7 +58,6 @@ class OilVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
-        
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage = image
         

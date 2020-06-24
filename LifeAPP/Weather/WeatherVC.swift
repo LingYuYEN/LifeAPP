@@ -18,17 +18,6 @@ class WeatherVC: UIViewController {
     @IBOutlet var pickerContentView: UIView!
     @IBOutlet var pickerView: UIPickerView!
     
-    @IBOutlet var gradientView: UIView! {
-        didSet {
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = gradientView.bounds
-            gradientLayer.colors = [UIColor.set(red: 4, green: 190, blue: 254).cgColor, UIColor.set(red: 68, green: 129, blue: 235).cgColor]
-            gradientLayer.startPoint = CGPoint(x: 1, y: 0)
-            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-            gradientView.layer.addSublayer(gradientLayer)
-        }
-    }
-    
     @IBOutlet var contentView: UIView! {
         didSet {
             contentView.frame.size.width = screen.width
@@ -154,6 +143,7 @@ class WeatherVC: UIViewController {
         "澎湖縣" : (23.827306,119.3869569)
     ]
     
+    @IBOutlet var naviBar: UINavigationBar!
     
     var shareMessage = ""
     var wxDescription = ""
@@ -163,7 +153,11 @@ class WeatherVC: UIViewController {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage = image
-        self.navigationController?.navigationBar.isHidden = false
+        
+        naviBar.setBackgroundImage(image, for: .default)
+        naviBar.shadowImage = image
+        
+        self.navigationController?.navigationBar.isHidden = true
         
         
         setupUI()
@@ -242,7 +236,8 @@ class WeatherVC: UIViewController {
         activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
         
         // 必須將 locationsBtn 指向 titleView 才可使用
-        self.navigationItem.titleView = locationsBtn
+        self.navigationController?.navigationItem.titleView = locationsBtn
+//        self.navigationItem.titleView = locationsBtn
         //        self.navigationItem.titleView = locationContentView
         
         refreshControl = UIRefreshControl()
@@ -252,11 +247,6 @@ class WeatherVC: UIViewController {
         self.scrollView.refreshControl = refreshControl
         
         isConnect()
-        if #available(iOS 13.0, *) {
-            let barAppearance =  UINavigationBarAppearance()
-            barAppearance.configureWithTransparentBackground()
-            navigationController?.navigationBar.standardAppearance = barAppearance
-        }
         
         let nib = UINib(nibName: "TextCollectionViewCell", bundle: nil)
         let imageNib = UINib(nibName: "ImageCollectionViewCell", bundle: nil)
