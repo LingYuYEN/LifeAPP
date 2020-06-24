@@ -516,6 +516,7 @@
                         <outlet property="locationContentView" destination="8SL-m0-55M" id="EE9-LA-oyB"/>
                         <outlet property="locationsBtn" destination="T0Y-F9-bJh" id="way-cp-W3w"/>
                         <outlet property="naviBar" destination="LFd-yn-RWv" id="uoj-a6-8dB"/>
+                        <outlet property="naviItem" destination="kh8-WK-bAZ" id="ejV-mY-9LS"/>
                         <outlet property="nowTempLabel" destination="Ekq-Dx-vAl" id="gQx-gV-8CM"/>
                         <outlet property="pickerContentView" destination="OaX-te-XBA" id="I9K-2Z-VvG"/>
                         <outlet property="pickerView" destination="1DO-7q-cZL" id="LVf-xK-bkA"/>

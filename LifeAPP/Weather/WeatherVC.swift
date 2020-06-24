@@ -144,6 +144,8 @@ class WeatherVC: UIViewController {
     ]
     
     @IBOutlet var naviBar: UINavigationBar!
+    @IBOutlet var naviItem: UINavigationItem!
+    
     
     var shareMessage = ""
     var wxDescription = ""
@@ -157,6 +159,9 @@ class WeatherVC: UIViewController {
         naviBar.setBackgroundImage(image, for: .default)
         naviBar.shadowImage = image
         
+        // 必須將 locationsBtn 指向 titleView 才可使用
+        self.naviItem.titleView = locationsBtn
+
         self.navigationController?.navigationBar.isHidden = true
         
         
@@ -235,8 +240,9 @@ class WeatherVC: UIViewController {
         myLocationManager = CLLocationManager()
         activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
         
-        // 必須將 locationsBtn 指向 titleView 才可使用
-        self.navigationController?.navigationItem.titleView = locationsBtn
+        
+        
+        
 //        self.navigationItem.titleView = locationsBtn
         //        self.navigationItem.titleView = locationContentView
         
@@ -271,6 +277,7 @@ class WeatherVC: UIViewController {
         guard let pop = model.rain.pop else { return }
         
         self.locationsBtn.setTitle(self.positionCity, for: .normal)
+        self.locationsBtn.setImage(UIImage(named: "down"), for: .normal)
         self.wxDescriptionLabel.text = model.weather.wxDescription
         self.nowTempLabel.text = "\(temp)"
         self.symbolLabel.isHidden = self.nowTempLabel.text == "" ? true : false
@@ -354,7 +361,7 @@ class WeatherVC: UIViewController {
         self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         self.bannerView.rootViewController = self
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         self.bannerView.load(GADRequest())
         self.bannerView.delegate = self
     }
