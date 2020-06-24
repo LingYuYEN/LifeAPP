@@ -260,6 +260,7 @@ class PostalVC: UIViewController {
     @IBAction func onDismissClick(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     func setUI() {
         loadBannerView()
         
