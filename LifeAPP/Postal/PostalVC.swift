@@ -247,8 +247,14 @@ class PostalVC: UIViewController {
     
     @IBAction func onSearchBtnClick(_ sender: UIButton) {
         
-        self.tableView.isHidden = false
-        self.tableView.reloadData()
+        if self.cellDefaultTitleArr[1] == "選擇區域" {
+            let postalDetailVC = PostalDetailVC.loadFromNib()
+            postalDetailVC.modalPresentationStyle = .overFullScreen
+            self.present(postalDetailVC, animated: false, completion: nil)
+        } else {
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func onDismissClick(_ sender: UIBarButtonItem) {
@@ -376,7 +382,7 @@ extension PostalVC: UITableViewDataSource {
 
 extension PostalVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36 * screenSceleHeight
+        return 48 * screenSceleHeight
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "PostalTableViewHeaderView")

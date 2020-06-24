@@ -35,21 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // show the dialog at a more appropriate time move this registration accordingly.
         UNUserNotificationCenter.current().delegate = self
         
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in}
-        application.registerForRemoteNotifications()
+//        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in}
+//        application.registerForRemoteNotifications()
 
-//        if #available(iOS 10.0, *) {
-//          UNUserNotificationCenter.current().delegate = self
-//
-//          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//          UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in
-//
-//          }
-//        } else {
-//          let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-//          application.registerUserNotificationSettings(settings)
-//        }
+        if #available(iOS 10.0, *) {
+          UNUserNotificationCenter.current().delegate = self
+
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (state, error) in
+
+          }
+        } else {
+          let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
         
         let navigationController = UINavigationController()
         let navigationBar = navigationController.navigationBar
