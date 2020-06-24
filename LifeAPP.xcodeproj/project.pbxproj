@@ -20,6 +20,7 @@
 		1345920D24A2FF1100A9D3DF /* ZipCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345920C24A2FF1100A9D3DF /* ZipCodeManager.swift */; };
 		1345921124A32D5200A9D3DF /* PostalDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345920F24A32D5200A9D3DF /* PostalDetailVC.swift */; };
 		1345921224A32D5200A9D3DF /* PostalDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1345921024A32D5200A9D3DF /* PostalDetailVC.xib */; };
+		1345921424A3590D00A9D3DF /* VersionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345921324A3590D00A9D3DF /* VersionModel.swift */; };
 		1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5D624848ADF0036E4A2 /* DetailVC.swift */; };
 		1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5D724848ADF0036E4A2 /* DetailVC.xib */; };
 		1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */; };
@@ -84,6 +85,7 @@
 		1345920C24A2FF1100A9D3DF /* ZipCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipCodeManager.swift; sourceTree = "<group>"; };
 		1345920F24A32D5200A9D3DF /* PostalDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalDetailVC.swift; sourceTree = "<group>"; };
 		1345921024A32D5200A9D3DF /* PostalDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostalDetailVC.xib; sourceTree = "<group>"; };
+		1345921324A3590D00A9D3DF /* VersionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionModel.swift; sourceTree = "<group>"; };
 		1347E5D624848ADF0036E4A2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1347E5D724848ADF0036E4A2 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				1347E6172487757D0036E4A2 /* OilModel.swift */,
 				13EA25AB248E2F640044DFAA /* WeatherModel.swift */,
 				13CAC6ED24A05A2600EEDA14 /* ZipFiveModel.swift */,
+				1345921324A3590D00A9D3DF /* VersionModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				1345921124A32D5200A9D3DF /* PostalDetailVC.swift in Sources */,
 				1347E5EA248632060036E4A2 /* MenuTableViewCell.swift in Sources */,
 				1347E5EF24863C0F0036E4A2 /* OilVC.swift in Sources */,
+				1345921424A3590D00A9D3DF /* VersionModel.swift in Sources */,
 				13552EA6247B915100CA895E /* Extension.swift in Sources */,
 				13EA25EC24931DBE0044DFAA /* NewHomeCollectionViewCell.swift in Sources */,
 				1347E5E424862BFD0036E4A2 /* MenuVC.swift in Sources */,

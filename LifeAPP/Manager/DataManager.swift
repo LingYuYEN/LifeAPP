@@ -17,6 +17,23 @@ class DataManager {
     let baseUrl = "https://opendata.cwb.gov.tw/api"
     let wetherApiKey = "CWB-CB4BCD6A-E710-4672-A9BF-8DB65AAA81CD"
  
+    
+    
+    /// 取得在 Apple 的版本
+    func getAppVersionWithWeb() {
+        let urlStr = "http://itunes.apple.com/tw/lookup?bundleId=co.conquers.LifeAPP"
+        guard let url = URL(string: urlStr) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else { return }
+            
+        }
+        task.resume()
+    }
+    
+    
+    
+    
+    
     /// 取得天氣資訊
     func getWeather(lat: Double, lon: Double, city: String, completed: @escaping (WeatherModel?, Bool?) -> (Void)) {
     //    let urlStr = "http://172.104.71.209:2000/api/weather/?lat=22.631505&lon=120.296738&city=%E9%AB%98%E9%9B%84%E5%B8%82"
