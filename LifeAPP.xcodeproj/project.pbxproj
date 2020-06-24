@@ -17,6 +17,7 @@
 		133645F0249C5D1B00A157BA /* NewHomeOilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133645EE249C5D1B00A157BA /* NewHomeOilCell.xib */; };
 		133645F4249E094A00A157BA /* PostalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133645F2249E094A00A157BA /* PostalVC.swift */; };
 		133645F5249E094A00A157BA /* PostalVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133645F3249E094A00A157BA /* PostalVC.xib */; };
+		1345920D24A2FF1100A9D3DF /* ZipCodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345920C24A2FF1100A9D3DF /* ZipCodeManager.swift */; };
 		1347E5D824848ADF0036E4A2 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5D624848ADF0036E4A2 /* DetailVC.swift */; };
 		1347E5D924848ADF0036E4A2 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347E5D724848ADF0036E4A2 /* DetailVC.xib */; };
 		1347E5DC2484C4470036E4A2 /* CardDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */; };
@@ -78,6 +79,7 @@
 		133645EE249C5D1B00A157BA /* NewHomeOilCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewHomeOilCell.xib; sourceTree = "<group>"; };
 		133645F2249E094A00A157BA /* PostalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalVC.swift; sourceTree = "<group>"; };
 		133645F3249E094A00A157BA /* PostalVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostalVC.xib; sourceTree = "<group>"; };
+		1345920C24A2FF1100A9D3DF /* ZipCodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipCodeManager.swift; sourceTree = "<group>"; };
 		1347E5D624848ADF0036E4A2 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1347E5D724848ADF0036E4A2 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1347E5DA2484C4470036E4A2 /* CardDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				13B05451247CE9A000B85357 /* ClientManager.swift */,
 				13B05453247CE9AD00B85357 /* DataManager.swift */,
 				13B1B341247F4A44003FC8F2 /* GeocodeManager.swift */,
+				1345920C24A2FF1100A9D3DF /* ZipCodeManager.swift */,
 				13EA25A9248E27F80044DFAA /* NetStatus.swift */,
 			);
 			path = Manager;
@@ -498,6 +501,7 @@
 				1347E5F3248654370036E4A2 /* OilCollectionViewCell.swift in Sources */,
 				133645EF249C5D1B00A157BA /* NewHomeOilCell.swift in Sources */,
 				13552E94247B8E5A00CA895E /* SceneDelegate.swift in Sources */,
+				1345920D24A2FF1100A9D3DF /* ZipCodeManager.swift in Sources */,
 				1347E5EA248632060036E4A2 /* MenuTableViewCell.swift in Sources */,
 				1347E5EF24863C0F0036E4A2 /* OilVC.swift in Sources */,
 				13552EA6247B915100CA895E /* Extension.swift in Sources */,

@@ -82,6 +82,10 @@ class PostalVC: UIViewController {
     var collectionSelectIndex = IndexPath()
     var pickerSelectIndex = Int()
     
+    var cityRow = Int()
+    var areaRow: Int?
+    var roadRow: Int?
+    
     var zipCode = String()
     var area = String()
     var road = String()
@@ -89,8 +93,7 @@ class PostalVC: UIViewController {
     
     var bannerView: GADBannerView!
     
-    var zipFiveModel: [ZipFiveModel]?
-    
+    var zipFiveModels: [ZipFiveModel]?
     
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
@@ -104,6 +107,8 @@ class PostalVC: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,107 +126,119 @@ class PostalVC: UIViewController {
         pickerView.pickerView.delegate = self
         
         
-        getZipCode(city: "", area: "") { (_) -> (Void) in
-            
-            DispatchQueue .main .async {
-                self.pickerView.labels = self.cityPickerNames
-                self.pickerView.pickerView.reloadAllComponents()
-            }
+        let models = ZipCodeManager.shared.models
+        cityArr = [String]()
+        
+        // 先取得縣市 pickerView Title
+        for model in models {
+            cityArr.append(model.city)
         }
+        
+        self.cityPickerNames = cityArr.removingDuplicates()
+        
+        
+        
         
         setUI()
     }
     
-    func getZipCode(city: String = "", area: String = "", road: String = "", completed: @escaping (String?) -> (Void)) {
-        activityIndicatorView.isHidden = false
-        DataManager.shared.getZipFive { (models, error) -> (Void) in
-            guard let models = models else { return }
-            self.zipFiveModel = models
-            
-            var newCityPickerNames = [String]()
-            var newAreaPickerNames = [String]()
-            var newRoadPickerNames = [String]()
-            
-            var zipResult = [String]()
-            var areaResult = [String]()
-            var roadResult = [String]()
-            var scopeResult = [String]()
-            
-//            var results =  [result]()
-            
-            for model in models {
-                newCityPickerNames.append(model.city)
-                
-                if model.city == city {
-                    newAreaPickerNames.append(model.area)
-                }
-                
-                if model.area == area {
-                    newRoadPickerNames.append(model.road)
-                }
-                
-                if city == model.city && area == model.area && road == "八德路１段" {
-                    
-                    zipResult.append(model.zip5)
-                    areaResult.append(model.area)
-                    roadResult.append(model.road)
-                    scopeResult.append(model.scope)
-                }
-                
-                self.zipFiveArr = zipResult
-                self.areaArr = areaResult
-                self.roadArr = roadResult
-                self.scopeArr = scopeResult
-            }
-            print("print(city, area, road)")
-            print(city, area, road)
-            
-            print("print(self.zipFiveArr, self.areaArr, self.roadArr, self.scopeArr)")
-            print(self.zipFiveArr, self.areaArr, self.roadArr, self.scopeArr)
-            
-            self.cityPickerNames = newCityPickerNames.removingDuplicates()
-            self.areaPickerNames = newAreaPickerNames.removingDuplicates()
-            self.roadPickerNames = newRoadPickerNames.removingDuplicates()
-            
-            
-            print("=====================")
-            print(self.cityPickerNames)
-            print(self.areaPickerNames)
-            print(self.roadPickerNames)
-            print("=====================")
-            
-            
-            
-            DispatchQueue.main.async {
-                self.activityIndicatorView.isHidden = true
-                self.collectionView.reloadData()
-            }
-        }
-    }
+
     
     @objc func doneAction() {
-        self.pickerViewIsHidden(bool: true)
-       
+        
+        areaArr = [String]()
+        roadArr = [String]()
+        
         switch collectionSelectIndex.row {
         case 0:
-            getZipCode(city: self.cityPickerNames[self.pickerView.pickerView.selectedRow(inComponent: 0)], area: "") { _ -> (Void) in
-                
-            }
-            self.cellDefaultTitleArr[0] = self.cityPickerNames[self.pickerView.pickerView.selectedRow(inComponent: 0)]
+            self.cityRow = self.pickerView.pickerView.selectedRow(inComponent: 0)
         case 1:
-            getZipCode(city: "", area: self.areaPickerNames[self.pickerView.pickerView.selectedRow(inComponent: 0)]) { _ -> (Void) in
-            }
-            self.cellDefaultTitleArr[1] = self.areaPickerNames[self.pickerView.pickerView.selectedRow(inComponent: 0)]
+            self.areaRow = self.pickerView.pickerView.selectedRow(inComponent: 0)
         case 2:
-            self.cellDefaultTitleArr[2] = self.roadPickerNames[self.pickerView.pickerView.selectedRow(inComponent: 0)]
-            
-            
+            self.roadRow = self.pickerView.pickerView.selectedRow(inComponent: 0)
         default:
             break
         }
+        pickerSelectIndex = self.pickerView.pickerView.selectedRow(inComponent: 0)
         
+        self.cellDefaultTitleArr[0] = self.cityPickerNames[self.cityRow]
+        
+        // 如果縣市已有值，則取得 Area pickerView title
+        if self.cityPickerNames.count != 0 {
+            let cityModels = ZipCodeManager.shared.search(city: self.cityPickerNames[self.cityRow], area: "", road: "")
+            print("cityModels: ", cityModels)
+            
+            for cityModel in cityModels {
+                areaArr.append(cityModel.area)
+            }
+            
+            self.areaPickerNames = areaArr.removingDuplicates()
+            
+            if let areaRow = self.areaRow {
+                self.cellDefaultTitleArr[1] = self.areaPickerNames[areaRow]
+            } else {
+                self.cellDefaultTitleArr[1] = "選擇區域"
+            }
+            
+        }
+        
+        
+        // 如果 Area 已有值，則取得 road pickerView title
+        if self.areaPickerNames.count != 0 {
+            if let areaRow = self.areaRow {
+                let areaModels = ZipCodeManager.shared.search(city: self.cityPickerNames[self.cityRow], area: self.areaPickerNames[areaRow], road: "")
+                print("areaModels: ", areaModels)
+                
+                for areaModel in areaModels {
+                    roadArr.append(areaModel.road)
+                }
+            }
+            
+            
+            
+            self.roadPickerNames = roadArr.removingDuplicates()
+            
+            if let roadRow = self.roadRow {
+                self.cellDefaultTitleArr[2] = self.roadPickerNames[roadRow]
+            } else {
+                self.cellDefaultTitleArr[2] = "選擇區域路名段號"
+            }
+        }
+        
+        var areaMap = ""
+        if self.cellDefaultTitleArr[1] != "選擇區域" {
+            areaMap = self.cellDefaultTitleArr[1]
+        }
+        
+        var roadMap = ""
+        if self.cellDefaultTitleArr[2] != "選擇區域路名段號" {
+            roadMap = self.cellDefaultTitleArr[2]
+        }
+        
+        let dataArr = ZipCodeManager.shared.search(city: self.cellDefaultTitleArr[0], area: areaMap, road: roadMap)
+        
+        var zipResult = [String]()
+        var areaResult = [String]()
+        var roadResult = [String]()
+        var scopeResult = [String]()
+        
+        for data in dataArr {
+            zipResult.append(data.zip5)
+            areaResult.append(data.area)
+            roadResult.append(data.road)
+            scopeResult.append(data.scope)
+        }
+        
+        self.zipFiveArr = zipResult
+        self.areaArr = areaResult
+        self.roadArr = roadResult
+        self.scopeArr = scopeResult
+        
+        print("cellDefaultTitleArr: ")
+        print(self.cellDefaultTitleArr)
+        
+        self.pickerViewIsHidden(bool: true)
         self.collectionView.reloadData()
-        
     }
     
     @objc func cancelAction() {
@@ -229,32 +246,8 @@ class PostalVC: UIViewController {
     }
     
     @IBAction func onSearchBtnClick(_ sender: UIButton) {
-        print(self.cellDefaultTitleArr)
         
-        guard let models = self.zipFiveModel else { return }
-        
-        var newZipFiveArr = [String]()
-        var newAreaArr = [String]()
-        var newRoadArr = [String]()
-        var newScopeArr = [String]()
-        
-        for model in models {
-            if model.city == self.cellDefaultTitleArr[0] && model.area == self.cellDefaultTitleArr[1] && model.road == self.cellDefaultTitleArr[2] {
-                print(model)
-                
-                newZipFiveArr.append(model.zip5)
-                newAreaArr.append(model.area)
-                newRoadArr.append(model.road)
-                newScopeArr.append(model.scope)
-                
-            }
-            
-            self.zipFiveArr = newZipFiveArr
-            self.areaArr = newAreaArr
-            self.roadArr = newRoadArr
-            self.scopeArr = newScopeArr
-        }
-        
+        self.tableView.isHidden = false
         self.tableView.reloadData()
     }
     

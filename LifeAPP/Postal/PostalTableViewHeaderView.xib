@@ -51,7 +51,7 @@
                 <outlet property="roadLabel" destination="70I-EH-Hh9" id="XGJ-hJ-VvU"/>
                 <outlet property="zipCodeLabel" destination="bhw-9S-GCE" id="LDN-0w-cpm"/>
             </connections>
-            <point key="canvasLocation" x="280.43478260869568" y="269.02173913043481"/>
+            <point key="canvasLocation" x="279.71014492753625" y="269.02173913043481"/>
         </view>
     </objects>
 </document>

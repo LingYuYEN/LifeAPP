@@ -97,8 +97,8 @@
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofE-dE-HKg">
                                     <rect key="frame" x="0.0" y="355.5" width="389" height="378.5"/>
                                     <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-an-1ZZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="378.5"/>
+                                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-an-1ZZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="470" height="378.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="separatorColor" red="0.2901960784" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <inset key="separatorInset" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -126,7 +126,7 @@
                                 <constraint firstItem="ofE-dE-HKg" firstAttribute="top" secondItem="Rub-lk-fF0" secondAttribute="bottom" constant="20" id="4Q3-47-nOA"/>
                                 <constraint firstItem="Vvr-an-1ZZ" firstAttribute="height" secondItem="0bw-Eb-Emm" secondAttribute="height" multiplier="0.451379" id="8pV-cC-R3X"/>
                                 <constraint firstItem="FNf-JK-h3d" firstAttribute="trailing" secondItem="nBu-4h-N9C" secondAttribute="trailing" id="Arg-ly-aCL"/>
-                                <constraint firstItem="Vvr-an-1ZZ" firstAttribute="width" secondItem="0bw-Eb-Emm" secondAttribute="width" id="FR3-1U-jzN"/>
+                                <constraint firstItem="Vvr-an-1ZZ" firstAttribute="width" secondItem="0bw-Eb-Emm" secondAttribute="width" multiplier="470:414" id="FR3-1U-jzN"/>
                                 <constraint firstItem="ofE-dE-HKg" firstAttribute="leading" secondItem="0bw-Eb-Emm" secondAttribute="leading" id="HeC-It-94G"/>
                                 <constraint firstItem="Rub-lk-fF0" firstAttribute="centerX" secondItem="0bw-Eb-Emm" secondAttribute="centerX" id="IQj-XD-dOm"/>
                                 <constraint firstItem="Rub-lk-fF0" firstAttribute="width" secondItem="0bw-Eb-Emm" secondAttribute="width" multiplier="0.316667" id="JN5-1m-duq"/>
@@ -157,7 +157,7 @@
                     <rect key="frame" x="0.0" y="912" width="414" height="313"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-zk-Sb8">
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-zk-Sb8">
                     <rect key="frame" x="157" y="398" width="100" height="100"/>
                     <color key="backgroundColor" white="1" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
