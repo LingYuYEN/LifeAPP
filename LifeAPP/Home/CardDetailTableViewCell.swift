@@ -14,7 +14,10 @@ class CardDetailTableViewCell: UITableViewCell {
            didSet {
                let gradientLayer = CAGradientLayer()
                gradientLayer.frame = gradientView.bounds
-               gradientLayer.colors = [UIColor.set(red: 4, green: 190, blue: 254).cgColor, UIColor.set(red: 68, green: 129, blue: 235).cgColor]
+               gradientLayer.colors = [
+                   UIColor.set(red: 1, green: 69, blue: 189).cgColor,
+                   UIColor.set(red: 2, green: 5, blue: 113).cgColor
+               ]
                gradientLayer.startPoint = CGPoint(x: 1, y: 0)
                gradientLayer.endPoint = CGPoint(x: 0, y: 1)
                gradientView.layer.cornerRadius = 8

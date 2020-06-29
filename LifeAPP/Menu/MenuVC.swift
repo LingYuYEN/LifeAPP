@@ -14,9 +14,9 @@ class MenuVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     
 //    let titleNameArr = ["天氣快報", "油價資訊", "振興券專區"]
-//    let titleImageNameArr = ["wetherIcon1", "oilIcon", "ticketIcon"]
+//    let titleImageNameArr = ["weatherIcon1", "oilIcon", "ticketIcon"]
     let titleNameArr = ["天氣快報", "油價資訊"]
-    let titleImageNameArr = ["wetherIcon1", "oilIcon"]
+    let titleImageNameArr = ["weatherIcon", "oilIcon"]
     let rowHeight = 130 * screenSceleHeight
     
     override func viewWillAppear(_ animated: Bool) {

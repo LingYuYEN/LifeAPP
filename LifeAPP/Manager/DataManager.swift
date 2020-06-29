@@ -17,8 +17,40 @@ class DataManager {
     let baseUrl = "https://opendata.cwb.gov.tw/api"
     let wetherApiKey = "CWB-CB4BCD6A-E710-4672-A9BF-8DB65AAA81CD"
  
+    var appVersion = String()
+    
+    /// 取得在 Apple 的版本，並判斷是否需要更新
+    func getAppVersionWithWeb(completed: @escaping (Bool) -> (Void)) {
+        
+        // 使用者當前 APP 版本
+        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
+            self.appVersion = appVersion
+        }
+        
+        let urlStr = "http://itunes.apple.com/tw/lookup?bundleId=co.conquers.LifeAPP"
+        guard let url = URL(string: urlStr) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else { return }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String : Any]
+                let results = json["results"] as! [[String : Any]]
+                let versionStr = results[0]["version"] as! String                
+                
+                // return true 則代表需更新
+                completed(self.appVersion != versionStr)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    
+    
+    
+    
     /// 取得天氣資訊
-    func getWeather(lat: Double, lon: Double, city: String, completed: @escaping (WetherModel?, Bool?) -> (Void)) {
+    func getWeather(lat: Double, lon: Double, city: String, completed: @escaping (WeatherModel?, Bool?) -> (Void)) {
     //    let urlStr = "http://172.104.71.209:2000/api/weather/?lat=22.631505&lon=120.296738&city=%E9%AB%98%E9%9B%84%E5%B8%82"
         
         let urlStr = "http://172.104.71.209:2000/api/weather/?lat=\(lat)&lon=\(lon)&city=\(city)"
@@ -33,7 +65,7 @@ class DataManager {
         let task = session.dataTask(with: url) { (data, res, error) in
             guard let data = data else { return }
             do {
-                let model = try JSONDecoder().decode(WetherModel.self, from: data)
+                let model = try JSONDecoder().decode(WeatherModel.self, from: data)
                 completed(model, false)
             } catch {
                 completed(nil, true)
@@ -59,5 +91,24 @@ class DataManager {
         }
         task.resume()
     }
+    
+    /// 取得郵遞資訊（3+2）
+    func getZipFive(completed: @escaping ([ZipFiveModel]?, Error?) -> (Void)) {
+        
+        guard let url = Bundle.main.url(forResource: "Zip5", withExtension:"json") else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else { return }
+            do {
+                let model = try JSONDecoder().decode([ZipFiveModel].self, from: data)
+                completed(model, nil)
+            } catch {
+                print("error:\(error)")
+                completed(nil, error)
+            }
+        }
+        task.resume()
+    }
+    
+    
 }
-
