@@ -1,19 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cellBgImg.jpg",
       "idiom" : "universal",
+      "filename" : "cellBgImg.png",
       "scale" : "1x"
     },
     {
-      "filename" : "cellBgImg@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "cellBgImg@3x.jpg",
-      "scale" : "3x",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

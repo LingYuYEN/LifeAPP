@@ -10,17 +10,31 @@ import UIKit
 
 class TicketVC: UIViewController {
 
+    
+    @IBOutlet var naviBar: UINavigationBar!
     @IBOutlet var collectionView: UICollectionView!
     
     
-    let cellNames = ["介紹、領取、使用懶人包", "信用卡優惠懶人包", "商家加值懶人包"]
-        
+    let titleNames = ["3000 元 振興三倍券", "800 元 振興抵用券", "600 元 藝FUN券", "600 元 農遊券"]
+    let memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
+    
     override func viewDidAppear(_ animated: Bool) {
         let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: UIColor.white,
                                                               NSAttributedString.Key.kern: 1,
                                                               NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 21)!]
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationItem.title = "快手振興"
+        naviBar.titleTextAttributes = textAttributes
+        
+        let image = UIImage()
+        
+        naviBar.setBackgroundImage(image, for: .default)
+        naviBar.shadowImage = image
+        
+        
+        // 取消預設 back icon
+        self.navigationController?.navigationBar.backIndicatorImage = image
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
+        
+        self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +47,13 @@ class TicketVC: UIViewController {
 
 extension TicketVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellNames.count
+        return titleNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TicketCollectionViewCell", for: indexPath) as! TicketCollectionViewCell
-        cell.titleLabel.text = cellNames[indexPath.row]
-        
+        cell.titleLabel.text = titleNames[indexPath.row]
+        cell.memoLabel.text = memoNames[indexPath.row]
         return cell
     }
     
@@ -47,8 +61,12 @@ extension TicketVC: UICollectionViewDataSource {
 }
 extension TicketVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(cellNames[indexPath.row])
+        print(titleNames[indexPath.row])
+        print(memoNames[indexPath.row])
         
+        let ticketDetailVC = TicketDetailVC.loadFromNib()
+//        ticketDetailVC.modalPresentationStyle = .fullScreen
+        self.present(ticketDetailVC, animated: true, completion: nil)
     }
 }
 extension TicketVC: UICollectionViewDelegateFlowLayout {
@@ -71,7 +89,7 @@ extension TicketVC: UICollectionViewDelegateFlowLayout {
     ///   - indexPath: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 364 * screenScaleWidth , height: 100)
+        return CGSize(width: 364 * screenScaleWidth , height: 100 * screenSceleHeight)
     }
     
     /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)

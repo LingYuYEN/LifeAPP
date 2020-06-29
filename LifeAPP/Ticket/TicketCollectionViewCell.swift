@@ -12,8 +12,8 @@ class TicketCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var gradientView: UIView!
     @IBOutlet var cellContentView: UIView!
-    @IBOutlet var imageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var memoLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,24 +22,18 @@ class TicketCollectionViewCell: UICollectionViewCell {
     
     func setUI() {
         
-        self.layer.cornerRadius = 8 * screenScaleWidth
-        self.layer.applySketchShadow(color: .set(red: 13, green: 121, blue: 183), alpha: 1, x: 0, y: 0, blur: 5, spread: 0)
-        self.layer.masksToBounds = false
+        gradientView.setGradientBorder(
+            lineWidth: 1,
+            colors: [
+                UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
+                UIColor.set(red: 6, green: 168, blue: 255)
+            ],
+            bounds: CGRect(x: 0, y: 0, width: 364 * screenScaleWidth , height: 100 * screenSceleHeight)
+        )
 
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.bounds
-        gradientLayer.colors = [UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98).cgColor, UIColor.set(red: 6, green: 168, blue: 255).cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        gradientLayer.cornerRadius = 8 * screenScaleWidth
-
-        gradientView.layer.addSublayer(gradientLayer)
-
-        self.cellContentView.layer.cornerRadius = 8 * screenScaleWidth
-        self.cellContentView.layer.masksToBounds = false
-
-        self.imageView.layer.cornerRadius = 8 * screenScaleWidth
-        self.imageView.clipsToBounds = true
+        gradientView.layer.cornerRadius = 8 * screenScaleWidth
+        
+        self.layoutIfNeeded()
     }
 
 }
