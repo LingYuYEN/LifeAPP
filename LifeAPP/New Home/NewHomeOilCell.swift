@@ -46,6 +46,8 @@ class NewHomeOilCell: UICollectionViewCell {
             bounds: CGRect(x: 0, y: 0, width: 364 * screenScaleWidth , height: 148 * screenSceleHeight)
         )
 
+        self.layer.cornerRadius = 8 * screenScaleWidth
+        
         self.layoutIfNeeded()
     }
 }

@@ -21,6 +21,8 @@ class PostalDetailVC: UIViewController {
     func setUI() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
+        gradientLayer.frame.size.width = 361 * screenScaleWidth
+        gradientLayer.frame.size.height = 160 * screenSceleHeight
         gradientLayer.colors = [UIColor.set(red: 61, green: 60, blue: 151).cgColor, UIColor.set(red: 52, green: 229, blue: 154).cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)

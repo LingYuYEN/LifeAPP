@@ -581,10 +581,9 @@ public extension UIView {
         border.colors = colors.map { return $0.cgColor }
         border.startPoint = startPoint
         border.endPoint = endPoint
-        border.cornerRadius = 10
         
         let mask = CAShapeLayer()
-        mask.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
+        mask.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8 * screenScaleWidth).cgPath
         mask.fillColor = UIColor.clear.cgColor
         mask.strokeColor = UIColor.white.cgColor
         mask.lineWidth = lineWidth

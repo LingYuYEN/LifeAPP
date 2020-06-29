@@ -275,8 +275,9 @@ class PostalVC: UIViewController {
                 UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
                 UIColor.set(red: 6, green: 168, blue: 255)
             ],
-            bounds: self.searchBtnContentView.bounds
+            bounds: CGRect(x: 0, y: 0, width: 131 * screenScaleWidth, height: 39.5 * screenSceleHeight)
         )
+        searchBtnContentView.layer.cornerRadius = 8 * screenScaleWidth
     }
     
 }

@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "oilBgImg.jpg",
+      "filename" : "oilBgImg.png",
       "scale" : "1x"
     },
     {
-      "filename" : "oilBgImg@2x.jpg",
-      "scale" : "2x",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "2x"
     },
     {
-      "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "oilBgImg@3x.jpg"
+      "scale" : "3x"
     }
   ],
   "info" : {
