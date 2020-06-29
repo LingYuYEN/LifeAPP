@@ -154,7 +154,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="azp-RF-E0b"/>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBA-U0-vHW" customClass="PickerView" customModule="LifeAPP" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="912" width="414" height="313"/>
+                    <rect key="frame" x="0.0" y="912" width="414" height="267"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-zk-Sb8">
@@ -183,9 +183,9 @@
                 <constraint firstItem="hOe-ny-blu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jQg-7H-nWr"/>
                 <constraint firstItem="n5D-zk-Sb8" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.241546" id="mLS-W4-4a4"/>
                 <constraint firstItem="dvZ-IY-C2P" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qzV-MW-0CR"/>
-                <constraint firstItem="tBA-U0-vHW" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.349185" id="sRW-BA-UNe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SLn-Kl-8bw" secondAttribute="trailing" id="vNs-32-uic"/>
                 <constraint firstItem="tBA-U0-vHW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yRL-KA-rGw"/>
+                <constraint firstItem="tBA-U0-vHW" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.297991" id="yUT-gS-CUB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tBA-U0-vHW" secondAttribute="trailing" id="zQL-Ob-l5l"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

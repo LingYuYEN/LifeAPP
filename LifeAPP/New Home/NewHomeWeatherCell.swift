@@ -37,7 +37,8 @@ class NewHomeWeatherCell: UICollectionViewCell {
             colors: [
                 UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
                 UIColor.set(red: 6, green: 168, blue: 255)
-            ]
+            ],
+            bounds: CGRect(x: 0, y: 0, width: 364 * screenScaleWidth , height: 119 * screenSceleHeight)
         )
 
         self.layoutIfNeeded()

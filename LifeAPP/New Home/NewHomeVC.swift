@@ -62,6 +62,8 @@ class NewHomeVC: UIViewController {
     
     var bannerView: GADBannerView!
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
@@ -74,15 +76,22 @@ class NewHomeVC: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(customView: backImageView)
         self.navigationController?.navigationBar.isHidden = false
         
-        // 使用者當前 APP 版本
-//        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
-//            print("ＡＰＰ 版本號碼：  ", appVersion)
-//        }
+        
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        DataManager.shared.getAppVersionWithWeb { (isOld) -> (Void) in
+            if isOld {
+                print("需更新")
+            } else {
+                print("不需更新")
+            }
+        }
+        
         
         collectionView.register(UINib(nibName: "NewHomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeCollectionViewCell")
         collectionView.register(UINib(nibName: "NewHomeWeatherCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeWeatherCell")
@@ -325,6 +334,7 @@ extension NewHomeVC: UICollectionViewDataSource {
             cell.maxAndMinTempLabel.text = self.maxAndMinTemp
             cell.popLabel.text = "降雨機率 \(self.pop) %"
             cell.uviLabel.text = self.uviDescription
+            cell.frame.size = CGSize(width: 364 * screenScaleWidth , height: 119 * screenSceleHeight)
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeOilCell", for: indexPath) as! NewHomeOilCell
@@ -339,6 +349,7 @@ extension NewHomeVC: UICollectionViewDataSource {
             cell.oil95Label.text = self.oil95
             cell.oil98Label.text = self.oil98
             cell.oilDieselLabel.text = self.oilDiesel
+            cell.effectView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewHomeCollectionViewCell", for: indexPath) as! NewHomeCollectionViewCell
@@ -346,6 +357,16 @@ extension NewHomeVC: UICollectionViewDataSource {
             cell.titleLabel.text = vcIdMap[indexPath.row]
             return cell
         }
+        
+        
+//        switch indexPath.row {
+//        case 0:
+//            return CGSize(width: 364 * screenScaleWidth , height: 119 * screenSceleHeight)
+//        case 1:
+//            return CGSize(width: 364 * screenScaleWidth , height: 148 * screenSceleHeight)
+//        default:
+//            return CGSize(width: 364 * screenScaleWidth , height: 86 * screenSceleHeight)
+//        }
     }
     
     

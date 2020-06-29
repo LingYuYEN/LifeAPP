@@ -1027,7 +1027,7 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: (collectionView.frame.size.width - (44 * screenScaleWidth)) / 6 , height: (collectionView.frame.size.height - (15 * screen.height / 985)) / 4)
     }
     
-    /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)
+    /// 滑動方向為「垂直」的話即「上下」的間距(預設為垂直)
     ///
     /// - Parameters:
     ///   - collectionView: _
@@ -1038,7 +1038,7 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout {
         return 0 * screenSceleHeight
     }
     
-    /// 滑動方向為「垂直」的話即「左右」的間距(預設為重直)
+    /// 滑動方向為「垂直」的話即「左右」的間距(預設為垂直)
     ///
     /// - Parameters:
     ///   - collectionView: _

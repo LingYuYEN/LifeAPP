@@ -43,7 +43,7 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="4vW-UG-8Xb" firstAttribute="bottom" secondItem="ZTg-uK-7eu" secondAttribute="bottom" id="6c1-4p-PHO"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="4vW-UG-8Xb" secondAttribute="trailing" id="0aS-b7-x6D"/>
                 <constraint firstItem="Rnq-r5-NDt" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="7Ab-B9-O1V"/>
                 <constraint firstItem="Rnq-r5-NDt" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.10989" id="D8r-d8-aCD"/>
                 <constraint firstItem="sA0-Mk-OA5" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="centerX" multiplier="337:182" id="MPU-gO-Xmt"/>
@@ -51,10 +51,10 @@
                 <constraint firstItem="sA0-Mk-OA5" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="QAh-E0-2CU"/>
                 <constraint firstItem="sA0-Mk-OA5" firstAttribute="width" secondItem="4vW-UG-8Xb" secondAttribute="width" multiplier="0.0412088" id="WJp-Gc-aHW"/>
                 <constraint firstItem="lB2-yN-85g" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Xht-zB-BbF"/>
-                <constraint firstItem="4vW-UG-8Xb" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="aPK-B0-rAN"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="4vW-UG-8Xb" secondAttribute="trailing" id="o69-ol-v4u"/>
                 <constraint firstItem="sA0-Mk-OA5" firstAttribute="leading" secondItem="lB2-yN-85g" secondAttribute="trailing" constant="20" id="sGB-wV-igg"/>
                 <constraint firstItem="lB2-yN-85g" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="centerX" multiplier="87:182" id="soz-V5-HRs"/>
+                <constraint firstItem="4vW-UG-8Xb" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="t3S-2T-nKH"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="4vW-UG-8Xb" secondAttribute="bottom" id="uX1-0E-pyy"/>
                 <constraint firstItem="Rnq-r5-NDt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="centerX" multiplier="27:182" id="vVT-dX-Jk5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>

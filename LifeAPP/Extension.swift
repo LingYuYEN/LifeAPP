@@ -571,6 +571,7 @@ public extension UIView {
     func setGradientBorder(
         lineWidth: CGFloat,
         colors: [UIColor],
+        bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0),
         startPoint: CGPoint = CGPoint(x: 0, y: 0),
         endPoint: CGPoint = CGPoint(x: 1, y: 1)
     ) {

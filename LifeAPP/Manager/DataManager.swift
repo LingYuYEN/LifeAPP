@@ -17,15 +17,30 @@ class DataManager {
     let baseUrl = "https://opendata.cwb.gov.tw/api"
     let wetherApiKey = "CWB-CB4BCD6A-E710-4672-A9BF-8DB65AAA81CD"
  
+    var appVersion = String()
     
-    
-    /// 取得在 Apple 的版本
-    func getAppVersionWithWeb() {
+    /// 取得在 Apple 的版本，並判斷是否需要更新
+    func getAppVersionWithWeb(completed: @escaping (Bool) -> (Void)) {
+        
+        // 使用者當前 APP 版本
+        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
+            self.appVersion = appVersion
+        }
+        
         let urlStr = "http://itunes.apple.com/tw/lookup?bundleId=co.conquers.LifeAPP"
         guard let url = URL(string: urlStr) else { return }
         let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else { return }
-            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String : Any]
+                let results = json["results"] as! [[String : Any]]
+                let versionStr = results[0]["version"] as! String                
+                
+                // return true 則代表需更新
+                completed(self.appVersion != versionStr)
+            } catch {
+                print(error)
+            }
         }
         task.resume()
     }

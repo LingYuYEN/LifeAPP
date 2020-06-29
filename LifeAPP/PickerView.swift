@@ -40,13 +40,6 @@ class PickerView: UIView {
             contView.frame = bounds
             
             pickerView.setValue(UIColor.black, forKey: "textColor")
-    //        contView.setRoundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.topRight], with: 10)
-//            contView.layer.cornerRadius = 10
-//            contView.layer.shadowColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.2).cgColor
-//            contView.layer.shadowOffset = CGSize(width: 0, height: 0)
-//            contView.layer.shadowRadius = 10
-//            contView.layer.shadowOpacity = 1.0
-//            contView.layer.masksToBounds = false
             self.addSubview(contView)
         }
 

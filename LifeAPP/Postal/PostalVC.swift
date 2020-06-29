@@ -274,7 +274,8 @@ class PostalVC: UIViewController {
             colors: [
                 UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
                 UIColor.set(red: 6, green: 168, blue: 255)
-            ]
+            ],
+            bounds: self.searchBtnContentView.bounds
         )
     }
     
@@ -414,7 +415,7 @@ extension PostalVC: UIPickerViewDelegate {
 
 extension PostalVC {
     func pickerViewIsHidden(bool: Bool) {
-        self.pickerViewTop.constant = bool ? 50 : -257
+        self.pickerViewTop.constant = bool ? 50 * screenSceleHeight : -257 * screenSceleHeight
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }

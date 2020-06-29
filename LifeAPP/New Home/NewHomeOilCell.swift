@@ -22,6 +22,8 @@ class NewHomeOilCell: UICollectionViewCell {
     @IBOutlet var oil95Label: UILabel!
     @IBOutlet var oilDieselLabel: UILabel!
     
+    @IBOutlet var titleLabelBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var oil92LabelBottomConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,16 +34,16 @@ class NewHomeOilCell: UICollectionViewCell {
 
     func setUI() {
         
-//        effectView.layer.applySketchShadow(color: .set(red: 13, green: 121, blue: 183), alpha: 1, x: 0, y: 0, blur: 5, spread: 0)
-//        effectView.layer.applySketchShadow(color: .white, alpha: 1, x: 1, y: 1, blur: 3, spread: 0)
-//        effectView.layer.masksToBounds = false
+        titleLabelBottomConstraint.constant = 15 * screenSceleHeight
+        oil92LabelBottomConstraint.constant = 13 * screenSceleHeight
         
         effectView.setGradientBorder(
             lineWidth: 1,
             colors: [
                 UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
                 UIColor.set(red: 6, green: 168, blue: 255)
-            ]
+            ],
+            bounds: CGRect(x: 0, y: 0, width: 364 * screenScaleWidth , height: 148 * screenSceleHeight)
         )
 
         self.layoutIfNeeded()
