@@ -87,6 +87,25 @@ class NewHomeVC: UIViewController {
         DataManager.shared.getAppVersionWithWeb { (isOld) -> (Void) in
             if isOld {
                 print("需更新")
+                
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "有新版本啦！", message: "新增了郵遞區號查詢功能，優化部分頁面", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "立即更新", style: .default) { _ in
+                        print("立即更新")
+                        
+                        let urlStr = "itms-apps://apps.apple.com/tw/app/生活小百科/id1515688778"
+                        guard let newUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+                        guard let url = URL(string: newUrlStr) else { return }
+                        UIApplication.shared.open(url: url)
+                    }
+                    let cancelAction = UIAlertAction(title: "忽略此版本", style: .cancel, handler: nil)
+                    
+                    alertController.addAction(alertAction)
+                    alertController.addAction(cancelAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
             } else {
                 print("不需更新")
             }

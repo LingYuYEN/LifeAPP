@@ -37,6 +37,8 @@ class DataManager {
                 let versionStr = results[0]["version"] as! String                
                 
                 // return true 則代表需更新
+                print("使用者安裝版本: ", self.appVersion)
+                print("架上版本: ", versionStr)
                 completed(self.appVersion != versionStr)
             } catch {
                 print(error)
