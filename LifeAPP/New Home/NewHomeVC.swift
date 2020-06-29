@@ -377,7 +377,7 @@ extension NewHomeVC: UICollectionViewDelegate {
         
         switch indexPath.row {
         case 0:
-            let weatherVC = storyboard?.instantiateViewController(withIdentifier: id) as! WeatherVC
+            let weatherVC = storyboard?.instantiateViewController(withIdentifier: id) as! ViewController
             weatherVC.weatherModel = self.weatherModel
             weatherVC.positionCity = self.positionCity
             weatherVC.oneWeekWx = self.oneWeekWx

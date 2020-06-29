@@ -11,7 +11,7 @@ import GoogleMobileAds
 import CoreLocation
 import Network
 
-class WeatherVC: UIViewController {
+class ViewController: UIViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     
@@ -935,7 +935,7 @@ class WeatherVC: UIViewController {
     
 }
 
-extension WeatherVC: GADBannerViewDelegate {
+extension ViewController: GADBannerViewDelegate {
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("Banner loaded successfully")
@@ -949,7 +949,7 @@ extension WeatherVC: GADBannerViewDelegate {
     }
 }
 
-extension WeatherVC: GADInterstitialDelegate {
+extension ViewController: GADInterstitialDelegate {
     
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
         print("Interstitial loaded successfully")
@@ -961,7 +961,7 @@ extension WeatherVC: GADInterstitialDelegate {
     }
 }
 
-extension WeatherVC: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4
     }
@@ -998,12 +998,12 @@ extension WeatherVC: UICollectionViewDataSource {
 }
 
 
-extension WeatherVC: UICollectionViewDelegate {
+extension ViewController: UICollectionViewDelegate {
     
 }
 
 // MARK: - 設定 CollectionView Cell 與 Cell 之間的間距、距確 Super View 的距離等等
-extension WeatherVC: UICollectionViewDelegateFlowLayout {
+extension ViewController: UICollectionViewDelegateFlowLayout {
     
     /// 設定 Collection View 距離 Super View上、下、左、下間的距離
     ///
@@ -1050,7 +1050,7 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension WeatherVC: CLLocationManagerDelegate {
+extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -1209,7 +1209,7 @@ extension WeatherVC: CLLocationManagerDelegate {
     
 }
 
-extension WeatherVC: UIPickerViewDataSource {
+extension ViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -1225,12 +1225,12 @@ extension WeatherVC: UIPickerViewDataSource {
     
 }
 
-extension WeatherVC: UIPickerViewDelegate {
+extension ViewController: UIPickerViewDelegate {
     
     
     
 }
 
-extension WeatherVC: UIScrollViewDelegate {
+extension ViewController: UIScrollViewDelegate {
     
 }
