@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TicketDetailVC" customModule="LifeAPP" customModuleProvider="target">
             <connections>
+                <outlet property="naviBar" destination="QHg-FI-OAU" id="AtW-OL-pDq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="boG-HA-eJM" id="BgF-hI-1R5"/>
             </connections>
@@ -19,24 +20,51 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boG-HA-eJM">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newHomeBgImg" translatesAutoresizingMaskIntoConstraints="NO" id="9ea-jh-gHm">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                </imageView>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boG-HA-eJM">
+                    <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <wkWebViewConfiguration key="configuration">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHg-FI-OAU">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="小資振興" id="Mee-uv-BRd">
+                            <barButtonItem key="leftBarButtonItem" title="Item" image="leftBarButtonIcon" id="eGl-ky-uw7">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="backAction:" destination="-1" id="vRh-Yf-aQ0"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9ea-jh-gHm" secondAttribute="trailing" id="9ey-gG-ayW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="boG-HA-eJM" secondAttribute="bottom" id="AXn-0x-dck"/>
+                <constraint firstItem="9ea-jh-gHm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Hqz-Vi-cv2"/>
+                <constraint firstItem="QHg-FI-OAU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="JaU-wz-Lra"/>
+                <constraint firstItem="9ea-jh-gHm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TZD-lh-G0F"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="boG-HA-eJM" secondAttribute="trailing" id="UeV-nQ-YrB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9ea-jh-gHm" secondAttribute="bottom" id="Xqq-c1-sEQ"/>
                 <constraint firstItem="boG-HA-eJM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eVf-Wc-LYf"/>
-                <constraint firstItem="boG-HA-eJM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gzl-PC-GL8"/>
+                <constraint firstItem="QHg-FI-OAU" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="guk-Ln-DUD"/>
+                <constraint firstItem="boG-HA-eJM" firstAttribute="top" secondItem="QHg-FI-OAU" secondAttribute="bottom" id="ulq-d7-qM2"/>
+                <constraint firstItem="QHg-FI-OAU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="veL-T0-mHm"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="148"/>
+            <point key="canvasLocation" x="137.68115942028987" y="147.55434782608697"/>
         </view>
     </objects>
+    <resources>
+        <image name="leftBarButtonIcon" width="29" height="30"/>
+        <image name="newHomeBgImg" width="1242" height="2208"/>
+    </resources>
 </document>

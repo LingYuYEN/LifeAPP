@@ -456,7 +456,7 @@ extension UIColor {
 }
 
 extension UIView {
-    // 將當前是圖轉為 UIImage
+    // 將當前視圖轉為 UIImage
     func snapImage() -> UIImage {
         let snapImageView = UIImageView()
         snapImageView.frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height - 50)
@@ -621,5 +621,16 @@ extension Array where Element: Hashable {
    }
 }
 
+extension UIImage {
+    convenience init(color: UIColor, size: CGSize) {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        color.set()
+        let ctx = UIGraphicsGetCurrentContext()!
+        ctx.fill(CGRect(origin: .zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
 
+        self.init(data: image.pngData()!)!
+    }
+}
 

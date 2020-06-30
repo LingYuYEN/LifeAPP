@@ -40,8 +40,10 @@ class TicketVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        // 移除分隔線
+        let image = UIImage()
+                
+        segmentControl.setDividerImage(image, forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
         segmentControl.setTitleTextAttributes([.foregroundColor : UIColor.black, .kern : CGFloat(1), .font : UIFont(name: "PingFangTC-Regular", size: CGFloat(17))!], for: .selected)
         segmentControl.setTitleTextAttributes([.foregroundColor : UIColor.set(red: 242, green: 115, blue: 112), .kern : CGFloat(1), .font : UIFont(name: "PingFangTC-Regular", size: CGFloat(17))!], for: .normal)
@@ -114,6 +116,7 @@ extension TicketVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let ticketDetailVC = TicketDetailVC.loadFromNib()
         ticketDetailVC.urlStr = urlStrs[indexPath.row]
+        ticketDetailVC.modalPresentationStyle = .fullScreen
         self.present(ticketDetailVC, animated: true, completion: nil)
     }
 }
@@ -126,7 +129,7 @@ extension TicketVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 40, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
+        return UIEdgeInsets(top: 20, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
     }
     
     ///  設定 CollectionViewCell 的寬、高
