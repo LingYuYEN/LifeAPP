@@ -24,24 +24,24 @@ class PickerView: UIView {
     var pickerIndex: IndexPath = IndexPath(row: 0, section: 0)
     
     override init(frame: CGRect) {
-            super.init(frame: frame)
-            initFromXib()
-        }
+        super.init(frame: frame)
+        initFromXib()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initFromXib()
+    }
+    
+    func initFromXib() {
+        let bundle = Bundle.init(for: PickerView.self)
+        let nib = UINib(nibName: "PickerView", bundle: bundle)
+        contView = nib.instantiate(withOwner: self, options: nil).first as? UIView
+        contView.frame = bounds
         
-        required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-            initFromXib()
-        }
-        
-        func initFromXib() {
-            let bundle = Bundle.init(for: PickerView.self)
-            let nib = UINib(nibName: "PickerView", bundle: bundle)
-            contView = nib.instantiate(withOwner: self, options: nil).first as? UIView
-            contView.frame = bounds
-            
-            pickerView.setValue(UIColor.black, forKey: "textColor")
-            self.addSubview(contView)
-        }
+        pickerView.setValue(UIColor.black, forKey: "textColor")
+        self.addSubview(contView)
+    }
 
 }
 

@@ -12,14 +12,18 @@ import WebKit
 class TicketDetailVC: UIViewController {
 
     @IBOutlet var webView: WKWebView!
+    var urlStr: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let url = URL(string: "https://www.conquers.co/") {
-            let request = URLRequest(url: url)
-            webView.load(request)
+        if let urlStr = urlStr {
+            if let url = URL(string: urlStr) {
+                let request = URLRequest(url: url)
+                webView.load(request)
+            }
         }
+        
     }
 
 
