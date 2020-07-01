@@ -26,6 +26,7 @@ class NewHomeVC: UIViewController {
     let vcIdMap = ["天氣資訊", "油價預測", "郵遞區號快速查詢"]
     let vcMap = [0 : "main", 1 : "oilVC", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
     
+    var locationTitleName = ""
     var cityTemp = ""
     var maxAndMinTemp = ""
     var pop = ""
@@ -84,32 +85,32 @@ class NewHomeVC: UIViewController {
         super.viewDidLoad()
         
         
-        DataManager.shared.getAppVersionWithWeb { (isOld) -> (Void) in
-            if isOld {
-                print("需更新")
-                
-                DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "有新版本啦！", message: "新增了郵遞區號查詢功能，優化部分頁面", preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "立即更新", style: .default) { _ in
-                        print("立即更新")
-
-                        let urlStr = "itms-apps://apps.apple.com/tw/app/生活小百科/id1515688778"
-                        guard let newUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-                        guard let url = URL(string: newUrlStr) else { return }
-                        UIApplication.shared.open(url: url)
-                    }
-                    let cancelAction = UIAlertAction(title: "忽略此版本", style: .cancel, handler: nil)
-
-                    alertController.addAction(alertAction)
-                    alertController.addAction(cancelAction)
-
-                    self.present(alertController, animated: true, completion: nil)
-                }
-                
-            } else {
-                print("不需更新")
-            }
-        }
+//        DataManager.shared.getAppVersionWithWeb { (isOldVersion) -> (Void) in
+//            if isOldVersion {
+//                print("需更新")
+//
+//                DispatchQueue.main.async {
+//                    let alertController = UIAlertController(title: "有新版本啦！", message: "新增了郵遞區號查詢功能，優化部分頁面", preferredStyle: .alert)
+//                    let alertAction = UIAlertAction(title: "立即更新", style: .default) { _ in
+//                        print("立即更新")
+//
+//                        let urlStr = "itms-apps://apps.apple.com/tw/app/生活小百科/id1515688778"
+//                        guard let newUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+//                        guard let url = URL(string: newUrlStr) else { return }
+//                        UIApplication.shared.open(url: url)
+//                    }
+//                    let cancelAction = UIAlertAction(title: "忽略此版本", style: .cancel, handler: nil)
+//
+//                    alertController.addAction(alertAction)
+//                    alertController.addAction(cancelAction)
+//
+//                    self.present(alertController, animated: true, completion: nil)
+//                }
+//
+//            } else {
+//                print("不需更新")
+//            }
+//        }
         
         
         collectionView.register(UINib(nibName: "NewHomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeCollectionViewCell")
@@ -226,6 +227,8 @@ class NewHomeVC: UIViewController {
             "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
             preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確認", style: .default) { _ in
+            print("self.defaultLocation.0: ", self.defaultLocation.0)
+            print("self.defaultLocation.1: ", self.defaultLocation.1)
             self.getWeatherData(locationLat: self.defaultLocation.0, locationLon: self.defaultLocation.1, city: self.defaultCity)
         }
         alertController.addAction(okAction)
@@ -238,7 +241,7 @@ class NewHomeVC: UIViewController {
         DataManager.shared.getWeather(lat: locationLat, lon: locationLon, city: city) { (model, _) -> (Void) in
             guard let model = model else { return }
             self.weatherModel = model
-            
+            self.locationTitleName = city
             var oneWeekWx = [String]()
             var oneWeekMaxTemp = [String]()
             var oneWeekMinTemp = [String]()
@@ -314,14 +317,7 @@ extension NewHomeVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        switch status {
-        case .denied:
-            presentDenineAlert()
-        case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
-        default:
-            break
-        }
+        refreshData()
         
     }
     
@@ -406,10 +402,10 @@ extension NewHomeVC: UICollectionViewDelegate {
             weatherVC.aqiValue = self.aqi
             weatherVC.uviValue = self.uvi
             weatherVC.popValue = self.pop
-            print(self.pop)
             weatherVC.pm25 = self.pm25
             weatherVC.pm10 = self.pm10
             weatherVC.o3 = self.o3
+            weatherVC.locationTitleName = self.locationTitleName
             self.navigationController?.pushViewController(weatherVC, animated: true)
         case 1:
             let oilVC = OilVC.loadFromNib()

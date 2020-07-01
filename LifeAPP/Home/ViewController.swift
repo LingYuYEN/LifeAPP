@@ -86,6 +86,7 @@ class ViewController: UIViewController {
     
     var urlOfImageToShare: URL?
     
+    var locationTitleName: String?
     var intWeekArr = [Int]()
     var chWeekArr = ["-", "-", "-", "-", "-", "-"]
     
@@ -179,6 +180,8 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     func setupUI() {
+        self.locationsBtn.setTitle(self.locationTitleName, for: .normal)
+        
         chWeekArr = [String]()
         var newChWeekArr = [String]()
         let chineseWeekDic = ["Monday" : "一", "Tuesday" : "二", "Wednesday" : "三", "Thursday" : "四", "Friday" : "五", "Saturday" : "六", "Sunday" : "日"]
@@ -207,6 +210,7 @@ class ViewController: UIViewController {
         }
         self.chWeekArr = newChWeekArr
         dateLabel.text = "\(nowFormatter)"
+        
         
         setWetherView(wetherView: wetherViewFirst, gradientView: stackContentViewFirst)
         setWetherView(wetherView: wetherViewSec, gradientView: stackContentViewSec)

@@ -29,7 +29,6 @@ class PostalDetailVC: UIViewController {
         gradientLayer.cornerRadius = 8 * screenScaleWidth
         
         gradientView.layer.addSublayer(gradientLayer)
-        
     }
 
     @IBAction func onDismissClick(_ sender: UIButton) {
