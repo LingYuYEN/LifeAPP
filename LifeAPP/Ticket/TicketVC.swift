@@ -20,14 +20,13 @@ class TicketVC: UIViewController {
     var memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
     var urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: UIColor.white,
                                                               NSAttributedString.Key.kern: 1,
                                                               NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 21)!]
         naviBar.titleTextAttributes = textAttributes
         
         let image = UIImage()
-        
         naviBar.setBackgroundImage(image, for: .default)
         naviBar.shadowImage = image
         
@@ -36,7 +35,11 @@ class TicketVC: UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
         
         self.navigationController?.navigationBar.isHidden = true
+        
+        // 為了不讓 navigationController offset
+        self.navigationController?.view.layoutIfNeeded()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,6 +96,9 @@ class TicketVC: UIViewController {
         collectionView.reloadData()
     }
     
+    @IBAction func backAction(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 
 }

@@ -20,10 +20,10 @@ class NewHomeVC: UIViewController {
     let locationManager = CLLocationManager()
     
 //    let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomeCityIcon", "newHomeQrcodeIcon", "newHomePostalIcon"]
-    let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomePostalIcon"]
+    let iconImageNames = ["newHomeWeatherIcon", "newHomeOilIcon", "newHomeTicketIcon", "newHomePostalIcon"]
 
 //    let vcIdMap = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "各縣市大型旅遊景點", "發票開獎與掃描對獎", "郵遞區號快速查詢"]
-    let vcIdMap = ["天氣資訊", "油價預測", "郵遞區號快速查詢"]
+    let vcIdMap = ["天氣資訊", "油價預測", "三倍券與旅遊振興資訊", "郵遞區號快速查詢"]
     let vcMap = [0 : "main", 1 : "oilVC", 2 : "ticket", 3 : "ticket", 4 : "ticket", 5 : "ticket"]
     
     var locationTitleName = ""
@@ -413,6 +413,9 @@ extension NewHomeVC: UICollectionViewDelegate {
             
             self.navigationController?.pushViewController(oilVC, animated: true)
         case 2:
+            let ticketVC = storyboard?.instantiateViewController(withIdentifier: id) as! TicketVC
+            self.navigationController?.pushViewController(ticketVC, animated: true)
+        case 3:
             let postalVC = PostalVC.loadFromNib()
             self.navigationController?.pushViewController(postalVC, animated: true)
 //        case 5:
