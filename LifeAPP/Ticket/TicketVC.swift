@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class TicketVC: UIViewController {
 
@@ -19,6 +20,8 @@ class TicketVC: UIViewController {
     var titleNames = ["3000 元 振興三倍券", "800 元 振興抵用券", "600 元 藝FUN券", "250 元 農遊券"]
     var memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
     var urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
+    
+    var bannerView: GADBannerView!
     
     override func viewWillAppear(_ animated: Bool) {
         let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -53,7 +56,23 @@ class TicketVC: UIViewController {
         
         let nib = UINib(nibName: "TicketCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "TicketCollectionViewCell")
+        
+        setUI()
     }
+    
+    func setUI() {
+        loadBannerView()
+    }
+    
+    func loadBannerView() {
+            self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+            self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
+            self.bannerView.rootViewController = self
+            
+            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+            self.bannerView.load(GADRequest())
+            self.bannerView.delegate = self
+        }
     
     @IBAction func segmentAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -102,6 +121,28 @@ class TicketVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    /// 加入橫幅廣告頁面
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.bringSubviewToFront(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: view.safeAreaLayoutGuide,
+                                attribute: .bottom,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+        ])
+    }
 
 }
 
@@ -171,5 +212,18 @@ extension TicketVC: UICollectionViewDelegateFlowLayout {
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0 * screenScaleWidth
+    }
+}
+
+extension TicketVC: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner loaded successfully")
+        addBannerViewToView(bannerView)
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
     }
 }
