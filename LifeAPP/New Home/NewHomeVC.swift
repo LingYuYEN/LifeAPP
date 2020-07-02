@@ -129,7 +129,7 @@ class NewHomeVC: UIViewController {
         
         isConnect()
         getLocationManager()
-//        refreshData()
+        refreshData()
         loadBannerView()
     }
     
