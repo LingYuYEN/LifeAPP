@@ -129,7 +129,7 @@ class NewHomeVC: UIViewController {
         
         isConnect()
         getLocationManager()
-        refreshData()
+//        refreshData()
         loadBannerView()
     }
     
@@ -227,8 +227,6 @@ class NewHomeVC: UIViewController {
             "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
             preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確認", style: .default) { _ in
-            print("self.defaultLocation.0: ", self.defaultLocation.0)
-            print("self.defaultLocation.1: ", self.defaultLocation.1)
             self.getWeatherData(locationLat: self.defaultLocation.0, locationLon: self.defaultLocation.1, city: self.defaultCity)
         }
         alertController.addAction(okAction)
@@ -489,7 +487,7 @@ extension NewHomeVC {
         self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
         self.bannerView.rootViewController = self
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
         self.bannerView.load(GADRequest())
         self.bannerView.delegate = self
     }
