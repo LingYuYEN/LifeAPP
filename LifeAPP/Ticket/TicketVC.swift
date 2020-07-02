@@ -64,32 +64,34 @@ class TicketVC: UIViewController {
         case 1:
             titleNames = ["安心旅遊補助", "自由行住宿補助", "自由行遊樂園門票補助", "自由行台灣觀光巴士優惠"]
             memoNames = ["介紹 ＆ 補助期間", "介紹 ＆ 辦法懶人包", "介紹 ＆ 辦法懶人包", "介紹 ＆ 辦法懶人包"]
-            urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
+            urlStrs = ["https://3coupon.info/eli5/tour/", "https://3coupon.info/eli5/tour/", "https://3coupon.info/eli5/tour/", "https://3coupon.info/eli5/tour/"]
         case 2:
             titleNames = ["台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"]
             memoNames = ["「台北GO了沒？」安心旅遊專案", "「新北振興一路發」優惠專案", "基隆市", "宜蘭縣", "加碼推出五百元電子旅遊券", "新竹縣", "加碼推出面額500元消費券", "苗栗縣", "台中購物節將推出「振興券抽獎獎項」", "彰化縣", "南投縣", "雲林縣", "搭配國旅補助，限量發放「嘉義優鮮券」", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "加碼發放每人500元消費券"]
-            urlStrs = ["https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/fun/"]
+            urlStrs = [
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/",
+                "https://3coupon.info/eli5/county/"
+            ]
         default:
             break
         }
