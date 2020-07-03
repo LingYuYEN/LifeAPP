@@ -675,7 +675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oDe-BN-fF2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1045" y="1595"/>
+            <point key="canvasLocation" x="1019" y="1595"/>
         </scene>
         <!--TicketVC-->
         <scene sceneID="TgX-oX-VDC">
@@ -694,6 +694,9 @@
                                     <navigationItem title="快手振興" id="8wV-Oi-vX6">
                                         <barButtonItem key="leftBarButtonItem" image="leftBarButtonIcon" id="ETV-60-ODS">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="backAction:" destination="iMN-eQ-Qy5" id="rWj-wi-vf6"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -733,7 +736,8 @@
                                     <segment title="旅遊補助"/>
                                     <segment title="縣市加碼"/>
                                 </segments>
-                                <color key="selectedSegmentTintColor" red="0.90265923738479614" green="0.73569375276565552" blue="0.51004260778427124" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.90265923739999998" green="0.73569375280000004" blue="0.51004260779999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="selectedSegmentTintColor" red="0.90196078431372551" green="0.73725490196078436" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="segmentAction:" destination="iMN-eQ-Qy5" eventType="valueChanged" id="Ymc-BR-ok5"/>
                                 </connections>
@@ -741,7 +745,6 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="qQa-04-5Il" firstAttribute="top" secondItem="vVH-it-cxY" secondAttribute="top" id="AKJ-Gd-2FD"/>
                             <constraint firstItem="qQa-04-5Il" firstAttribute="leading" secondItem="vVH-it-cxY" secondAttribute="leading" id="Cg6-TB-flI"/>
                             <constraint firstItem="1m1-aP-zRD" firstAttribute="leading" secondItem="vVH-it-cxY" secondAttribute="leading" constant="25" id="H60-EH-QvJ"/>
                             <constraint firstItem="vVH-it-cxY" firstAttribute="trailing" secondItem="LKN-Qw-XMq" secondAttribute="trailing" id="RkD-WH-fhN"/>
@@ -754,6 +757,7 @@
                             <constraint firstItem="qbK-hC-GNr" firstAttribute="top" secondItem="1m1-aP-zRD" secondAttribute="bottom" constant="20" id="kO6-kY-2O3"/>
                             <constraint firstItem="vVH-it-cxY" firstAttribute="trailing" secondItem="qbK-hC-GNr" secondAttribute="trailing" id="oqX-QZ-k3L"/>
                             <constraint firstItem="LKN-Qw-XMq" firstAttribute="top" secondItem="ldF-cA-CbG" secondAttribute="top" id="uFO-4g-hjD"/>
+                            <constraint firstItem="qQa-04-5Il" firstAttribute="top" secondItem="vVH-it-cxY" secondAttribute="top" id="w6L-p4-UXf"/>
                             <constraint firstItem="vVH-it-cxY" firstAttribute="bottom" secondItem="qbK-hC-GNr" secondAttribute="bottom" id="xgy-Wj-dPd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vVH-it-cxY"/>
@@ -767,7 +771,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhb-Qs-5hG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1966.6666666666667" y="1594.5652173913045"/>
+            <point key="canvasLocation" x="1813" y="1595"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="BpO-h6-RZL">

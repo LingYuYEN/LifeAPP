@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import FirebaseFirestore
+import FirebaseCore
 
 class TicketVC: UIViewController {
 
@@ -16,18 +19,25 @@ class TicketVC: UIViewController {
     @IBOutlet var segmentControl: UISegmentedControl!
     
     
-    var titleNames = ["3000 元 振興三倍券", "800 元 振興抵用券", "600 元 藝FUN券", "250 元 農遊券"]
-    var memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
-    var urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
     
-    override func viewDidAppear(_ animated: Bool) {
+//    var titleNames = ["3000 元 振興三倍券", "800 元 振興抵用券", "600 元 藝FUN券", "250 元 農遊券"]
+//    var memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
+//    var urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
+    
+    var titleNames = [String]()
+    var memoNames = [String]()
+    var urlStrs = [String]()
+    
+    var bannerView: GADBannerView!
+    var db: Firestore!
+    
+    override func viewWillAppear(_ animated: Bool) {
         let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: UIColor.white,
                                                               NSAttributedString.Key.kern: 1,
                                                               NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 21)!]
         naviBar.titleTextAttributes = textAttributes
         
         let image = UIImage()
-        
         naviBar.setBackgroundImage(image, for: .default)
         naviBar.shadowImage = image
         
@@ -36,7 +46,11 @@ class TicketVC: UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
         
         self.navigationController?.navigationBar.isHidden = true
+        
+        // 為了不讓 navigationController offset
+        self.navigationController?.view.layoutIfNeeded()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,50 +64,133 @@ class TicketVC: UIViewController {
         
         let nib = UINib(nibName: "TicketCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "TicketCollectionViewCell")
+        
+        db = Firestore.firestore()
+        readData(documentName: "revitalize")
+        
+        setUI()
     }
+    
+    func readData(documentName: String){
+        
+        // 取得 lifeAppData 這個 collection
+        db.collection("lifeAppData").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let dataArr = document.data()[documentName] as! [[String: String]]
+                    
+                    var newTitleNames = [String]()
+                    var newMemoNames = [String]()
+                    var newUrlStrs = [String]()
+                    
+                    for data in dataArr {
+                        if let name = data["name"], let memo = data["memo"], let url = data["url"] {
+                            newTitleNames.append(name)
+                            newMemoNames.append(memo)
+                            newUrlStrs.append(url)
+                        }
+                    }
+                    
+                    self.titleNames = newTitleNames
+                    self.memoNames = newMemoNames
+                    self.urlStrs = newUrlStrs
+                    
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func setUI() {
+        loadBannerView()
+    }
+    
+    func loadBannerView() {
+            self.bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+            self.bannerView.adUnitID = "ca-app-pub-4291784641323785/5225318746"
+            self.bannerView.rootViewController = self
+            
+            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["7ba6ce8064354f5e9f3ec6453bb021b43150a707"]
+            self.bannerView.load(GADRequest())
+            self.bannerView.delegate = self
+        }
     
     @IBAction func segmentAction(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            titleNames = ["3000 元 振興三倍券", "800 元 振興抵用券", "600 元 藝FUN券", "250 元 農遊券"]
-            memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
-            urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
+            
+            readData(documentName: "revitalize")
+            
+//            titleNames = ["3000 元 振興三倍券", "800 元 振興抵用券", "600 元 藝FUN券", "250 元 農遊券"]
+//            memoNames = ["介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包", "介紹 ＆ 領取 ＆ 使用懶人包"]
+//            urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
         case 1:
-            titleNames = ["安心旅遊補助", "自由行住宿補助", "自由行遊樂園門票補助", "自由行台灣觀光巴士優惠"]
-            memoNames = ["介紹 ＆ 補助期間", "介紹 ＆ 辦法懶人包", "介紹 ＆ 辦法懶人包", "介紹 ＆ 辦法懶人包"]
-            urlStrs = ["https://3coupon.info/eli5/treble/", "https://3coupon.info/eli5/voucher/", "https://3coupon.info/eli5/fun/", "https://3coupon.info/eli5/farming/"]
+            readData(documentName: "tourism")
+//            titleNames = ["安心旅遊補助", "自由行住宿補助", "自由行遊樂園門票補助", "自由行台灣觀光巴士優惠"]
+//            memoNames = ["介紹 ＆ 補助期間", "介紹 ＆ 辦法懶人包", "介紹 ＆ 辦法懶人包", "介紹 ＆ 辦法懶人包"]
+//            urlStrs = ["https://3coupon.info/eli5/tour/", "https://3coupon.info/eli5/tour/", "https://3coupon.info/eli5/tour/", "https://3coupon.info/eli5/tour/"]
         case 2:
-            titleNames = ["台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"]
-            memoNames = ["「台北GO了沒？」安心旅遊專案", "「新北振興一路發」優惠專案", "基隆市", "宜蘭縣", "加碼推出五百元電子旅遊券", "新竹縣", "加碼推出面額500元消費券", "苗栗縣", "台中購物節將推出「振興券抽獎獎項」", "彰化縣", "南投縣", "雲林縣", "搭配國旅補助，限量發放「嘉義優鮮券」", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "加碼發放每人500元消費券"]
-            urlStrs = ["https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/treble/",
-                       "https://3coupon.info/eli5/voucher/",
-                       "https://3coupon.info/eli5/fun/",
-                       "https://3coupon.info/eli5/fun/"]
+            readData(documentName: "countryPlus")
+//            titleNames = ["台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "澎湖縣"]
+//            memoNames = ["「台北GO了沒？」安心旅遊專案", "「新北振興一路發」優惠專案", "基隆市", "宜蘭縣", "加碼推出五百元電子旅遊券", "新竹縣", "加碼推出面額500元消費券", "苗栗縣", "台中購物節將推出「振興券抽獎獎項」", "彰化縣", "南投縣", "雲林縣", "搭配國旅補助，限量發放「嘉義優鮮券」", "嘉義市", "台南市", "高雄市", "屏東縣", "花蓮縣", "台東縣", "金門縣", "連江縣", "加碼發放每人500元消費券"]
+//            urlStrs = [
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/",
+//                "https://3coupon.info/eli5/county/"
+//            ]
         default:
             break
         }
         collectionView.reloadData()
     }
     
+    @IBAction func backAction(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
+    /// 加入橫幅廣告頁面
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.bringSubviewToFront(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: view.safeAreaLayoutGuide,
+                                attribute: .bottom,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+        ])
+    }
 
 }
 
@@ -129,7 +226,7 @@ extension TicketVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 25 * screenScaleWidth, bottom: 40, right: 25 * screenScaleWidth)
+        return UIEdgeInsets(top: 20, left: 25 * screenScaleWidth, bottom: 20, right: 25 * screenScaleWidth)
     }
     
     ///  設定 CollectionViewCell 的寬、高
@@ -163,5 +260,18 @@ extension TicketVC: UICollectionViewDelegateFlowLayout {
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0 * screenScaleWidth
+    }
+}
+
+extension TicketVC: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner loaded successfully")
+        addBannerViewToView(bannerView)
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
     }
 }

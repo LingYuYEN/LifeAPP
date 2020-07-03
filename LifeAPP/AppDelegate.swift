@@ -10,7 +10,10 @@ import UIKit
 import GoogleMobileAds
 import Firebase
 import Fabric
- 
+import FirebaseFirestore
+import FirebaseCore
+import CoreLocation
+
 
 
 let screen = UIScreen.main.bounds.size
@@ -21,11 +24,22 @@ let screenSceleHeight = screen.height / 736
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var myLocationManager : CLLocationManager = CLLocationManager()
+    var myUserDefaults : UserDefaults!
+    let userLocationAuth : String = "locationAuth"
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        self.myUserDefaults = UserDefaults.standard
+        myLocationManager.delegate = self
+        myLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        myLocationManager.startUpdatingHeading()
+        
+        
         // 連線至 Firebase
         FirebaseApp.configure()
+        
         // 上傳 Debug 至 Firebase
         Fabric.sharedSDK().debug = true
         
@@ -81,18 +95,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        
-//        // 先建立 Main SB
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        let initVC = sb.instantiateViewController(withIdentifier: "main")
-//        let nav = UINavigationController(rootViewController: initVC)
-//
-//        // window 滿版
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        // 指定 rootViewController
-//        window?.rootViewController = nav
-//        // 顯示當前窗口(將 UIWindow 設置可見的)
-//        window?.makeKeyAndVisible()
         
         return true
     }
@@ -158,4 +160,24 @@ extension AppDelegate: MessagingDelegate {
   func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
     print("Received data message: \(remoteMessage.appData)")
   }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .notDetermined{
+            myLocationManager.requestWhenInUseAuthorization()
+        }//if
+        else if status == .denied || status == .restricted {
+            self.myUserDefaults.set(false, forKey: userLocationAuth)
+            self.myUserDefaults.synchronize()
+          //這邊可以設定你想要執行的功能，例如這邊我想要紀錄使用者的權限狀況，所以用了userDefaults的功能。
+          //如果你沒有想要執行任何功能，else if 這一段這一段可以完全不寫。
+        }//else if
+        else if status == .authorizedWhenInUse {
+            self.myUserDefaults.set(true, forKey: userLocationAuth)
+            self.myUserDefaults.synchronize()
+          //這一段同上，如果你沒有想要執行任何功能，這一段可以不寫
+          //
+        }//else if
+    }
 }
