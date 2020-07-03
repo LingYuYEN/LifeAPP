@@ -66,6 +66,7 @@ class NewHomeVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage = image
@@ -76,9 +77,6 @@ class NewHomeVC: UIViewController {
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(customView: backImageView)
         self.navigationController?.navigationBar.isHidden = false
-        
-        
-        
     }
     
     override func viewDidLoad() {
@@ -117,36 +115,54 @@ class NewHomeVC: UIViewController {
         collectionView.register(UINib(nibName: "NewHomeWeatherCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeWeatherCell")
         collectionView.register(UINib(nibName: "NewHomeOilCell", bundle: nil), forCellWithReuseIdentifier: "NewHomeOilCell")
         
-        let attrStr = NSMutableAttributedString(string: "下滑更新最新資訊")
-        attrStr.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: attrStr.length))
-        refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .white
-        refreshControl.attributedTitle = attrStr
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        collectionView.addSubview(refreshControl)
+//        let attrStr = NSMutableAttributedString(string: "下滑更新最新資訊")
+//        attrStr.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: attrStr.length))
+//        refreshControl = UIRefreshControl()
+//        refreshControl.tintColor = .white
+//        refreshControl.attributedTitle = attrStr
+//        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+//        collectionView.addSubview(refreshControl)
         
         activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
         
         isConnect()
         getLocationManager()
-        refreshData()
+        getOilData()
         loadBannerView()
     }
     
-    @objc func refreshData() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func refreshData() {
         switch CLLocationManager.authorizationStatus() {
         case .denied:
+            presentDenineAlert()
+        case .restricted:
             presentDenineAlert()
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
         default:
             break
         }
-        getOilData()
         
         DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
+//            self.refreshControl.endRefreshing()
             self.collectionView.reloadData()
+        }
+    }
+    
+    func getLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted {
+            presentDenineAlert()
         }
     }
     
@@ -193,11 +209,7 @@ class NewHomeVC: UIViewController {
         }
     }
     
-    func getLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-    }
+    
     
     func isConnect() {
         monitor.pathUpdateHandler = { path in
