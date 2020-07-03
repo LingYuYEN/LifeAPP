@@ -226,7 +226,7 @@ extension TicketVC: UICollectionViewDelegateFlowLayout {
     ///   - section: _
     /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 25 * screenScaleWidth, bottom: 80, right: 25 * screenScaleWidth)
+        return UIEdgeInsets(top: 20, left: 25 * screenScaleWidth, bottom: 20, right: 25 * screenScaleWidth)
     }
     
     ///  設定 CollectionViewCell 的寬、高
