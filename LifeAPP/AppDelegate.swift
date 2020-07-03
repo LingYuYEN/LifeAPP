@@ -10,6 +10,8 @@ import UIKit
 import GoogleMobileAds
 import Firebase
 import Fabric
+import FirebaseFirestore
+import FirebaseCore
  
 
 
@@ -26,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 連線至 Firebase
         FirebaseApp.configure()
+        let db = Firestore.firestore()
+        
         // 上傳 Debug 至 Firebase
         Fabric.sharedSDK().debug = true
         
