@@ -166,7 +166,6 @@ class PostalVC: UIViewController {
         // 如果縣市已有值，則取得 Area pickerView title
         if self.cityPickerNames.count != 0 {
             let cityModels = ZipCodeManager.shared.search(city: self.cityPickerNames[self.cityRow], area: "", road: "")
-            print("cityModels: ", cityModels)
             
             for cityModel in cityModels {
                 areaArr.append(cityModel.area)
@@ -187,7 +186,6 @@ class PostalVC: UIViewController {
         if self.areaPickerNames.count != 0 {
             if let areaRow = self.areaRow {
                 let areaModels = ZipCodeManager.shared.search(city: self.cityPickerNames[self.cityRow], area: self.areaPickerNames[areaRow], road: "")
-                print("areaModels: ", areaModels)
                 
                 for areaModel in areaModels {
                     roadArr.append(areaModel.road)
@@ -234,9 +232,6 @@ class PostalVC: UIViewController {
         self.roadArr = roadResult
         self.scopeArr = scopeResult
         
-        print("cellDefaultTitleArr: ")
-        print(self.cellDefaultTitleArr)
-        
         self.pickerViewIsHidden(bool: true)
         self.collectionView.reloadData()
     }
@@ -246,10 +241,15 @@ class PostalVC: UIViewController {
     }
     
     @IBAction func onSearchBtnClick(_ sender: UIButton) {
-        
-        if self.cellDefaultTitleArr[1] == "選擇區域" {
+        if self.cellDefaultTitleArr[0] == "選擇縣市" {
             let postalDetailVC = PostalDetailVC.loadFromNib()
             postalDetailVC.modalPresentationStyle = .overFullScreen
+            postalDetailVC.selectMemoText = "請選擇縣市 > 區域"
+            self.present(postalDetailVC, animated: false, completion: nil)
+        } else if self.cellDefaultTitleArr[1] == "選擇區域" {
+            let postalDetailVC = PostalDetailVC.loadFromNib()
+            postalDetailVC.modalPresentationStyle = .overFullScreen
+            postalDetailVC.selectMemoText = "請選擇區域"
             self.present(postalDetailVC, animated: false, completion: nil)
         } else {
             self.tableView.isHidden = false
@@ -302,19 +302,35 @@ extension PostalVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         collectionSelectIndex = indexPath
-        print(collectionSelectIndex)
         switch indexPath.row {
         case 0:
+            self.pickerViewIsHidden(bool: false)
             self.pickerView.labels = self.cityPickerNames
         case 1:
-            self.pickerView.labels = self.areaPickerNames
+            if self.cellDefaultTitleArr[0] == "選擇縣市" {
+                let postalDetailVC = PostalDetailVC.loadFromNib()
+                postalDetailVC.modalPresentationStyle = .overFullScreen
+                postalDetailVC.selectMemoText = "請選擇縣市"
+                self.present(postalDetailVC, animated: false, completion: nil)
+            } else {
+                self.pickerViewIsHidden(bool: false)
+                self.pickerView.labels = self.areaPickerNames
+            }
         case 2:
-            self.pickerView.labels = self.roadPickerNames
+            if self.cellDefaultTitleArr[1] == "選擇區域" {
+                let postalDetailVC = PostalDetailVC.loadFromNib()
+                postalDetailVC.modalPresentationStyle = .overFullScreen
+                postalDetailVC.selectMemoText = "請選擇縣市 > 區域"
+                self.present(postalDetailVC, animated: false, completion: nil)
+            } else {
+                self.pickerViewIsHidden(bool: false)
+                self.pickerView.labels = self.roadPickerNames
+            }
         default:
             break
         }
         
-        self.pickerViewIsHidden(bool: false)
+        
     }
 }
 

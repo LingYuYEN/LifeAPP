@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostalDetailVC" customModule="LifeAPP" customModuleProvider="target">
             <connections>
                 <outlet property="gradientView" destination="H9Y-q8-y1U" id="OoK-0j-RJc"/>
+                <outlet property="selectMemoLabel" destination="LQp-xj-92W" id="TSq-Ng-7IK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
