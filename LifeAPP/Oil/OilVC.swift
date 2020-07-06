@@ -184,7 +184,6 @@ class OilVC: UIViewController {
             
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorView.isHidden = true
-//            self.collectionView.reloadData()
         }
     }
     /// 錯誤請求 Alert
