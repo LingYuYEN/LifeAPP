@@ -11,7 +11,9 @@ import UIKit
 class PostalDetailVC: UIViewController {
 
     @IBOutlet var gradientView: UIView!
+    @IBOutlet var selectMemoLabel: UILabel!
     
+    var selectMemoText = "請選擇區域"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,8 @@ class PostalDetailVC: UIViewController {
         gradientLayer.cornerRadius = 8 * screenScaleWidth
         
         gradientView.layer.addSublayer(gradientLayer)
+        
+        self.selectMemoLabel.text = selectMemoText
     }
 
     @IBAction func onDismissClick(_ sender: UIButton) {
