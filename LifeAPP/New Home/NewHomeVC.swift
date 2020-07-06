@@ -15,6 +15,7 @@ class NewHomeVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet var bannerContentView: UIView!
     
     let monitor = NWPathMonitor()
     let locationManager = CLLocationManager()
@@ -47,8 +48,8 @@ class NewHomeVC: UIViewController {
     var oil98 = ""
     var oilDiesel = ""
     
-    var defaultLocation = (25.0375417, 121.562244)
-    let defaultCity = "台北市"
+    var defaultLocation = (22.6336637, 120.2957256)
+    let defaultCity = "高雄市"
     
     var weatherModel: WeatherModel?
     var oilModel: OilModel?
@@ -236,7 +237,7 @@ class NewHomeVC: UIViewController {
         let alertController = UIAlertController(
             title: "定位權限已關閉",
             message:
-            "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
+            "如要變更權限，請至 設定 > 隱私權 > 定位服務 > 生活小百科 > 使用 App 期間",
             preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確認", style: .default) { _ in
             self.getWeatherData(locationLat: self.defaultLocation.0, locationLon: self.defaultLocation.1, city: self.defaultCity)
@@ -303,9 +304,6 @@ class NewHomeVC: UIViewController {
                     self.uviDescription = "紫外線過高"
                 }
             }
-            
-
-            
             
             let descriptionsCount = model.descriptions.count
             let random = Int.random(in: 0 ... descriptionsCount - 1)
@@ -382,16 +380,6 @@ extension NewHomeVC: UICollectionViewDataSource {
             cell.titleLabel.text = vcIdMap[indexPath.row]
             return cell
         }
-        
-        
-//        switch indexPath.row {
-//        case 0:
-//            return CGSize(width: 364 * screenScaleWidth , height: 119 * screenSceleHeight)
-//        case 1:
-//            return CGSize(width: 364 * screenScaleWidth , height: 148 * screenSceleHeight)
-//        default:
-//            return CGSize(width: 364 * screenScaleWidth , height: 86 * screenSceleHeight)
-//        }
     }
     
     
@@ -532,6 +520,7 @@ extension NewHomeVC: GADBannerViewDelegate {
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("Banner loaded successfully")
+        bannerContentView.isHidden = false
         addBannerViewToView(bannerView)
     }
     

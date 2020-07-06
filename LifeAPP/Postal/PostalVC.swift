@@ -22,6 +22,7 @@ class PostalVC: UIViewController {
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
     @IBOutlet var pickerViewTop: NSLayoutConstraint!
+    @IBOutlet var bannerContentView: UIView!
     
     var cellDefaultTitleArr = ["選擇縣市", "選擇區域", "選擇區域路名段號"]
     var zipFiveArr = [String]()
@@ -31,47 +32,6 @@ class PostalVC: UIViewController {
     var scopeArr = [String]()
     
     var dicArr = [[String : String]]()
-    
-//    var cityPickerNames = [
-//        "X基隆市",
-//        "臺北市",
-//        "新北市",
-//        "桃園市",
-//        "新竹市",
-//        "新竹縣",
-//        "苗栗縣",
-//        "臺中市",
-//        "彰化縣",
-//        "南投縣",
-//        "雲林縣",
-//        "嘉義市",
-//        "嘉義縣",
-//        "臺南市",
-//        "高雄市",
-//        "屏東縣",
-//        "臺東縣",
-//        "花蓮縣",
-//        "宜蘭縣",
-//        "澎湖縣",
-//        "金門縣",
-//        "連江縣"
-//    ]
-//
-//    var areaPickerNames = [
-//        "中山區",
-//        "中正區",
-//        "萬華區",
-//        "苓雅區",
-//        "前鎮區"
-//    ]
-//
-//    var roadPickerNames = [
-//        "中正路",
-//        "中華路",
-//        "中山路",
-//        "中北路",
-//        "中東路"
-//    ]
     
     var cityPickerNames = [String]()
     
@@ -136,9 +96,10 @@ class PostalVC: UIViewController {
         
         self.cityPickerNames = cityArr.removingDuplicates()
         
-        
-        
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setUI()
     }
     
@@ -265,19 +226,22 @@ class PostalVC: UIViewController {
         loadBannerView()
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        
         activityIndicatorView.layer.cornerRadius = 8 * screenScaleWidth
-        
-        gradientView.layer.applySketchShadow(color: .set(red: 13, green: 121, blue: 183), alpha: 1, x: 0, y: 0, blur: 5, spread: 0)
         gradientView.setGradientBorder(
             lineWidth: 1,
             colors: [
                 UIColor.set(red: 85, green: 219, blue: 255).withAlphaComponent(0.98),
                 UIColor.set(red: 6, green: 168, blue: 255)
             ],
-            bounds: CGRect(x: 0, y: 0, width: 131 * screenScaleWidth, height: 39.5 * screenSceleHeight)
+            bounds: searchBtnContentView.bounds
         )
+        
         searchBtnContentView.layer.cornerRadius = 8 * screenScaleWidth
+        searchBtn.layer.cornerRadius = 8 * screenScaleWidth
+        
+        searchBtnContentView.isHidden = false
+        gradientView.isHidden = false
+        searchBtn.isHidden = false
     }
     
 }
@@ -476,7 +440,7 @@ extension PostalVC: GADBannerViewDelegate {
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("Banner loaded successfully")
-//        bannerContentView.isHidden = false
+        bannerContentView.isHidden = false
         addBannerViewToView(bannerView)
     }
     
