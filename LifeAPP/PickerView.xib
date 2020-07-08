@@ -39,7 +39,7 @@
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="MV6-nn-Yb8" firstAttribute="centerY" secondItem="wCX-Jx-F0T" secondAttribute="centerY" id="9F2-LR-EcB"/>
                         <constraint firstAttribute="trailing" secondItem="RsS-Yc-1NH" secondAttribute="trailing" constant="10" id="Q5x-8E-Ukf"/>
